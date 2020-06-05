@@ -5,7 +5,9 @@ import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package="github.com/cargod-bj/b2c-transaction-api/leads";
-
+/**
+*车辆引线
+ */
 service Leads {
   rpc Add(LeadsDTO) returns (Response) {}
   rpc Delete(DeleteId) returns (Response) {}

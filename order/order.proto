@@ -5,11 +5,17 @@ import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package="github.com/cargod-bj/b2c-transaction-api/order";
-
+/**
+*订单
+ */
 service Order {
+  //新增订单，返回data.nil
   rpc Add(OrderDTO) returns (Response) {}
+  //根据id删除订单，这里是假删除，设置status为1，返回data.nil
   rpc Delete(DeleteId) returns (Response) {}
+  //更新订单信息，返回data.nil
   rpc Update(OrderDTO) returns (Response) {}
+  //查询订单列表，返回订单列表数据
   rpc GetList(OrderCondition) returns (Response) {}
 
 }
@@ -18,16 +24,16 @@ message OrderDTO {
   uint64 id = 1;
   uint64 userId = 2;
   uint64 appointmentId = 3;
-  uint64 staffId = 4;
+  uint64 staffId = 4;//服务人员id
   uint64 leadId = 5;
   uint64 carId = 6;
   uint32 type = 7;
   uint64 storeId = 8;
   uint32 status = 9;
-  float receivableAmount = 10;
-  float paiedAmount = 11;
-  float totalAmount = 12;
-  float discountedAmount = 13;
+  float receivableAmount = 10;//需要支付金额
+  float paiedAmount = 11;//已支付金额
+  float totalAmount = 12;//总金额
+  float discountedAmount = 13;//优惠金额
   google.protobuf.Timestamp createTime = 14;
   google.protobuf.Timestamp updateTime = 15;
 }
