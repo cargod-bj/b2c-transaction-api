@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package go.micro.service.leads;
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package="leads";
+
+service Leads {
+  rpc Add(LeadsDTO) returns (Response) {}
+  rpc Delete(DeleteId) returns (Response) {}
+  rpc Update(LeadsDTO) returns (Response) {}
+  rpc GetList(LeadsCondition) returns (Response) {}
+
+}
+
+message LeadsDTO {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 carId = 3;
+  uint64 storeId = 4;
+  uint32 status = 5;
+  google.protobuf.Timestamp appointment = 6;
+  google.protobuf.Timestamp createTime = 7;
+  google.protobuf.Timestamp updateTime = 8;
+}
+
+message LeadsList {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  repeated LeadsDTO leadss = 3;
+  uint32 count = 4;
+}
+message LeadsCondition {
+  uint32 page = 1;
+  uint32 limit = 2;
+  string name = 3;
+}
+
+message Response {
+  string msg = 1;
+  google.protobuf.Any data = 3;
+  string code = 2;
+}
+
+message AddLeadsData{
+  uint64 id = 1;
+}
+message DeleteId{
+  uint64 id = 1;
+}
+

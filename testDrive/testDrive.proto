@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package go.micro.service.testDrive;
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package="github.com/cargod-bj/b2c-transaction-api/testDrive";
+
+service TestDrive {
+  rpc Add(TestDriveDTO) returns (Response) {}
+  rpc Delete(DeleteId) returns (Response) {}
+  rpc Update(TestDriveDTO) returns (Response) {}
+  rpc GetList(TestDriveCondition) returns (Response) {}
+
+}
+
+message TestDriveDTO {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 appointmentId = 3;
+  uint64 staffId = 4;
+  string description = 5;
+  uint64 carId = 6;
+  uint64 storeId = 7;
+  uint32 status = 8;
+  google.protobuf.Timestamp appointment = 9;
+  google.protobuf.Timestamp createTime = 10;
+  google.protobuf.Timestamp updateTime = 11;
+}
+
+message TestDriveList {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  repeated TestDriveDTO testDrive = 3;
+  uint32 count = 4;
+}
+message TestDriveCondition {
+  uint32 page = 1;
+  uint32 limit = 2;
+}
+
+message Response {
+  string msg = 1;
+  google.protobuf.Any data = 3;
+  string code = 2;
+}
+
+message AddTestDriveData{
+  uint64 id = 1;
+}
+message DeleteId{
+  uint64 id = 1;
+}
+

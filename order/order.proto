@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package go.micro.service.order;
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package="order";
+
+service Order {
+  rpc Add(OrderDTO) returns (Response) {}
+  rpc Delete(DeleteId) returns (Response) {}
+  rpc Update(OrderDTO) returns (Response) {}
+  rpc GetList(OrderCondition) returns (Response) {}
+
+}
+
+message OrderDTO {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 appointmentId = 3;
+  uint64 staffId = 4;
+  uint64 leadId = 5;
+  uint64 carId = 6;
+  uint32 type = 7;
+  uint64 storeId = 8;
+  uint32 status = 9;
+  float receivableAmount = 10;
+  float paiedAmount = 11;
+  float totalAmount = 12;
+  float discountedAmount = 13;
+  google.protobuf.Timestamp createTime = 14;
+  google.protobuf.Timestamp updateTime = 15;
+}
+
+message OrderList {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  repeated OrderDTO order = 3;
+  uint32 count = 4;
+}
+message OrderCondition {
+  uint32 page = 1;
+  uint32 limit = 2;
+}
+
+message Response {
+  string msg = 1;
+  google.protobuf.Any data = 3;
+  string code = 2;
+}
+
+message AddOrderData{
+  uint64 id = 1;
+}
+message DeleteId{
+  uint64 id = 1;
+}
+
