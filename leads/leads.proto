@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package leads;
 import "google/protobuf/any.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package="github.com/cargod-bj/b2c-transaction-api/leads";
 /**
@@ -22,9 +21,9 @@ message LeadsDTO {
   uint64 carId = 3;
   uint64 storeId = 4;
   uint32 status = 5;
-  google.protobuf.Timestamp appointment = 6;
-  google.protobuf.Timestamp createTime = 7;
-  google.protobuf.Timestamp updateTime = 8;
+  uint64 appointment = 6;
+  uint64 createTime = 7;
+  uint64 updateTime = 8;
 }
 
 message LeadsList {

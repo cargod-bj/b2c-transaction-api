@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package order;
 import "google/protobuf/any.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package="github.com/cargod-bj/b2c-transaction-api/order";
 /**
@@ -34,8 +33,8 @@ message OrderDTO {
   float paiedAmount = 11;//已支付金额
   float totalAmount = 12;//总金额
   float discountedAmount = 13;//优惠金额
-  google.protobuf.Timestamp createTime = 14;
-  google.protobuf.Timestamp updateTime = 15;
+  uint64 createTime = 14;
+  uint64 updateTime = 15;
 }
 
 message OrderList {
