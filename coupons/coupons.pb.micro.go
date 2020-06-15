@@ -48,6 +48,8 @@ type CouponsService interface {
 	Delete(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
 	List(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
+	UseCoupon(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
+	FindCouponByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
 }
 
 type couponsService struct {
@@ -102,6 +104,26 @@ func (c *couponsService) List(ctx context.Context, in *common.Page, opts ...clie
 	return out, nil
 }
 
+func (c *couponsService) UseCoupon(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.UseCoupon", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponsService) FindCouponByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.FindCouponByUser", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Coupons service
 
 type CouponsHandler interface {
@@ -109,6 +131,8 @@ type CouponsHandler interface {
 	Delete(context.Context, *CouponDto, *common.Response) error
 	Update(context.Context, *CouponDto, *common.Response) error
 	List(context.Context, *common.Page, *common.Response) error
+	UseCoupon(context.Context, *CouponDto, *common.Response) error
+	FindCouponByUser(context.Context, *User, *common.Response) error
 }
 
 func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server.HandlerOption) error {
@@ -117,6 +141,8 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		Delete(ctx context.Context, in *CouponDto, out *common.Response) error
 		Update(ctx context.Context, in *CouponDto, out *common.Response) error
 		List(ctx context.Context, in *common.Page, out *common.Response) error
+		UseCoupon(ctx context.Context, in *CouponDto, out *common.Response) error
+		FindCouponByUser(ctx context.Context, in *User, out *common.Response) error
 	}
 	type Coupons struct {
 		coupons
@@ -143,4 +169,12 @@ func (h *couponsHandler) Update(ctx context.Context, in *CouponDto, out *common.
 
 func (h *couponsHandler) List(ctx context.Context, in *common.Page, out *common.Response) error {
 	return h.CouponsHandler.List(ctx, in, out)
+}
+
+func (h *couponsHandler) UseCoupon(ctx context.Context, in *CouponDto, out *common.Response) error {
+	return h.CouponsHandler.UseCoupon(ctx, in, out)
+}
+
+func (h *couponsHandler) FindCouponByUser(ctx context.Context, in *User, out *common.Response) error {
+	return h.CouponsHandler.FindCouponByUser(ctx, in, out)
 }
