@@ -13,7 +13,6 @@ service Coupons {
   rpc Delete(CouponDto) returns (common.Response) {}
   rpc Update(CouponDto) returns (common.Response) {}
   rpc List(common.Page) returns (common.Response) {}
-  rpc UseCoupon(CouponDto) returns (common.Response) {}
   rpc FindCouponByUser(User) returns (common.Response) {}
 }
 message User {
