@@ -15,6 +15,7 @@ service Coupons {
   rpc List(common.Page) returns (common.Response) {}
   rpc FindCouponByUser(User) returns (common.Response) {}
   rpc FindCouponByNo(CouponNo) returns (common.Response) {}
+  rpc UseCoupon(CouponNo) returns (common.Response) {}
 
 }
 message User {
