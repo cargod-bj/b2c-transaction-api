@@ -38,8 +38,9 @@ message CouponDto {
   uint64   PaymentId = 12;
   uint32   UseStatus = 13;
   uint32   Status = 14;
-  int64   CreateTime = 15;
-  int64   UpdateTime = 16;
+  uint32   Num = 15;
+  int64   CreateTime = 16;
+  int64   UpdateTime = 17;
 }
 message PagedList{
   uint32 pageNo = 1;
