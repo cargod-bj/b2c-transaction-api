@@ -14,9 +14,14 @@ service Coupons {
   rpc Update(CouponDto) returns (common.Response) {}
   rpc List(common.Page) returns (common.Response) {}
   rpc FindCouponByUser(User) returns (common.Response) {}
+  rpc FindCouponByNo(CouponNo) returns (common.Response) {}
+
 }
 message User {
   uint64   UserId = 1;
+}
+message CouponNo {
+  uint64   CouponNo = 1;
 }
 message CouponDto {
   uint64   Id = 1;

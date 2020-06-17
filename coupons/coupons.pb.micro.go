@@ -49,6 +49,7 @@ type CouponsService interface {
 	Update(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
 	List(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 	FindCouponByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
+	FindCouponByNo(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
 }
 
 type couponsService struct {
@@ -113,6 +114,16 @@ func (c *couponsService) FindCouponByUser(ctx context.Context, in *User, opts ..
 	return out, nil
 }
 
+func (c *couponsService) FindCouponByNo(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.FindCouponByNo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Coupons service
 
 type CouponsHandler interface {
@@ -121,6 +132,7 @@ type CouponsHandler interface {
 	Update(context.Context, *CouponDto, *common.Response) error
 	List(context.Context, *common.Page, *common.Response) error
 	FindCouponByUser(context.Context, *User, *common.Response) error
+	FindCouponByNo(context.Context, *CouponNo, *common.Response) error
 }
 
 func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server.HandlerOption) error {
@@ -130,6 +142,7 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		Update(ctx context.Context, in *CouponDto, out *common.Response) error
 		List(ctx context.Context, in *common.Page, out *common.Response) error
 		FindCouponByUser(ctx context.Context, in *User, out *common.Response) error
+		FindCouponByNo(ctx context.Context, in *CouponNo, out *common.Response) error
 	}
 	type Coupons struct {
 		coupons
@@ -160,4 +173,8 @@ func (h *couponsHandler) List(ctx context.Context, in *common.Page, out *common.
 
 func (h *couponsHandler) FindCouponByUser(ctx context.Context, in *User, out *common.Response) error {
 	return h.CouponsHandler.FindCouponByUser(ctx, in, out)
+}
+
+func (h *couponsHandler) FindCouponByNo(ctx context.Context, in *CouponNo, out *common.Response) error {
+	return h.CouponsHandler.FindCouponByNo(ctx, in, out)
 }
