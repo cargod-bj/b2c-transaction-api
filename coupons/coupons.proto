@@ -22,7 +22,7 @@ message User {
   uint64   UserId = 1;
 }
 message CouponNo {
-  uint64   CouponNo = 1;
+  string   CouponNo = 1;
 }
 message CouponDto {
   uint64   Id = 1;
