@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package appointment;
 import "google/protobuf/any.proto";
-option go_package="github.com/cargod-bj/b2c-transaction-api/appointment";
+option go_package = "github.com/cargod-bj/b2c-transaction-api/appointment";
 /**
 *预约
  */
@@ -23,7 +23,7 @@ message AppointmentDTO {
   uint64 carId = 6;
   uint64 storeId = 7;
   uint32 status = 8;
-  int64 appointment = 9; //预约时间
+  string appointment = 9; //预约时间
   uint64 createTime = 10;
   uint64 updateTime = 11;
 }
@@ -35,8 +35,13 @@ message AppointmentList {
   uint32 count = 4;
 }
 message AppointmentCondition {
-  uint32 page = 1;
-  uint32 limit = 2;
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  repeated uint64 UserId = 3;
+  uint64 CarId = 7;
+  uint64 StaffId = 6;
+  uint64 StoreId = 9;
+  string Appointment = 11; //预约时间
 }
 
 message Response {
