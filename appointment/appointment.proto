@@ -11,7 +11,7 @@ service Appointment {
   rpc Delete(DeleteId) returns (Response) {}
   rpc Update(AppointmentDTO) returns (Response) {}
   rpc GetList(AppointmentCondition) returns (Response) {}
-
+  rpc AssignAppointment(AssignDto) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -57,3 +57,7 @@ message DeleteId{
   uint64 id = 1;
 }
 
+message AssignDto{
+  repeated uint64 id = 1;
+  uint64 StaffId = 2;
+}
