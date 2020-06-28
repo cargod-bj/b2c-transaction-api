@@ -12,6 +12,8 @@ service Appointment {
   rpc Update(AppointmentDTO) returns (Response) {}
   rpc GetList(AppointmentCondition) returns (Response) {}
   rpc AssignAppointment(AssignDto) returns (Response) {}
+  //个人中心查询预约
+  rpc GetUserList(AppointmentCon) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -33,6 +35,14 @@ message AppointmentList {
   uint32 pageSize = 2;
   repeated AppointmentDTO appointment = 3;
   uint32 count = 4;
+  uint32 unCompletedCount = 5;
+  uint32 CompletedCount = 6;
+}
+message AppointmentCon {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  uint64 UserId = 3;
+  uint32 Completed = 4;//0表示未完成的，1表示完成的
 }
 message AppointmentCondition {
   uint32 pageNo = 1;
@@ -56,6 +66,7 @@ message AddAppointmentData{
 }
 message DeleteId{
   uint64 id = 1;
+  uint64 UserId = 2;
 }
 
 message AssignDto{
