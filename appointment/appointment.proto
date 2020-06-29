@@ -49,7 +49,7 @@ message AppointmentCondition {
   uint32 pageSize = 2;
   repeated uint64 UserId = 3;
   uint64 CarId = 7;
-  uint64 StaffId = 6;
+  repeated uint64 StaffId = 6;
   uint64 StoreId = 9;
   string Appointment = 11; //预约时间
   repeated uint32 Status = 12;
