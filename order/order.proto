@@ -46,6 +46,7 @@ message OrderList {
 message OrderCondition {
   uint32 page = 1;
   uint32 limit = 2;
+  uint64 userId = 3;
 }
 
 message Response {
