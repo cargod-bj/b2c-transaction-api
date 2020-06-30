@@ -59,5 +59,6 @@ message AddOrderData{
 }
 message DeleteId{
   uint64 id = 1;
+  uint64 userId = 2;
 }
 
