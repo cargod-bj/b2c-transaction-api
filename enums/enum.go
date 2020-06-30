@@ -6,6 +6,7 @@ const (
 	CANCELLED           = 1
 	COMPLETED           = 2
 	CANCELLEDNOTARRIVED = 3
+	ONPROCESSING        = 4
 )
 
 var appointmentStatusText = map[int]string{
@@ -40,4 +41,28 @@ var appointmentStatusCode = map[string]int{
 
 func AppointmentStatusCode(text string) int {
 	return appointmentStatusCode[text]
+}
+
+var orderStatusText = map[int]string{
+	CANCELLED:    "CANCELLED",
+	COMPLETED:    "COMPLETED",
+	ONPROCESSING: "ONPROCESSING",
+}
+
+func OrderStatusText(code int) string {
+	return orderStatusText[code]
+}
+
+func OrderStatusList() []int {
+	return getKeys(appointmentStatusText)
+}
+
+var orderStatusCode = map[string]int{
+	"CANCELLED":    CANCELLED,
+	"COMPLETED":    COMPLETED,
+	"ONPROCESSING": ONPROCESSING,
+}
+
+func OrderStatusCode(text string) int {
+	return orderStatusCode[text]
 }
