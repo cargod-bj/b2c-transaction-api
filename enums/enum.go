@@ -63,7 +63,7 @@ func OrderStatusText(code int) string {
 }
 
 func OrderStatusList() []int {
-	return getKeys(appointmentStatusText)
+	return getKeys(orderStatusText)
 }
 
 var orderStatusCode = map[string]int{
