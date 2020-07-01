@@ -41,6 +41,7 @@ message OrderDTO {
   uint32 deliveryType = 19;
   int64  deliveryDate = 20;
   string deliveryAddress = 21;
+  string ownerName = 22;
 }
 
 message OrderList {
