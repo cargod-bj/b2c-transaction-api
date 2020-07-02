@@ -50,6 +50,8 @@ type AppointmentService interface {
 	AssignAppointment(ctx context.Context, in *AssignDto, opts ...client.CallOption) (*Response, error)
 	//个人中心查询预约
 	GetUserList(ctx context.Context, in *AppointmentCon, opts ...client.CallOption) (*Response, error)
+	//单个车查询预约
+	Get(ctx context.Context, in *AppointCon, opts ...client.CallOption) (*Response, error)
 }
 
 type appointmentService struct {
@@ -124,6 +126,16 @@ func (c *appointmentService) GetUserList(ctx context.Context, in *AppointmentCon
 	return out, nil
 }
 
+func (c *appointmentService) Get(ctx context.Context, in *AppointCon, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Appointment.Get", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Appointment service
 
 type AppointmentHandler interface {
@@ -134,6 +146,8 @@ type AppointmentHandler interface {
 	AssignAppointment(context.Context, *AssignDto, *Response) error
 	//个人中心查询预约
 	GetUserList(context.Context, *AppointmentCon, *Response) error
+	//单个车查询预约
+	Get(context.Context, *AppointCon, *Response) error
 }
 
 func RegisterAppointmentHandler(s server.Server, hdlr AppointmentHandler, opts ...server.HandlerOption) error {
@@ -144,6 +158,7 @@ func RegisterAppointmentHandler(s server.Server, hdlr AppointmentHandler, opts .
 		GetList(ctx context.Context, in *AppointmentCondition, out *Response) error
 		AssignAppointment(ctx context.Context, in *AssignDto, out *Response) error
 		GetUserList(ctx context.Context, in *AppointmentCon, out *Response) error
+		Get(ctx context.Context, in *AppointCon, out *Response) error
 	}
 	type Appointment struct {
 		appointment
@@ -178,4 +193,8 @@ func (h *appointmentHandler) AssignAppointment(ctx context.Context, in *AssignDt
 
 func (h *appointmentHandler) GetUserList(ctx context.Context, in *AppointmentCon, out *Response) error {
 	return h.AppointmentHandler.GetUserList(ctx, in, out)
+}
+
+func (h *appointmentHandler) Get(ctx context.Context, in *AppointCon, out *Response) error {
+	return h.AppointmentHandler.Get(ctx, in, out)
 }
