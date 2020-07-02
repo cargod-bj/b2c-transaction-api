@@ -14,6 +14,8 @@ service Appointment {
   rpc AssignAppointment(AssignDto) returns (Response) {}
   //个人中心查询预约
   rpc GetUserList(AppointmentCon) returns (Response) {}
+  //单个车查询预约
+  rpc Get(AppointCon) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -44,6 +46,10 @@ message AppointmentCon {
   uint32 pageSize = 2;
   uint64 UserId = 3;
   uint32 Completed = 4;//0表示未完成的，1表示完成的
+}
+message AppointCon {
+  uint64 carId = 1;
+  uint64 userId = 2;
 }
 message AppointmentCondition {
   uint32 pageNo = 1;
