@@ -3,7 +3,7 @@ syntax = "proto3";
 package order;
 import "google/protobuf/any.proto";
 
-option go_package="github.com/cargod-bj/b2c-transaction-api/order";
+option go_package = "github.com/cargod-bj/b2c-transaction-api/order";
 /**
 *订单
  */
@@ -29,12 +29,19 @@ message OrderDTO {
   uint32 type = 7;
   uint64 storeId = 8;
   uint32 status = 9;
-  float receivableAmount = 10;//需要支付金额
-  float paiedAmount = 11;//已支付金额
-  float totalAmount = 12;//总金额
-  float discountedAmount = 13;//优惠金额
+  string receivableAmount = 10;//需要支付金额
+  string paiedAmount = 11;//已支付金额
+  string totalAmount = 12;//总金额
+  string discountedAmount = 13;//优惠金额
   uint64 createTime = 14;
   uint64 updateTime = 15;
+  uint64 orderNo = 16;
+  string insurance = 17;
+  string warranty = 18;
+  uint32 deliveryType = 19;
+  int64  deliveryDate = 20;
+  string deliveryAddress = 21;
+  string ownerName = 22;
 }
 
 message OrderList {
@@ -62,4 +69,3 @@ message DeleteId{
   uint64 id = 1;
   uint64 userId = 2;
 }
-
