@@ -42,7 +42,7 @@ type OrderDTO struct {
 	Status           uint32  `protobuf:"varint,9,opt,name=status,proto3" json:"status,omitempty"`
 	ReceivableAmount float32 `protobuf:"fixed32,10,opt,name=receivableAmount,proto3" json:"receivableAmount,omitempty"` //需要支付金额
 	PaiedAmount      float32 `protobuf:"fixed32,11,opt,name=paiedAmount,proto3" json:"paiedAmount,omitempty"`           //已支付金额
-	TotalAmount      float32 `protobuf:"fixed32,12,opt,name=totalAmount,proto3" json:"totalAmount,omitempty"`           //总金额
+	TotalAmount      float32 `protobuf:"fixed32z,12,opt,name=totalAmount,proto3" json:"totalAmount,omitempty"`           //总金额
 	DiscountedAmount float32 `protobuf:"fixed32,13,opt,name=discountedAmount,proto3" json:"discountedAmount,omitempty"` //优惠金额
 	CreateTime       uint64  `protobuf:"varint,14,opt,name=createTime,proto3" json:"createTime,omitempty"`
 	UpdateTime       uint64  `protobuf:"varint,15,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
