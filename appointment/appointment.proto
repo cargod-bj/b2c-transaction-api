@@ -32,6 +32,8 @@ message AppointmentDTO {
   string location = 11;//地址
   uint64 createTime = 12;
   uint64 updateTime = 13;
+
+  uint32 appointment_status = 14;//预约状态1canceled,2completed
 }
 
 message AppointmentList {
