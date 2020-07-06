@@ -29,8 +29,9 @@ message AppointmentDTO {
   uint32 status = 8;
   string appointment = 9; //预约时间
   string remark = 10;//备注
-  uint64 createTime = 11;
-  uint64 updateTime = 12;
+  string location = 11;//地址
+  uint64 createTime = 12;
+  uint64 updateTime = 13;
 }
 
 message AppointmentList {
