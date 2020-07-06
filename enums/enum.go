@@ -66,3 +66,30 @@ var orderStatusCode = map[string]int{
 func OrderStatusCode(text string) int {
 	return orderStatusCode[text]
 }
+
+const (
+	LEAD   = 1
+	WALKIN = 2
+)
+
+var leadTypeText = map[int]string{
+	LEAD:   "LEAD",
+	WALKIN: "WALKIN",
+}
+
+func LeadTypeText(code int) string {
+	return leadTypeText[code]
+}
+
+func LeadTypeList() []int {
+	return getKeys(leadTypeText)
+}
+
+var leadTypeCode = map[string]int{
+	"LEAD":   LEAD,
+	"WALKIN": WALKIN,
+}
+
+func LeadTypeCode(text string) int {
+	return leadTypeCode[text]
+}
