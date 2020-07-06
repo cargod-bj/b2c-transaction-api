@@ -3,10 +3,10 @@ package enums
 import "sort"
 
 const (
-	CANCELLED           = 3
-	COMPLETED           = 4
-	CANCELLEDNOTARRIVED = 5
-	ONPROCESSING        = 6
+	CANCELLED           = 1
+	COMPLETED           = 2
+	CANCELLEDNOTARRIVED = 3
+	ONPROCESSING        = 4
 )
 
 var appointmentStatusText = map[int]string{
