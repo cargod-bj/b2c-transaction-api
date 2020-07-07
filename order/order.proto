@@ -51,8 +51,8 @@ message OrderList {
   uint32 count = 4;
 }
 message OrderCondition {
-  uint32 page = 1;
-  uint32 limit = 2;
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
   uint64 userId = 3;
   repeated uint64 userIds = 4;
   uint64 orderNo = 5;
