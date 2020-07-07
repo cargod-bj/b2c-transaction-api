@@ -56,7 +56,7 @@ message OrderCondition {
   uint64 userId = 3;
   repeated uint64 userIds = 4;
   uint64 orderNo = 5;
-  uint64 carId = 6;
+  string carId = 6;
   uint64 storeId = 7;
   uint32 status = 8;
   string createTime = 9;
