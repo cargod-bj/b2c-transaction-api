@@ -53,7 +53,12 @@ message OrderList {
 message OrderCondition {
   uint32 page = 1;
   uint32 limit = 2;
-  uint64 userId = 3;
+  repeated uint64 userIds = 3;
+  uint64 orderNo = 4;
+  uint64 carId = 5;
+  uint64 storeId = 6;
+  uint32 status = 7;
+  string createTime = 8;
 }
 
 message Response {
