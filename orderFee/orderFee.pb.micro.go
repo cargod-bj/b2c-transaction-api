@@ -48,7 +48,7 @@ type OrderFeeService interface {
 	Delete(ctx context.Context, in *OrderFeeDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *OrderFeeDto, opts ...client.CallOption) (*common.Response, error)
 	//根据订单号获取费用信息 （orderID必填字段，feeType选填）
-	GetFeeListByCond(ctx context.Context, in *OrderFeeDto, opts ...client.CallOption) (*common.Response, error)
+	GetFeeListByCond(ctx context.Context, in *FeeCond, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderFeeService struct {
@@ -93,7 +93,7 @@ func (c *orderFeeService) Update(ctx context.Context, in *OrderFeeDto, opts ...c
 	return out, nil
 }
 
-func (c *orderFeeService) GetFeeListByCond(ctx context.Context, in *OrderFeeDto, opts ...client.CallOption) (*common.Response, error) {
+func (c *orderFeeService) GetFeeListByCond(ctx context.Context, in *FeeCond, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "OrderFee.getFeeListByCond", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -111,7 +111,7 @@ type OrderFeeHandler interface {
 	Delete(context.Context, *OrderFeeDto, *common.Response) error
 	Update(context.Context, *OrderFeeDto, *common.Response) error
 	//根据订单号获取费用信息 （orderID必填字段，feeType选填）
-	GetFeeListByCond(context.Context, *OrderFeeDto, *common.Response) error
+	GetFeeListByCond(context.Context, *FeeCond, *common.Response) error
 }
 
 func RegisterOrderFeeHandler(s server.Server, hdlr OrderFeeHandler, opts ...server.HandlerOption) error {
@@ -119,7 +119,7 @@ func RegisterOrderFeeHandler(s server.Server, hdlr OrderFeeHandler, opts ...serv
 		Add(ctx context.Context, in *OrderFeeDto, out *common.Response) error
 		Delete(ctx context.Context, in *OrderFeeDto, out *common.Response) error
 		Update(ctx context.Context, in *OrderFeeDto, out *common.Response) error
-		GetFeeListByCond(ctx context.Context, in *OrderFeeDto, out *common.Response) error
+		GetFeeListByCond(ctx context.Context, in *FeeCond, out *common.Response) error
 	}
 	type OrderFee struct {
 		orderFee
@@ -144,6 +144,6 @@ func (h *orderFeeHandler) Update(ctx context.Context, in *OrderFeeDto, out *comm
 	return h.OrderFeeHandler.Update(ctx, in, out)
 }
 
-func (h *orderFeeHandler) GetFeeListByCond(ctx context.Context, in *OrderFeeDto, out *common.Response) error {
+func (h *orderFeeHandler) GetFeeListByCond(ctx context.Context, in *FeeCond, out *common.Response) error {
 	return h.OrderFeeHandler.GetFeeListByCond(ctx, in, out)
 }
