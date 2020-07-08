@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package order;
 import "google/protobuf/any.proto";
+import "../../payment/payment.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/order";
 /**
@@ -16,7 +17,8 @@ service Order {
   rpc Update(OrderDTO) returns (Response) {}
   //查询订单列表，返回订单列表数据
   rpc GetList(OrderCondition) returns (Response) {}
-
+  //查询订单详情
+  rpc GetDetail(OrderCondition) returns (Response) {}
 }
 
 message OrderDTO {
@@ -42,6 +44,8 @@ message OrderDTO {
   int64  deliveryDate = 20;
   string deliveryAddress = 21;
   string ownerName = 22;
+  string consigneeName = 23;
+  string consigneeNum = 24;
 }
 
 message OrderList {
@@ -74,4 +78,59 @@ message AddOrderData{
 message DeleteId{
   uint64 id = 1;
   uint64 userId = 2;
+}
+message OrderFee{
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 staffId = 3;
+  uint64 orderId = 4;
+  uint32 feeType = 5;
+  uint32 status = 6;
+  string amount = 7;
+}
+message CheckList{
+  uint64 id = 1;
+  uint64 orderId = 2;
+  string image = 3;
+  uint32 type = 4;
+  string name = 5;
+  string filetype = 6;
+}
+message OrderFlowLog{
+  uint64 id = 1;
+  uint64 orderId = 2;
+  string remark = 3;
+  uint32 status = 4;
+  uint64 time = 5;
+  uint64 staffId = 6;
+}
+
+message OrderRefund{
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 orderId = 3;
+  string remark = 4;
+  string amount = 5;
+  uint32 status = 6;
+  string reason = 7;
+  uint64 staffId = 8;
+  repeated CheckList images = 9;
+}
+message OrderCheckList{
+  repeated CheckList salesContract = 1;
+  repeated CheckList puspakomInspection = 2;
+  repeated CheckList jpjVehicleTransfer = 3;
+  repeated CheckList insurance = 4;
+  repeated CheckList roadTax = 5;
+  repeated CheckList warranty = 6;
+  repeated CheckList receivedConfirm = 7;
+}
+
+message OrderDetail{
+  OrderDTO orderDto = 1;
+  repeated OrderFee orderFees = 2;
+  repeated PaymentDto paymentDtos = 3;
+  OrderCheckList orderCheckList = 4;
+  OrderRefund orderRefund = 5;
+  repeated OrderFlowLog orderFlowLogs = 6;
 }
