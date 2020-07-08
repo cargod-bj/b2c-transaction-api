@@ -25,7 +25,7 @@ message OrderFeeDto {
 }
 
 message FeeList{
-  repeated OrderFeeDto fee = 1;
+  repeated OrderFeeDto feeList = 1;
 }
 
 message FeeCond{
