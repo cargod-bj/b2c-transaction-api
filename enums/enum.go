@@ -270,16 +270,18 @@ const (
 	RoadTax            = 5
 	Warranty           = 6
 	ReceivedConfirm    = 7
+	Moneyback          = 8
 )
 
 var checkListTypeText = map[int]string{
 	SalesContract:      "SalesContract",
 	PUSPAKOMInspection: "PUSPAKOMInspection",
 	JPJVehicleTransfer: "JPJVehicleTransfer",
-	insurance:          "insurance",
+	insurance:          "Insurance",
 	RoadTax:            "RoadTax",
 	Warranty:           "Warranty",
 	ReceivedConfirm:    "ReceivedConfirm",
+	Moneyback:          "Moneyback",
 }
 
 func CheckListTypeText(code int) string {
@@ -294,10 +296,11 @@ var checkListTypeCode = map[string]int{
 	"SalesContract":      SalesContract,
 	"PUSPAKOMInspection": PUSPAKOMInspection,
 	"JPJVehicleTransfer": JPJVehicleTransfer,
-	"insurance":          insurance,
+	"Insurance":          insurance,
 	"RoadTax":            RoadTax,
 	"Warranty":           Warranty,
 	"ReceivedConfirm":    ReceivedConfirm,
+	"Moneyback":          Moneyback,
 }
 
 func CheckListTypeCode(text string) int {
