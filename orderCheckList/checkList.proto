@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package orderCheckList;
+import "google/protobuf/any.proto";
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+
+option go_package = "github.com/cargod-bj/b2c-transaction-api/orderCheckList";
+/**
+*订单各种收据图片
+ */
+service CheckList {
+  rpc Add(CheckListDto) returns (common.Response) {}
+  rpc Delete(CheckListDto) returns (common.Response) {}
+  rpc Update(CheckListDto) returns (common.Response) {}
+}
+message CheckListDto {
+  uint64 id = 1;
+  uint64 orderId = 2;
+  string image = 3;
+  uint32 type = 4;
+  string name = 5;
+  string fileType = 6;
+}
+
+

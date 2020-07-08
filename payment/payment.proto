@@ -6,7 +6,7 @@ import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/payment";
 /**
-*车辆试驾
+*订单付款和退款记录
  */
 service Payment {
   rpc Add(PaymentDto) returns (common.Response) {}

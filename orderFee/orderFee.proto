@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package orderFee;
+import "google/protobuf/any.proto";
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+
+option go_package = "github.com/cargod-bj/b2c-transaction-api/orderFee";
+/**
+*订单费用明细
+ */
+service OrderFee {
+  rpc Add(OrderFeeDto) returns (common.Response) {}
+  rpc Delete(OrderFeeDto) returns (common.Response) {}
+  rpc Update(OrderFeeDto) returns (common.Response) {}
+}
+message OrderFeeDto {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 staffId = 3;
+  uint64 orderId = 4;
+  uint32 feeType = 5;
+  uint32 status = 6;
+  string amount = 7;
+}
+
+
