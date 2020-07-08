@@ -1,9 +1,8 @@
 syntax = "proto3";
 
 package orderRefund;
-import "google/protobuf/any.proto";
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-import "../../orderCheckList/checklist.proto";
+import "orderCheckList/checklist.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/orderRefund";
 /**
@@ -23,7 +22,7 @@ message OrderRefundDto {
   uint32 status = 6;
   string reason = 7;
   uint64 staffId = 8;
-  repeated CheckList images = 9;
+  repeated orderCheckList.CheckListDto images = 9;
 }
 
 

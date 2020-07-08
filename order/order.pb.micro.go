@@ -5,6 +5,11 @@ package order
 
 import (
 	fmt "fmt"
+	_ "github.com/cargod-bj/b2c-transaction-api/orderCheckList"
+	_ "github.com/cargod-bj/b2c-transaction-api/orderFee"
+	_ "github.com/cargod-bj/b2c-transaction-api/orderFlowLog"
+	_ "github.com/cargod-bj/b2c-transaction-api/orderRefund"
+	_ "github.com/cargod-bj/b2c-transaction-api/payment"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/golang/protobuf/ptypes/any"
 	math "math"
@@ -51,6 +56,8 @@ type OrderService interface {
 	Update(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*Response, error)
 	//查询订单列表，返回订单列表数据
 	GetList(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
+	//查询订单详情
+	GetDetail(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
 }
 
 type orderService struct {
@@ -105,6 +112,16 @@ func (c *orderService) GetList(ctx context.Context, in *OrderCondition, opts ...
 	return out, nil
 }
 
+func (c *orderService) GetDetail(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetDetail", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -116,6 +133,8 @@ type OrderHandler interface {
 	Update(context.Context, *OrderDTO, *Response) error
 	//查询订单列表，返回订单列表数据
 	GetList(context.Context, *OrderCondition, *Response) error
+	//查询订单详情
+	GetDetail(context.Context, *OrderCondition, *Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -124,6 +143,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		Delete(ctx context.Context, in *DeleteId, out *Response) error
 		Update(ctx context.Context, in *OrderDTO, out *Response) error
 		GetList(ctx context.Context, in *OrderCondition, out *Response) error
+		GetDetail(ctx context.Context, in *OrderCondition, out *Response) error
 	}
 	type Order struct {
 		order
@@ -150,4 +170,8 @@ func (h *orderHandler) Update(ctx context.Context, in *OrderDTO, out *Response) 
 
 func (h *orderHandler) GetList(ctx context.Context, in *OrderCondition, out *Response) error {
 	return h.OrderHandler.GetList(ctx, in, out)
+}
+
+func (h *orderHandler) GetDetail(ctx context.Context, in *OrderCondition, out *Response) error {
+	return h.OrderHandler.GetDetail(ctx, in, out)
 }

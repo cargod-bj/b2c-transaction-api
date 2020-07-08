@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package order;
 import "google/protobuf/any.proto";
-import "../../payment/payment.proto";
-import "../../orderCheckList/checklist.proto";
-import "../../orderFee/orderFee.proto";
-import "../../orderFlowLog/orderFlowLog.proto";
-import "../../orderRefund/orderRefund.proto";
+import "payment/payment.proto";
+import "orderCheckList/checklist.proto";
+import "orderFee/orderFee.proto";
+import "orderFlowLog/orderFlowLog.proto";
+import "orderRefund/orderRefund.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/order";
 /**
@@ -85,20 +85,20 @@ message DeleteId{
 }
 
 message OrderCheckList{
-  repeated CheckList salesContract = 1;
-  repeated CheckList puspakomInspection = 2;
-  repeated CheckList jpjVehicleTransfer = 3;
-  repeated CheckList insurance = 4;
-  repeated CheckList roadTax = 5;
-  repeated CheckList warranty = 6;
-  repeated CheckList receivedConfirm = 7;
+  repeated orderCheckList.CheckListDto salesContract = 1;
+  repeated orderCheckList.CheckListDto puspakomInspection = 2;
+  repeated orderCheckList.CheckListDto jpjVehicleTransfer = 3;
+  repeated orderCheckList.CheckListDto insurance = 4;
+  repeated orderCheckList.CheckListDto roadTax = 5;
+  repeated orderCheckList.CheckListDto warranty = 6;
+  repeated orderCheckList.CheckListDto receivedConfirm = 7;
 }
 
 message OrderDetail{
   OrderDTO orderDto = 1;
-  repeated OrderFee orderFees = 2;
-  repeated PaymentDto paymentDtos = 3;
+  repeated orderFee.OrderFeeDto orderFees = 2;
+  repeated payment.PaymentDto paymentDtos = 3;
   OrderCheckList orderCheckList = 4;
-  OrderRefund orderRefund = 5;
-  repeated OrderFlowLog orderFlowLogs = 6;
+  orderRefund.OrderRefundDto orderRefund = 5;
+  repeated orderFlowLog.OrderFlowLogDto orderFlowLogs = 6;
 }
