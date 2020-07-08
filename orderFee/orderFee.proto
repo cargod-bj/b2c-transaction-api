@@ -8,9 +8,12 @@ option go_package = "github.com/cargod-bj/b2c-transaction-api/orderFee";
 *订单费用明细
  */
 service OrderFee {
+  //添加费用信息
   rpc Add(OrderFeeDto) returns (common.Response) {}
   rpc Delete(OrderFeeDto) returns (common.Response) {}
   rpc Update(OrderFeeDto) returns (common.Response) {}
+  //根据订单号获取费用信息 （orderID必填字段，feeType选填）
+  rpc getFeeListByCond(OrderFeeDto) returns (common.Response) {}
 }
 message OrderFeeDto {
   uint64 id = 1;
@@ -19,6 +22,15 @@ message OrderFeeDto {
   uint32 feeType = 5;
   uint32 status = 6;
   string amount = 7;
+}
+
+message FeeList{
+  repeated OrderFeeDto fee = 1;
+}
+
+message FeeCond{
+  uint64 orderId = 1;
+  uint32 feeType = 5;
 }
 
 
