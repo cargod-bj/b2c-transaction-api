@@ -261,3 +261,45 @@ var recordTypeCode = map[string]int{
 func RecordTypeCode(text string) int {
 	return recordTypeCode[text]
 }
+
+const (
+	SalesContract      = 1
+	PUSPAKOMInspection = 2
+	JPJVehicleTransfer = 3
+	insurance          = 4
+	RoadTax            = 5
+	Warranty           = 6
+	ReceivedConfirm    = 7
+)
+
+var checkListTypeText = map[int]string{
+	SalesContract:      "SalesContract",
+	PUSPAKOMInspection: "PUSPAKOMInspection",
+	JPJVehicleTransfer: "JPJVehicleTransfer",
+	insurance:          "insurance",
+	RoadTax:            "RoadTax",
+	Warranty:           "Warranty",
+	ReceivedConfirm:    "ReceivedConfirm",
+}
+
+func CheckListTypeText(code int) string {
+	return checkListTypeText[code]
+}
+
+func CheckListTypeList() []int {
+	return getKeys(checkListTypeText)
+}
+
+var checkListTypeCode = map[string]int{
+	"SalesContract":      SalesContract,
+	"PUSPAKOMInspection": PUSPAKOMInspection,
+	"JPJVehicleTransfer": JPJVehicleTransfer,
+	"insurance":          insurance,
+	"RoadTax":            RoadTax,
+	"Warranty":           Warranty,
+	"ReceivedConfirm":    ReceivedConfirm,
+}
+
+func CheckListTypeCode(text string) int {
+	return checkListTypeCode[text]
+}
