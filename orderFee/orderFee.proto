@@ -13,7 +13,7 @@ service OrderFee {
   rpc Delete(OrderFeeDto) returns (common.Response) {}
   rpc Update(OrderFeeDto) returns (common.Response) {}
   //根据订单号获取费用信息 （orderID必填字段，feeType选填）
-  rpc getFeeListByCond(OrderFeeDto) returns (common.Response) {}
+  rpc getFeeListByCond(FeeCond) returns (common.Response) {}
 }
 message OrderFeeDto {
   uint64 id = 1;
