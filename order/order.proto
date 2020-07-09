@@ -50,6 +50,7 @@ message OrderDTO {
   string ownerName = 22;
   string consigneeName = 23;
   string consigneeNum = 24;
+  repeated OrderFeeDto feeList = 25;//费用信息
 }
 
 message OrderList {
@@ -102,4 +103,12 @@ message OrderDetail{
   OrderCheckList orderCheckList = 4;
   orderRefund.OrderRefundDto orderRefund = 5;
   repeated orderFlowLog.OrderFlowLogDto orderFlowLogs = 6;
+}
+message OrderFeeDto {
+  uint64 id = 1;
+  uint64 staffId = 3;
+  uint64 orderId = 4;
+  uint32 feeType = 5;
+  uint32 status = 6;
+  string amount = 7;
 }
