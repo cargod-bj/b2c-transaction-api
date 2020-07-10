@@ -137,12 +137,14 @@ func DeliveryMethodCode(text string) int {
 }
 
 const (
-	Insurance = 1
-	WarrantyA = 2
-	WarrantyB = 3
+	CarPrice  = 1
+	Insurance = 2
+	WarrantyA = 3
+	WarrantyB = 4
 )
 
 var feeTypeText = map[int]string{
+	CarPrice:  "CarPrice",
 	Insurance: "Insurance",
 	WarrantyA: "Warranty-A",
 	WarrantyB: "Warranty-B",
@@ -157,6 +159,7 @@ func FeeTypeList() []int {
 }
 
 var feeTypeCode = map[string]int{
+	"CarPrice":   CarPrice,
 	"Insurance":  Insurance,
 	"Warranty-A": WarrantyA,
 	"Warranty-B": WarrantyB,
