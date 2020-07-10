@@ -49,13 +49,14 @@ message OrderDTO {
   string deliveryAddress = 21;
   string ownerName = 22;
   string consigneeName = 23;
-  string ownerNum = 24;
-  string ownerId = 25;
-  string car = 26;
-  string statusLabel = 27;
+
+  string ownerNum = 24;//所有者电话
+  string ownerId = 25;//所有者身份证号
+  string car = 26; //车信息
+  string statusLabel = 27;//显示状态
   string carPrice = 28;
-  string contactNo = 29;
-  string name = 30;
+  string contactNo = 29;//联系方式
+  string name = 30;//姓名
   string email = 31;
   string location = 32;
 
