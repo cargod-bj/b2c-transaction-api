@@ -23,6 +23,21 @@ service Order {
   rpc GetList(OrderCondition) returns (Response) {}
   //查询订单详情
   rpc GetDetail(OrderCondition) returns (Response) {}
+  //取消订单
+  rpc CancelOrder(OrderCondition) returns (Response) {}
+  //保存快递信息
+  rpc SaveDeliveryInfo(DeliveryInfo) returns (Response) {}
+}
+
+
+message DeliveryInfo {
+  uint64 id = 1;
+  string ownerName = 2;
+  string ownerNum = 3;
+  string ownerId = 4;
+  uint32  deliveryType = 5;
+  uint64 deliveryDate = 6;
+  string deliveryAddress = 7;
 }
 
 message OrderDTO {
@@ -70,6 +85,7 @@ message OrderList {
   uint32 count = 4;
 }
 message OrderCondition {
+
   uint32 pageNo = 1;
   uint32 pageSize = 2;
   uint64 userId = 3;
@@ -80,6 +96,9 @@ message OrderCondition {
   uint32 status = 8;
   string createTime = 9;
   uint64 staffId = 10;//订单PIC
+  uint64 orderId = 11;//后面查询用
+
+  string remarks = 12;
 }
 
 message Response {
