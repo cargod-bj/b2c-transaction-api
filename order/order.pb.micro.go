@@ -58,6 +58,10 @@ type OrderService interface {
 	GetList(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
 	//查询订单详情
 	GetDetail(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
+	//取消订单
+	CancelOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
+	//保存快递信息
+	SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*Response, error)
 }
 
 type orderService struct {
@@ -122,6 +126,26 @@ func (c *orderService) GetDetail(ctx context.Context, in *OrderCondition, opts .
 	return out, nil
 }
 
+func (c *orderService) CancelOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CancelOrder", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Order.SaveDeliveryInfo", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -135,6 +159,10 @@ type OrderHandler interface {
 	GetList(context.Context, *OrderCondition, *Response) error
 	//查询订单详情
 	GetDetail(context.Context, *OrderCondition, *Response) error
+	//取消订单
+	CancelOrder(context.Context, *OrderCondition, *Response) error
+	//保存快递信息
+	SaveDeliveryInfo(context.Context, *DeliveryInfo, *Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -144,6 +172,8 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		Update(ctx context.Context, in *OrderDTO, out *Response) error
 		GetList(ctx context.Context, in *OrderCondition, out *Response) error
 		GetDetail(ctx context.Context, in *OrderCondition, out *Response) error
+		CancelOrder(ctx context.Context, in *OrderCondition, out *Response) error
+		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
 	}
 	type Order struct {
 		order
@@ -174,4 +204,12 @@ func (h *orderHandler) GetList(ctx context.Context, in *OrderCondition, out *Res
 
 func (h *orderHandler) GetDetail(ctx context.Context, in *OrderCondition, out *Response) error {
 	return h.OrderHandler.GetDetail(ctx, in, out)
+}
+
+func (h *orderHandler) CancelOrder(ctx context.Context, in *OrderCondition, out *Response) error {
+	return h.OrderHandler.CancelOrder(ctx, in, out)
+}
+
+func (h *orderHandler) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error {
+	return h.OrderHandler.SaveDeliveryInfo(ctx, in, out)
 }
