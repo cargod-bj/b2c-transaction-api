@@ -25,6 +25,9 @@ message CheckListDto {
 }
 message CheckListsDto{
   repeated CheckListDto checkLists= 1;
+  uint64 receiptTime = 2;
+  uint64 logisticsPic = 3;
+  uint32 isChecked = 4;
 }
 message OrderIdDto {
   uint64 orderId = 1;
