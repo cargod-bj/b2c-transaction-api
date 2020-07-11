@@ -94,7 +94,7 @@ func (c *orderFeeService) Update(ctx context.Context, in *OrderFeeDto, opts ...c
 }
 
 func (c *orderFeeService) GetFeeListByCond(ctx context.Context, in *FeeCond, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "OrderFee.getFeeListByCond", in)
+	req := c.c.NewRequest(c.name, "OrderFee.GetFeeListByCond", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
