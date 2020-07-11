@@ -13,6 +13,7 @@ var appointmentStatusText = map[int]string{
 	CANCELLED:           "CANCELLED",
 	COMPLETED:           "COMPLETED",
 	CANCELLEDNOTARRIVED: "CANCELLEDNOTARRIVED",
+	ONPROCESSING:        "ONPROCESSING",
 }
 
 func AppointmentStatusText(code int) string {
@@ -37,6 +38,7 @@ var appointmentStatusCode = map[string]int{
 	"CANCELLED":           CANCELLED,
 	"COMPLETED":           COMPLETED,
 	"CANCELLEDNOTARRIVED": CANCELLEDNOTARRIVED,
+	"ONPROCESSING":        ONPROCESSING,
 }
 
 func AppointmentStatusCode(text string) int {
