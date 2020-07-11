@@ -22,7 +22,7 @@ message OrderRefundDto {
   uint32 status = 6;
   string reason = 7;
   uint64 staffId = 8;
-  string images = 9;
+  orderCheckList.CheckListDto images = 9;
 }
 
 

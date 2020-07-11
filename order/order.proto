@@ -115,7 +115,7 @@ message DeleteId{
 }
 
 message OrderCheckList{
-  repeated checklist.CheckListDto checkLists = 1;
+  repeated orderCheckList.CheckListDto checkLists = 1;
 
 }
 
