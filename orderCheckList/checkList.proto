@@ -8,17 +8,25 @@ option go_package = "github.com/cargod-bj/b2c-transaction-api/orderCheckList";
 *订单各种收据图片
  */
 service CheckList {
+  rpc Add(CheckListDto) returns (common.Response) {}
+  rpc Delete(CheckListDto) returns (common.Response) {}
+  rpc Update(CheckListDto) returns (common.Response) {}
   //批量添加checklists
-  rpc AddCheckLists(CheckListsDto) returns (common.Response) {}
+  rpc AddCheckLists(CheckListDto) returns (common.Response) {}
   rpc List(OrderIdDto) returns (common.Response) {}
 }
-
-message CheckListsDto{
-  string checkLists = 1;
-  uint64 receiptTime = 2;
-  uint64 logisticsPic = 3;
-  uint32 isChecked = 4;
+message CheckListDto {
+  uint64 id = 1;
+  uint64 orderId = 2;
+  string image = 3;
+  uint32 type = 4;
+  string name = 5;
+  string fileType = 6;
+  uint32 isChecked = 7;
+  uint64 receiptTime = 8;
+  uint64 logisticsPic = 9;
 }
+
 message OrderIdDto {
   uint64 orderId = 1;
 }

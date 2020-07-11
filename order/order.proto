@@ -115,22 +115,8 @@ message DeleteId{
 }
 
 message OrderCheckList{
-  string salesContract = 1;
-  string puspakomInspection = 2;
-  string jpjVehicleTransfer = 3;
-  string insurance = 4;
-  string roadTax = 5;
-  string warranty = 6;
-  string receivedConfirm = 7;
-  uint64 receiptTime = 8;
-  uint64 logisticsPic = 9;
-  bool  checkedPuspakomInspection = 10;
-  bool  checkedSalesContract = 11;
-  bool  checkedJpjVehicleTransfer = 12;
-  bool checkedInsurance = 13;
-  bool checkedRoadTex = 14;
-  bool checkedWarranty = 15;
-  bool checkedVehicleReceivedConfirmation = 16;
+  repeated checklist.CheckListDto checkLists = 1;
+
 }
 
 message OrderDetail{
