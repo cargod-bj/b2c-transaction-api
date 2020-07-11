@@ -115,15 +115,22 @@ message DeleteId{
 }
 
 message OrderCheckList{
-  repeated orderCheckList.CheckListDto salesContract = 1;
-  repeated orderCheckList.CheckListDto puspakomInspection = 2;
-  repeated orderCheckList.CheckListDto jpjVehicleTransfer = 3;
-  repeated orderCheckList.CheckListDto insurance = 4;
-  repeated orderCheckList.CheckListDto roadTax = 5;
-  repeated orderCheckList.CheckListDto warranty = 6;
-  repeated orderCheckList.CheckListDto receivedConfirm = 7;
+  string salesContract = 1;
+  string puspakomInspection = 2;
+  string jpjVehicleTransfer = 3;
+  string insurance = 4;
+  string roadTax = 5;
+  string warranty = 6;
+  string receivedConfirm = 7;
   uint64 receiptTime = 8;
   uint64 logisticsPic = 9;
+  bool  checkedPuspakomInspection = 10;
+  bool  checkedSalesContract = 11;
+  bool  checkedJpjVehicleTransfer = 12;
+  bool checkedInsurance = 13;
+  bool checkedRoadTex = 14;
+  bool checkedWarranty = 15;
+  bool checkedVehicleReceivedConfirmation = 16;
 }
 
 message OrderDetail{
