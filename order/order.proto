@@ -97,7 +97,6 @@ message OrderCondition {
   string createTime = 9;
   uint64 staffId = 10;//订单PIC
   uint64 orderId = 11;//后面查询用
-
   string remarks = 12;
 }
 

@@ -11,6 +11,9 @@ service CheckList {
   rpc Add(CheckListDto) returns (common.Response) {}
   rpc Delete(CheckListDto) returns (common.Response) {}
   rpc Update(CheckListDto) returns (common.Response) {}
+  //批量添加checklists
+  rpc AddCheckLists(CheckListsDto) returns (common.Response) {}
+  rpc List(OrderIdDto) returns (common.Response) {}
 }
 message CheckListDto {
   uint64 id = 1;
@@ -20,5 +23,9 @@ message CheckListDto {
   string name = 5;
   string fileType = 6;
 }
-
-
+message CheckListsDto{
+  repeated CheckListDto checkLists= 1;
+}
+message OrderIdDto {
+  uint64 orderId = 1;
+}
