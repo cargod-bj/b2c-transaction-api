@@ -22,6 +22,7 @@ message CheckListDto {
   uint32 type = 4;
   string name = 5;
   string fileType = 6;
+  uint32 isChecked = 7;
 }
 message CheckListsDto{
   repeated CheckListDto checkLists= 1;

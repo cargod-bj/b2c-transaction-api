@@ -122,6 +122,8 @@ message OrderCheckList{
   repeated orderCheckList.CheckListDto roadTax = 5;
   repeated orderCheckList.CheckListDto warranty = 6;
   repeated orderCheckList.CheckListDto receivedConfirm = 7;
+  uint64 receiptTime = 8;
+  uint64 logisticsPic = 9;
 }
 
 message OrderDetail{
