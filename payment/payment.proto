@@ -22,7 +22,7 @@ message PaymentDto {
   uint64   UserId = 2;
   uint64   OrderId = 3;
   uint64   StaffId = 4;
-  uint32   Type = 5;
+  uint32   Method = 5;
   string   Amount = 6;
   uint32   Status = 7;
   int64   CreateTime = 8;
