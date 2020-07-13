@@ -122,7 +122,7 @@ message OrderCheckList{
 message OrderDetail{
   OrderDTO orderDto = 1;
   repeated orderFee.OrderFeeDto orderFees = 2;
-  repeated payment.PaymentDto paymentDtos = 3;
+  payment.PaymentList paymentDtos = 3;
   OrderCheckList orderCheckList = 4;
   orderRefund.OrderRefundDto orderRefund = 5;
   repeated orderFlowLog.OrderFlowLogDto orderFlowLogs = 6;
