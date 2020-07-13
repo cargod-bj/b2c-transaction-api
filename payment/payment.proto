@@ -15,7 +15,7 @@ service Payment {
   //根据订单号获取支付信息 （orderID必填字段）
   rpc GetPaymentListByCond(PaymentCond) returns (common.Response) {}
   //新增照片信息
-  rpc UploadImages(PaymentDto) returns (common.Response) {}
+  rpc AddPaymentImages(PaymentDto) returns (common.Response) {}
 
 }
 message PaymentDto {

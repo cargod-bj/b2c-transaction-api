@@ -50,7 +50,7 @@ type PaymentService interface {
 	//根据订单号获取支付信息 （orderID必填字段）
 	GetPaymentListByCond(ctx context.Context, in *PaymentCond, opts ...client.CallOption) (*common.Response, error)
 	//新增照片信息
-	UploadImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
+	AddPaymentImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type paymentService struct {
@@ -115,8 +115,8 @@ func (c *paymentService) GetPaymentListByCond(ctx context.Context, in *PaymentCo
 	return out, nil
 }
 
-func (c *paymentService) UploadImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Payment.UploadImages", in)
+func (c *paymentService) AddPaymentImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Payment.AddPaymentImages", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -135,7 +135,7 @@ type PaymentHandler interface {
 	//根据订单号获取支付信息 （orderID必填字段）
 	GetPaymentListByCond(context.Context, *PaymentCond, *common.Response) error
 	//新增照片信息
-	UploadImages(context.Context, *PaymentDto, *common.Response) error
+	AddPaymentImages(context.Context, *PaymentDto, *common.Response) error
 }
 
 func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server.HandlerOption) error {
@@ -145,7 +145,7 @@ func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server
 		Update(ctx context.Context, in *PaymentDto, out *common.Response) error
 		List(ctx context.Context, in *common.Page, out *common.Response) error
 		GetPaymentListByCond(ctx context.Context, in *PaymentCond, out *common.Response) error
-		UploadImages(ctx context.Context, in *PaymentDto, out *common.Response) error
+		AddPaymentImages(ctx context.Context, in *PaymentDto, out *common.Response) error
 	}
 	type Payment struct {
 		payment
@@ -178,6 +178,6 @@ func (h *paymentHandler) GetPaymentListByCond(ctx context.Context, in *PaymentCo
 	return h.PaymentHandler.GetPaymentListByCond(ctx, in, out)
 }
 
-func (h *paymentHandler) UploadImages(ctx context.Context, in *PaymentDto, out *common.Response) error {
-	return h.PaymentHandler.UploadImages(ctx, in, out)
+func (h *paymentHandler) AddPaymentImages(ctx context.Context, in *PaymentDto, out *common.Response) error {
+	return h.PaymentHandler.AddPaymentImages(ctx, in, out)
 }
