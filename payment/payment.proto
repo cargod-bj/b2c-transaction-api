@@ -16,6 +16,8 @@ service Payment {
   rpc GetPaymentListByCond(PaymentCond) returns (common.Response) {}
   //新增照片信息
   rpc AddPaymentImages(PaymentDto) returns (common.Response) {}
+  //订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
+  rpc CheckOrderPaymentStatus(OrderId) returns (common.Response) {}
 
 }
 message PaymentDto {
@@ -39,7 +41,9 @@ message PaymentCond{
   uint32 recordType = 2;
   uint32 status = 3;
 }
-
+message OrderId{
+  uint64 orderId = 1;
+}
 message PaymentList{
   repeated PaymentDto paymentList = 1;
   string totalAmount = 2;
