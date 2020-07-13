@@ -42,4 +42,5 @@ message PaymentCond{
 
 message PaymentList{
   repeated PaymentDto paymentList = 1;
+  string totalAmount = 2;
 }
