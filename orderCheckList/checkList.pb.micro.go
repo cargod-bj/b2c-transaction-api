@@ -49,6 +49,8 @@ type CheckListService interface {
 	//批量添加checklists
 	AddCheckLists(ctx context.Context, in *CheckListDto, opts ...client.CallOption) (*common.Response, error)
 	List(ctx context.Context, in *OrderIdDto, opts ...client.CallOption) (*common.Response, error)
+	//校验上传照片信息
+	DeliveryConfirm(ctx context.Context, in *OrderIdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type checkListService struct {
@@ -113,6 +115,16 @@ func (c *checkListService) List(ctx context.Context, in *OrderIdDto, opts ...cli
 	return out, nil
 }
 
+func (c *checkListService) DeliveryConfirm(ctx context.Context, in *OrderIdDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "CheckList.DeliveryConfirm", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CheckList service
 
 type CheckListHandler interface {
@@ -122,6 +134,8 @@ type CheckListHandler interface {
 	//批量添加checklists
 	AddCheckLists(context.Context, *CheckListDto, *common.Response) error
 	List(context.Context, *OrderIdDto, *common.Response) error
+	//校验上传照片信息
+	DeliveryConfirm(context.Context, *OrderIdDto, *common.Response) error
 }
 
 func RegisterCheckListHandler(s server.Server, hdlr CheckListHandler, opts ...server.HandlerOption) error {
@@ -131,6 +145,7 @@ func RegisterCheckListHandler(s server.Server, hdlr CheckListHandler, opts ...se
 		Update(ctx context.Context, in *CheckListDto, out *common.Response) error
 		AddCheckLists(ctx context.Context, in *CheckListDto, out *common.Response) error
 		List(ctx context.Context, in *OrderIdDto, out *common.Response) error
+		DeliveryConfirm(ctx context.Context, in *OrderIdDto, out *common.Response) error
 	}
 	type CheckList struct {
 		checkList
@@ -161,4 +176,8 @@ func (h *checkListHandler) AddCheckLists(ctx context.Context, in *CheckListDto, 
 
 func (h *checkListHandler) List(ctx context.Context, in *OrderIdDto, out *common.Response) error {
 	return h.CheckListHandler.List(ctx, in, out)
+}
+
+func (h *checkListHandler) DeliveryConfirm(ctx context.Context, in *OrderIdDto, out *common.Response) error {
+	return h.CheckListHandler.DeliveryConfirm(ctx, in, out)
 }
