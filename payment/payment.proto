@@ -14,9 +14,6 @@ service Payment {
   rpc Update(PaymentDto) returns (common.Response) {}
   rpc List(common.Page) returns (common.Response) {}
 }
-message User {
-  uint64   UserId = 1;
-}
 message PaymentDto {
   uint64   Id = 1;
   uint64   UserId = 2;
@@ -30,7 +27,7 @@ message PaymentDto {
   uint32   recordType = 10;
   uint32   paymentType = 11;
   string   remark = 12;
-  string  images = 13;
+  repeated string  images = 13;
 }
 message PagedList{
   uint32 pageNo = 1;

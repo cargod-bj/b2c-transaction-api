@@ -27,77 +27,30 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type User struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	UserId uint64 `protobuf:"varint,1,opt,name=UserId,proto3" json:"UserId,omitempty"`
-}
-
-func (x *User) Reset() {
-	*x = User{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_payment_payment_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*User) ProtoMessage() {}
-
-func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_payment_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_payment_payment_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *User) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
 type PaymentDto struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id          uint64 `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	UserId      uint64 `protobuf:"varint,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
-	OrderId     uint64 `protobuf:"varint,3,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
-	StaffId     uint64 `protobuf:"varint,4,opt,name=StaffId,proto3" json:"StaffId,omitempty"`
-	Method      uint32 `protobuf:"varint,5,opt,name=Method,proto3" json:"Method,omitempty"`
-	Amount      string `protobuf:"bytes,6,opt,name=Amount,proto3" json:"Amount,omitempty"`
-	Status      uint32 `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
-	CreateTime  int64  `protobuf:"varint,8,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
-	UpdateTime  int64  `protobuf:"varint,9,opt,name=UpdateTime,proto3" json:"UpdateTime,omitempty"`
-	RecordType  uint32 `protobuf:"varint,10,opt,name=recordType,proto3" json:"recordType,omitempty"`
-	PaymentType uint32 `protobuf:"varint,11,opt,name=paymentType,proto3" json:"paymentType,omitempty"`
-	Remark      string `protobuf:"bytes,12,opt,name=remark,proto3" json:"remark,omitempty"`
-	Images      string `protobuf:"bytes,13,opt,name=images,proto3" json:"images,omitempty"`
+	Id          uint64   `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	UserId      uint64   `protobuf:"varint,2,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	OrderId     uint64   `protobuf:"varint,3,opt,name=OrderId,proto3" json:"OrderId,omitempty"`
+	StaffId     uint64   `protobuf:"varint,4,opt,name=StaffId,proto3" json:"StaffId,omitempty"`
+	Method      uint32   `protobuf:"varint,5,opt,name=Method,proto3" json:"Method,omitempty"`
+	Amount      string   `protobuf:"bytes,6,opt,name=Amount,proto3" json:"Amount,omitempty"`
+	Status      uint32   `protobuf:"varint,7,opt,name=Status,proto3" json:"Status,omitempty"`
+	CreateTime  int64    `protobuf:"varint,8,opt,name=CreateTime,proto3" json:"CreateTime,omitempty"`
+	UpdateTime  int64    `protobuf:"varint,9,opt,name=UpdateTime,proto3" json:"UpdateTime,omitempty"`
+	RecordType  uint32   `protobuf:"varint,10,opt,name=recordType,proto3" json:"recordType,omitempty"`
+	PaymentType uint32   `protobuf:"varint,11,opt,name=paymentType,proto3" json:"paymentType,omitempty"`
+	Remark      string   `protobuf:"bytes,12,opt,name=remark,proto3" json:"remark,omitempty"`
+	Images      []string `protobuf:"bytes,13,rep,name=images,proto3" json:"images,omitempty"`
 }
 
 func (x *PaymentDto) Reset() {
 	*x = PaymentDto{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_payment_payment_proto_msgTypes[1]
+		mi := &file_payment_payment_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -110,7 +63,7 @@ func (x *PaymentDto) String() string {
 func (*PaymentDto) ProtoMessage() {}
 
 func (x *PaymentDto) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_payment_proto_msgTypes[1]
+	mi := &file_payment_payment_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -123,7 +76,7 @@ func (x *PaymentDto) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentDto.ProtoReflect.Descriptor instead.
 func (*PaymentDto) Descriptor() ([]byte, []int) {
-	return file_payment_payment_proto_rawDescGZIP(), []int{1}
+	return file_payment_payment_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *PaymentDto) GetId() uint64 {
@@ -210,11 +163,11 @@ func (x *PaymentDto) GetRemark() string {
 	return ""
 }
 
-func (x *PaymentDto) GetImages() string {
+func (x *PaymentDto) GetImages() []string {
 	if x != nil {
 		return x.Images
 	}
-	return ""
+	return nil
 }
 
 type PagedList struct {
@@ -231,7 +184,7 @@ type PagedList struct {
 func (x *PagedList) Reset() {
 	*x = PagedList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_payment_payment_proto_msgTypes[2]
+		mi := &file_payment_payment_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -244,7 +197,7 @@ func (x *PagedList) String() string {
 func (*PagedList) ProtoMessage() {}
 
 func (x *PagedList) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_payment_proto_msgTypes[2]
+	mi := &file_payment_payment_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -257,7 +210,7 @@ func (x *PagedList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PagedList.ProtoReflect.Descriptor instead.
 func (*PagedList) Descriptor() ([]byte, []int) {
-	return file_payment_payment_proto_rawDescGZIP(), []int{2}
+	return file_payment_payment_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *PagedList) GetPageNo() uint32 {
@@ -298,9 +251,7 @@ var file_payment_payment_proto_rawDesc = []byte{
 	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x61, 0x72, 0x67, 0x6f, 0x64, 0x2d, 0x62,
 	0x6a, 0x2f, 0x62, 0x32, 0x63, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6d, 0x6d,
 	0x6f, 0x6e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1e, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x16,
-	0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06,
-	0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0xe2, 0x02, 0x0a, 0x0a, 0x50, 0x61, 0x79, 0x6d, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xe2, 0x02, 0x0a, 0x0a, 0x50, 0x61, 0x79, 0x6d, 0x65,
 	0x6e, 0x74, 0x44, 0x74, 0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x04, 0x52, 0x02, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x18, 0x0a,
@@ -322,7 +273,7 @@ var file_payment_payment_proto_rawDesc = []byte{
 	0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x72,
 	0x65, 0x6d, 0x61, 0x72, 0x6b, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x6d,
 	0x61, 0x72, 0x6b, 0x12, 0x16, 0x0a, 0x06, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73, 0x18, 0x0d, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73, 0x22, 0x7f, 0x0a, 0x09, 0x50,
+	0x03, 0x28, 0x09, 0x52, 0x06, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73, 0x22, 0x7f, 0x0a, 0x09, 0x50,
 	0x61, 0x67, 0x65, 0x64, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x61, 0x67, 0x65,
 	0x4e, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x6f,
 	0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01,
@@ -362,25 +313,24 @@ func file_payment_payment_proto_rawDescGZIP() []byte {
 	return file_payment_payment_proto_rawDescData
 }
 
-var file_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_payment_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_payment_payment_proto_goTypes = []interface{}{
-	(*User)(nil),            // 0: payment.User
-	(*PaymentDto)(nil),      // 1: payment.PaymentDto
-	(*PagedList)(nil),       // 2: payment.PagedList
-	(*any.Any)(nil),         // 3: google.protobuf.Any
-	(*common.Page)(nil),     // 4: common.Page
-	(*common.Response)(nil), // 5: common.Response
+	(*PaymentDto)(nil),      // 0: payment.PaymentDto
+	(*PagedList)(nil),       // 1: payment.PagedList
+	(*any.Any)(nil),         // 2: google.protobuf.Any
+	(*common.Page)(nil),     // 3: common.Page
+	(*common.Response)(nil), // 4: common.Response
 }
 var file_payment_payment_proto_depIdxs = []int32{
-	3, // 0: payment.PagedList.list:type_name -> google.protobuf.Any
-	1, // 1: payment.Payment.Add:input_type -> payment.PaymentDto
-	1, // 2: payment.Payment.Delete:input_type -> payment.PaymentDto
-	1, // 3: payment.Payment.Update:input_type -> payment.PaymentDto
-	4, // 4: payment.Payment.List:input_type -> common.Page
-	5, // 5: payment.Payment.Add:output_type -> common.Response
-	5, // 6: payment.Payment.Delete:output_type -> common.Response
-	5, // 7: payment.Payment.Update:output_type -> common.Response
-	5, // 8: payment.Payment.List:output_type -> common.Response
+	2, // 0: payment.PagedList.list:type_name -> google.protobuf.Any
+	0, // 1: payment.Payment.Add:input_type -> payment.PaymentDto
+	0, // 2: payment.Payment.Delete:input_type -> payment.PaymentDto
+	0, // 3: payment.Payment.Update:input_type -> payment.PaymentDto
+	3, // 4: payment.Payment.List:input_type -> common.Page
+	4, // 5: payment.Payment.Add:output_type -> common.Response
+	4, // 6: payment.Payment.Delete:output_type -> common.Response
+	4, // 7: payment.Payment.Update:output_type -> common.Response
+	4, // 8: payment.Payment.List:output_type -> common.Response
 	5, // [5:9] is the sub-list for method output_type
 	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -395,18 +345,6 @@ func file_payment_payment_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_payment_payment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*User); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_payment_payment_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PaymentDto); i {
 			case 0:
 				return &v.state
@@ -418,7 +356,7 @@ func file_payment_payment_proto_init() {
 				return nil
 			}
 		}
-		file_payment_payment_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_payment_payment_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PagedList); i {
 			case 0:
 				return &v.state
@@ -437,7 +375,7 @@ func file_payment_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_payment_payment_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
