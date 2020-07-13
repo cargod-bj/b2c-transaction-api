@@ -47,7 +47,7 @@ type CheckListService interface {
 	Delete(ctx context.Context, in *CheckListDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *CheckListDto, opts ...client.CallOption) (*common.Response, error)
 	//批量添加checklists
-	AddCheckLists(ctx context.Context, in *CheckListsDto, opts ...client.CallOption) (*common.Response, error)
+	AddCheckLists(ctx context.Context, in *CheckListDto, opts ...client.CallOption) (*common.Response, error)
 	List(ctx context.Context, in *OrderIdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
@@ -93,7 +93,7 @@ func (c *checkListService) Update(ctx context.Context, in *CheckListDto, opts ..
 	return out, nil
 }
 
-func (c *checkListService) AddCheckLists(ctx context.Context, in *CheckListsDto, opts ...client.CallOption) (*common.Response, error) {
+func (c *checkListService) AddCheckLists(ctx context.Context, in *CheckListDto, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "CheckList.AddCheckLists", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -120,7 +120,7 @@ type CheckListHandler interface {
 	Delete(context.Context, *CheckListDto, *common.Response) error
 	Update(context.Context, *CheckListDto, *common.Response) error
 	//批量添加checklists
-	AddCheckLists(context.Context, *CheckListsDto, *common.Response) error
+	AddCheckLists(context.Context, *CheckListDto, *common.Response) error
 	List(context.Context, *OrderIdDto, *common.Response) error
 }
 
@@ -129,7 +129,7 @@ func RegisterCheckListHandler(s server.Server, hdlr CheckListHandler, opts ...se
 		Add(ctx context.Context, in *CheckListDto, out *common.Response) error
 		Delete(ctx context.Context, in *CheckListDto, out *common.Response) error
 		Update(ctx context.Context, in *CheckListDto, out *common.Response) error
-		AddCheckLists(ctx context.Context, in *CheckListsDto, out *common.Response) error
+		AddCheckLists(ctx context.Context, in *CheckListDto, out *common.Response) error
 		List(ctx context.Context, in *OrderIdDto, out *common.Response) error
 	}
 	type CheckList struct {
@@ -155,7 +155,7 @@ func (h *checkListHandler) Update(ctx context.Context, in *CheckListDto, out *co
 	return h.CheckListHandler.Update(ctx, in, out)
 }
 
-func (h *checkListHandler) AddCheckLists(ctx context.Context, in *CheckListsDto, out *common.Response) error {
+func (h *checkListHandler) AddCheckLists(ctx context.Context, in *CheckListDto, out *common.Response) error {
 	return h.CheckListHandler.AddCheckLists(ctx, in, out)
 }
 
