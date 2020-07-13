@@ -16,15 +16,15 @@ service Payment {
   rpc GetPaymentListByCond(PaymentCond) returns (common.Response) {}
 }
 message PaymentDto {
-  uint64   Id = 1;
-  uint64   UserId = 2;
-  uint64   OrderId = 3;
-  uint64   StaffId = 4;
-  uint32   Method = 5;
-  string   Amount = 6;
-  uint32   Status = 7;
-  int64   CreateTime = 8;
-  int64   UpdateTime = 9;
+  uint64   id = 1;
+  uint64   userId = 2;
+  uint64   orderId = 3;
+  uint64   staffId = 4;
+  uint32   method = 5;
+  string   amount = 6;
+  uint32   status = 7;
+  int64   createTime = 8;
+  int64   updateTime = 9;
   uint32   recordType = 10;
   uint32   paymentType = 11;
   string   remark = 12;
