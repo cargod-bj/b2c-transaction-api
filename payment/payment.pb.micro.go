@@ -7,7 +7,6 @@ import (
 	fmt "fmt"
 	common "github.com/cargod-bj/b2c-proto-common/common"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/golang/protobuf/ptypes/any"
 	math "math"
 )
 
@@ -48,6 +47,8 @@ type PaymentService interface {
 	Delete(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 	List(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
+	//根据订单号获取支付信息 （orderID必填字段）
+	GetPaymentListByCond(ctx context.Context, in *PaymentCond, opts ...client.CallOption) (*common.Response, error)
 }
 
 type paymentService struct {
@@ -102,6 +103,16 @@ func (c *paymentService) List(ctx context.Context, in *common.Page, opts ...clie
 	return out, nil
 }
 
+func (c *paymentService) GetPaymentListByCond(ctx context.Context, in *PaymentCond, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Payment.GetPaymentListByCond", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Payment service
 
 type PaymentHandler interface {
@@ -109,6 +120,8 @@ type PaymentHandler interface {
 	Delete(context.Context, *PaymentDto, *common.Response) error
 	Update(context.Context, *PaymentDto, *common.Response) error
 	List(context.Context, *common.Page, *common.Response) error
+	//根据订单号获取支付信息 （orderID必填字段）
+	GetPaymentListByCond(context.Context, *PaymentCond, *common.Response) error
 }
 
 func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server.HandlerOption) error {
@@ -117,6 +130,7 @@ func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server
 		Delete(ctx context.Context, in *PaymentDto, out *common.Response) error
 		Update(ctx context.Context, in *PaymentDto, out *common.Response) error
 		List(ctx context.Context, in *common.Page, out *common.Response) error
+		GetPaymentListByCond(ctx context.Context, in *PaymentCond, out *common.Response) error
 	}
 	type Payment struct {
 		payment
@@ -143,4 +157,8 @@ func (h *paymentHandler) Update(ctx context.Context, in *PaymentDto, out *common
 
 func (h *paymentHandler) List(ctx context.Context, in *common.Page, out *common.Response) error {
 	return h.PaymentHandler.List(ctx, in, out)
+}
+
+func (h *paymentHandler) GetPaymentListByCond(ctx context.Context, in *PaymentCond, out *common.Response) error {
+	return h.PaymentHandler.GetPaymentListByCond(ctx, in, out)
 }
