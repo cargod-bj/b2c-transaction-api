@@ -7,6 +7,7 @@ import "orderCheckList/checklist.proto";
 import "orderFee/orderFee.proto";
 import "orderFlowLog/orderFlowLog.proto";
 import "orderRefund/orderRefund.proto";
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/order";
 /**
@@ -28,7 +29,7 @@ service Order {
   //保存快递信息
   rpc SaveDeliveryInfo(DeliveryInfo) returns (Response) {}
   //更新订单状态
-  rpc UpdateOrderStatus(UpdateInfo) returns (Response) {}
+  rpc UpdateOrderStatus(UpdateInfo) returns (common.Response) {}
 }
 
 

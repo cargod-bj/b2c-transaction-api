@@ -5,6 +5,7 @@ package order
 
 import (
 	fmt "fmt"
+	common "github.com/cargod-bj/b2c-proto-common/common"
 	_ "github.com/cargod-bj/b2c-transaction-api/orderCheckList"
 	_ "github.com/cargod-bj/b2c-transaction-api/orderFee"
 	_ "github.com/cargod-bj/b2c-transaction-api/orderFlowLog"
@@ -63,7 +64,7 @@ type OrderService interface {
 	//保存快递信息
 	SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*Response, error)
 	//更新订单状态
-	UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*Response, error)
+	UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -148,9 +149,9 @@ func (c *orderService) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, o
 	return out, nil
 }
 
-func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*Response, error) {
+func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Order.UpdateOrderStatus", in)
-	out := new(Response)
+	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -176,7 +177,7 @@ type OrderHandler interface {
 	//保存快递信息
 	SaveDeliveryInfo(context.Context, *DeliveryInfo, *Response) error
 	//更新订单状态
-	UpdateOrderStatus(context.Context, *UpdateInfo, *Response) error
+	UpdateOrderStatus(context.Context, *UpdateInfo, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -188,7 +189,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		GetDetail(ctx context.Context, in *OrderCondition, out *Response) error
 		CancelOrder(ctx context.Context, in *OrderCondition, out *Response) error
 		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
-		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *Response) error
+		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -229,6 +230,6 @@ func (h *orderHandler) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, o
 	return h.OrderHandler.SaveDeliveryInfo(ctx, in, out)
 }
 
-func (h *orderHandler) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *Response) error {
+func (h *orderHandler) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error {
 	return h.OrderHandler.UpdateOrderStatus(ctx, in, out)
 }
