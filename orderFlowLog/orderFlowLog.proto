@@ -20,6 +20,7 @@ message OrderFlowLogDto {
   uint64 time = 5;
   uint64 staffId = 6;
   string statusLabel = 7;
+  string staffName = 8;
 }
 
 
