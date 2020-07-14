@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package orderRefund;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-import "orderCheckList/checklist.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/orderRefund";
 /**
@@ -12,6 +11,8 @@ service OrderRefund {
   rpc Add(OrderRefundDto) returns (common.Response) {}
   rpc Delete(OrderRefundDto) returns (common.Response) {}
   rpc Update(OrderRefundDto) returns (common.Response) {}
+  //根据订单号获取退款信息 （orderID必填字段）
+  rpc GetPaymentListByCond(RefundCond) returns (common.Response) {}
 }
 message OrderRefundDto {
   uint64 id = 1;
@@ -22,7 +23,10 @@ message OrderRefundDto {
   uint32 status = 6;
   string reason = 7;
   uint64 staffId = 8;
-  orderCheckList.CheckListDto images = 9;
+  string images = 9;
 }
-
+message RefundCond{
+  uint64 orderId = 1;
+  uint32 status = 3;
+}
 

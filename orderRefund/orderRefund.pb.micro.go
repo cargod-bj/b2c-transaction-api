@@ -6,7 +6,6 @@ package orderRefund
 import (
 	fmt "fmt"
 	common "github.com/cargod-bj/b2c-proto-common/common"
-	_ "github.com/cargod-bj/b2c-transaction-api/orderCheckList"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
@@ -47,6 +46,8 @@ type OrderRefundService interface {
 	Add(ctx context.Context, in *OrderRefundDto, opts ...client.CallOption) (*common.Response, error)
 	Delete(ctx context.Context, in *OrderRefundDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *OrderRefundDto, opts ...client.CallOption) (*common.Response, error)
+	//根据订单号获取退款信息 （orderID必填字段）
+	GetPaymentListByCond(ctx context.Context, in *RefundCond, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderRefundService struct {
@@ -91,12 +92,24 @@ func (c *orderRefundService) Update(ctx context.Context, in *OrderRefundDto, opt
 	return out, nil
 }
 
+func (c *orderRefundService) GetPaymentListByCond(ctx context.Context, in *RefundCond, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "OrderRefund.GetPaymentListByCond", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for OrderRefund service
 
 type OrderRefundHandler interface {
 	Add(context.Context, *OrderRefundDto, *common.Response) error
 	Delete(context.Context, *OrderRefundDto, *common.Response) error
 	Update(context.Context, *OrderRefundDto, *common.Response) error
+	//根据订单号获取退款信息 （orderID必填字段）
+	GetPaymentListByCond(context.Context, *RefundCond, *common.Response) error
 }
 
 func RegisterOrderRefundHandler(s server.Server, hdlr OrderRefundHandler, opts ...server.HandlerOption) error {
@@ -104,6 +117,7 @@ func RegisterOrderRefundHandler(s server.Server, hdlr OrderRefundHandler, opts .
 		Add(ctx context.Context, in *OrderRefundDto, out *common.Response) error
 		Delete(ctx context.Context, in *OrderRefundDto, out *common.Response) error
 		Update(ctx context.Context, in *OrderRefundDto, out *common.Response) error
+		GetPaymentListByCond(ctx context.Context, in *RefundCond, out *common.Response) error
 	}
 	type OrderRefund struct {
 		orderRefund
@@ -126,4 +140,8 @@ func (h *orderRefundHandler) Delete(ctx context.Context, in *OrderRefundDto, out
 
 func (h *orderRefundHandler) Update(ctx context.Context, in *OrderRefundDto, out *common.Response) error {
 	return h.OrderRefundHandler.Update(ctx, in, out)
+}
+
+func (h *orderRefundHandler) GetPaymentListByCond(ctx context.Context, in *RefundCond, out *common.Response) error {
+	return h.OrderRefundHandler.GetPaymentListByCond(ctx, in, out)
 }
