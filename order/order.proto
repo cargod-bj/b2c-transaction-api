@@ -140,6 +140,7 @@ message OrderFeeDto {
 
 message UpdateInfo{
   uint64 id = 1;
-  uint64 staffId = 3;
-  string remarks = 12;
+  uint64 staffId = 2;
+  uint32 status = 3;
+  string remarks = 4;
 }
