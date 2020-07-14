@@ -34,6 +34,7 @@ message PaymentDto {
   uint32   paymentType = 11;
   string   remark = 12;
   repeated string  images = 13;
+  string couponNo = 14;
 }
 
 message PaymentCond{
