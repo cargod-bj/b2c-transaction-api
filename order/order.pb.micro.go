@@ -62,6 +62,8 @@ type OrderService interface {
 	CancelOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*Response, error)
 	//保存快递信息
 	SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*Response, error)
+	//更新订单状态
+	UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*Response, error)
 }
 
 type orderService struct {
@@ -146,6 +148,16 @@ func (c *orderService) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, o
 	return out, nil
 }
 
+func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Order.UpdateOrderStatus", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -163,6 +175,8 @@ type OrderHandler interface {
 	CancelOrder(context.Context, *OrderCondition, *Response) error
 	//保存快递信息
 	SaveDeliveryInfo(context.Context, *DeliveryInfo, *Response) error
+	//更新订单状态
+	UpdateOrderStatus(context.Context, *UpdateInfo, *Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -174,6 +188,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		GetDetail(ctx context.Context, in *OrderCondition, out *Response) error
 		CancelOrder(ctx context.Context, in *OrderCondition, out *Response) error
 		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
+		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *Response) error
 	}
 	type Order struct {
 		order
@@ -212,4 +227,8 @@ func (h *orderHandler) CancelOrder(ctx context.Context, in *OrderCondition, out 
 
 func (h *orderHandler) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error {
 	return h.OrderHandler.SaveDeliveryInfo(ctx, in, out)
+}
+
+func (h *orderHandler) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *Response) error {
+	return h.OrderHandler.UpdateOrderStatus(ctx, in, out)
 }

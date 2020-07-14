@@ -27,7 +27,8 @@ service Order {
   rpc CancelOrder(OrderCondition) returns (Response) {}
   //保存快递信息
   rpc SaveDeliveryInfo(DeliveryInfo) returns (Response) {}
-
+  //更新订单状态
+  rpc UpdateOrderStatus(UpdateInfo) returns (Response) {}
 }
 
 
@@ -135,4 +136,10 @@ message OrderFeeDto {
   uint32 feeType = 5;
   uint32 status = 6;
   string amount = 7;
+}
+
+message UpdateInfo{
+  uint64 id = 1;
+  uint64 staffId = 3;
+  string remarks = 12;
 }
