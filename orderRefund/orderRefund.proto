@@ -12,7 +12,7 @@ service OrderRefund {
   rpc Delete(OrderRefundDto) returns (common.Response) {}
   rpc Update(OrderRefundDto) returns (common.Response) {}
   //根据订单号获取退款信息 （orderID必填字段）
-  rpc GetPaymentListByCond(RefundCond) returns (common.Response) {}
+  rpc GetOrderRefundByCond(RefundCond) returns (common.Response) {}
 }
 message OrderRefundDto {
   uint64 id = 1;
