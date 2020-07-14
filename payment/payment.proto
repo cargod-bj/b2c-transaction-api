@@ -48,3 +48,6 @@ message PaymentList{
   repeated PaymentDto paymentList = 1;
   string totalAmount = 2;
 }
+message PaymentCheck{
+  uint32 result = 1;
+}
