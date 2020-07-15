@@ -16,7 +16,6 @@ service OrderRefund {
 }
 message OrderRefundDto {
   uint64 id = 1;
-  uint64 userId = 2;
   uint64 orderId = 3;
   string remark = 4;
   string customerAmount = 5;
@@ -24,7 +23,8 @@ message OrderRefundDto {
   uint32 status = 7;
   string reason = 8;
   uint64 staffId = 9;
-  string images = 10;
+  uint64 storeId = 10;
+  string images = 11;
 }
 message RefundCond{
   uint64 orderId = 1;
