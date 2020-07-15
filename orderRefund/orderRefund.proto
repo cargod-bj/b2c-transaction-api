@@ -24,7 +24,7 @@ message OrderRefundDto {
   string reason = 8;
   uint64 staffId = 9;
   uint64 storeId = 10;
-  string images = 11;
+  repeated string images = 11;
 }
 message RefundCond{
   uint64 orderId = 1;

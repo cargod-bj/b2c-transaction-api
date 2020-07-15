@@ -31,16 +31,16 @@ type OrderRefundDto struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	OrderId        uint64 `protobuf:"varint,3,opt,name=orderId,proto3" json:"orderId,omitempty"`
-	Remark         string `protobuf:"bytes,4,opt,name=remark,proto3" json:"remark,omitempty"`
-	CustomerAmount string `protobuf:"bytes,5,opt,name=customerAmount,proto3" json:"customerAmount,omitempty"`
-	BankAmount     string `protobuf:"bytes,6,opt,name=bankAmount,proto3" json:"bankAmount,omitempty"`
-	Status         uint32 `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
-	Reason         string `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`
-	StaffId        uint64 `protobuf:"varint,9,opt,name=staffId,proto3" json:"staffId,omitempty"`
-	StoreId        uint64 `protobuf:"varint,10,opt,name=storeId,proto3" json:"storeId,omitempty"`
-	Images         string `protobuf:"bytes,11,opt,name=images,proto3" json:"images,omitempty"`
+	Id             uint64   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderId        uint64   `protobuf:"varint,3,opt,name=orderId,proto3" json:"orderId,omitempty"`
+	Remark         string   `protobuf:"bytes,4,opt,name=remark,proto3" json:"remark,omitempty"`
+	CustomerAmount string   `protobuf:"bytes,5,opt,name=customerAmount,proto3" json:"customerAmount,omitempty"`
+	BankAmount     string   `protobuf:"bytes,6,opt,name=bankAmount,proto3" json:"bankAmount,omitempty"`
+	Status         uint32   `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	Reason         string   `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`
+	StaffId        uint64   `protobuf:"varint,9,opt,name=staffId,proto3" json:"staffId,omitempty"`
+	StoreId        uint64   `protobuf:"varint,10,opt,name=storeId,proto3" json:"storeId,omitempty"`
+	Images         []string `protobuf:"bytes,11,rep,name=images,proto3" json:"images,omitempty"`
 }
 
 func (x *OrderRefundDto) Reset() {
@@ -138,11 +138,11 @@ func (x *OrderRefundDto) GetStoreId() uint64 {
 	return 0
 }
 
-func (x *OrderRefundDto) GetImages() string {
+func (x *OrderRefundDto) GetImages() []string {
 	if x != nil {
 		return x.Images
 	}
-	return ""
+	return nil
 }
 
 type RefundCond struct {
@@ -226,7 +226,7 @@ var file_orderRefund_orderRefund_proto_rawDesc = []byte{
 	0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x73, 0x74, 0x61, 0x66, 0x66, 0x49, 0x64, 0x12, 0x18,
 	0x0a, 0x07, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x49, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x04, 0x52,
 	0x07, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x69, 0x6d, 0x61, 0x67,
-	0x65, 0x73, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73,
+	0x65, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x73,
 	0x22, 0x3e, 0x0a, 0x0a, 0x52, 0x65, 0x66, 0x75, 0x6e, 0x64, 0x43, 0x6f, 0x6e, 0x64, 0x12, 0x18,
 	0x0a, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
 	0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
