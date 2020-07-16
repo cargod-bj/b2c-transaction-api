@@ -78,7 +78,9 @@ message OrderDTO {
   string email = 31;
   string location = 32;
 
+
   repeated OrderFeeDto feeList = 33;//费用信息
+  string carNo = 34;//车辆编号
 }
 
 message OrderList {
