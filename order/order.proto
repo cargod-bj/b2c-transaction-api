@@ -81,6 +81,9 @@ message OrderDTO {
 
   repeated OrderFeeDto feeList = 33;//费用信息
   string carNo = 34;//车辆编号
+
+  string paymentAmount = 35; //收款总额
+  string refundAmount = 36; //退款总额
 }
 
 message OrderList {
