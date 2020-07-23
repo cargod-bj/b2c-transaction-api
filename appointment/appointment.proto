@@ -86,6 +86,6 @@ message AssignDto{
   uint64 StaffId = 2;
 }
 message ManageCond{
-  repeated uint64 userId = 1;
+  repeated uint64 userIds = 1;
   uint64 StoreId = 2;
 }
