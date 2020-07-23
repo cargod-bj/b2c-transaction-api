@@ -16,6 +16,8 @@ service Appointment {
   rpc GetUserList(AppointmentCon) returns (Response) {}
   //单个车查询预约
   rpc Get(AppointCon) returns (Response) {}
+  //客户管理页面查询
+  rpc GetListForManage(ManageCond) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -82,4 +84,8 @@ message DeleteId{
 message AssignDto{
   repeated uint64 ids = 1;
   uint64 StaffId = 2;
+}
+message ManageCond{
+  uint64 userId = 1;
+  uint64 StoreId = 2;
 }
