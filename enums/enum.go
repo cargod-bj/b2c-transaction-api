@@ -311,3 +311,104 @@ var checkListTypeCode = map[string]int{
 func CheckListTypeCode(text string) int {
 	return checkListTypeCode[text]
 }
+
+const (
+	CouponTypeCash          = 1
+	CouponTypeFullReduction = 2
+	CouponTypeDiscount      = 3
+)
+
+var couponTypeText = map[int]string{
+	CouponTypeCash:          "Cash",
+	CouponTypeFullReduction: "FullReduction",
+	CouponTypeDiscount:      "Discount",
+}
+
+func CouponTypeText(code int) string {
+	return couponTypeText[code]
+}
+
+func CouponTypeList() []int {
+	return getKeys(couponTypeText)
+}
+
+var CouponTypeCode = map[string]int{
+	"Cash":          CouponTypeCash,
+	"FullReduction": CouponTypeFullReduction,
+	"Discount":      CouponTypeDiscount,
+}
+
+const (
+	C2BTradeIn             = 1
+	B2CClientReferral      = 2
+	OnlineShopVoucherShop  = 3
+	CarSomeEmployeeVoucher = 4
+)
+
+var couponBizTypeText = map[int]string{
+	C2BTradeIn:             "C2B Trade-in",
+	B2CClientReferral:      "B2C Client Referral",
+	OnlineShopVoucherShop:  "Online Shop Voucher_Shopee&Lazada",
+	CarSomeEmployeeVoucher: "CarSome Employee Voucher",
+}
+
+func CouponBizTypeText(code int) string {
+	return couponBizTypeText[code]
+}
+
+func CouponBizTypeList() []int {
+	return getKeys(couponBizTypeText)
+}
+
+var CouponBizTypeCode = map[string]int{
+	"C2B Trade-in":                      C2BTradeIn,
+	"B2C Client Referral":               B2CClientReferral,
+	"Online Shop Voucher_Shopee&Lazada": OnlineShopVoucherShop,
+	"CarSome Employee Voucher":          CarSomeEmployeeVoucher,
+}
+
+const (
+	Active   = 1
+	InActive = 2
+)
+
+var statusText = map[int]string{
+	Active:   "Active",
+	InActive: "InActive",
+}
+
+func StatusText(code int) string {
+	return statusText[code]
+}
+
+func StatusList() []int {
+	return getKeys(statusText)
+}
+
+var StatusCode = map[string]int{
+	"Active":   Active,
+	"InActive": InActive,
+}
+
+const (
+	UnUsed = 1
+	Used   = 2
+)
+
+var couponUsedStatusText = map[int]string{
+	UnUsed: "UnUsed",
+	Used:   "Used",
+}
+
+func CouponUsedStatusText(code int) string {
+	return couponUsedStatusText[code]
+}
+
+func CouponUsedStatusList() []int {
+	return getKeys(couponUsedStatusText)
+}
+
+var CouponUsedStatusCode = map[string]int{
+	"UnUsed": UnUsed,
+	"Used":   Used,
+}

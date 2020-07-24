@@ -17,6 +17,13 @@ service Coupons {
   rpc FindCouponByNo(CouponNo) returns (common.Response) {}
   rpc UseCoupon(CouponNo) returns (common.Response) {}
 
+  rpc AddTemplate(CouponTemplateDto) returns (common.Response) {}
+
+  rpc UpdateTemplate(CouponTemplateDto) returns (common.Response) {}
+
+  rpc ListCouponTemplate(common.Page) returns (common.Response) {}
+
+
 }
 message User {
   uint64   UserId = 1;
@@ -32,21 +39,62 @@ message CouponDto {
   string   CouponDesc = 5;
   string   Amount = 6;
   uint32   Type = 7;
-  int64   StartTime = 8;
-  int64   EndTime = 9;
+  int64    StartTime = 8;
+  int64    EndTime = 9;
   uint64   UserId = 10;
   uint64   OrderId = 11;
-  uint64   PaymentId = 12;
+  uint32   UsedNum = 12;
   uint32   UseStatus = 13;
   uint32   Status = 14;
   uint32   Num = 15;
-  int64   CreateTime = 16;
-  int64   UpdateTime = 17;
+  int64    CreateTime = 16;
+  int64    UpdateTime = 17;
+  uint64   CouponTemplateId = 18;
+  uint32   BizType = 19;
+  int64    GenerateNum = 20;
 }
 message PagedList{
   uint32 pageNo = 1;
   uint32 pageSize = 2;
   uint32 total = 3;
   repeated google.protobuf.Any list = 4;
+}
+
+message CouponTemplateDto {
+  uint64   Id = 1;
+  string   Title = 3;
+  string   Icon = 4;
+  string   CouponDesc = 5;
+  string   Amount = 6;
+  uint32   Type = 7;
+  int64    StartTime = 8;
+  int64    EndTime = 9;
+  uint32   Status = 14;
+  int64    CreateTime = 16;
+  int64    UpdateTime = 17;
+  uint32   BizType = 19;
+}
+
+message CouponUserDto {
+  uint64   Id = 1;
+  string   CouponNo = 2;
+  string   Title = 3;
+  string   Icon = 4;
+  string   CouponDesc = 5;
+  string   Amount = 6;
+  uint32   Type = 7;
+  int64    StartTime = 8;
+  int64    EndTime = 9;
+  uint64   UserId = 10;
+  uint64   OrderId = 11;
+  uint64   PaymentId = 12;
+  uint32   UseStatus = 13;
+  uint32   Status = 14;
+  int64    CreateTime = 16;
+  int64    UpdateTime = 17;
+  uint64   CouponTemplateId = 18;
+  uint32   BizType = 19;
+  uint64   ReceiverId = 20;
+  uint64   SourceOrderId = 21;
 }
 

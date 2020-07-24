@@ -51,6 +51,9 @@ type CouponsService interface {
 	FindCouponByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
 	FindCouponByNo(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
 	UseCoupon(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
+	AddTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
+	UpdateTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
+	ListCouponTemplate(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
 }
 
 type couponsService struct {
@@ -135,6 +138,36 @@ func (c *couponsService) UseCoupon(ctx context.Context, in *CouponNo, opts ...cl
 	return out, nil
 }
 
+func (c *couponsService) AddTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.AddTemplate", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponsService) UpdateTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.UpdateTemplate", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponsService) ListCouponTemplate(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.ListCouponTemplate", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Coupons service
 
 type CouponsHandler interface {
@@ -145,6 +178,9 @@ type CouponsHandler interface {
 	FindCouponByUser(context.Context, *User, *common.Response) error
 	FindCouponByNo(context.Context, *CouponNo, *common.Response) error
 	UseCoupon(context.Context, *CouponNo, *common.Response) error
+	AddTemplate(context.Context, *CouponTemplateDto, *common.Response) error
+	UpdateTemplate(context.Context, *CouponTemplateDto, *common.Response) error
+	ListCouponTemplate(context.Context, *common.Page, *common.Response) error
 }
 
 func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server.HandlerOption) error {
@@ -156,6 +192,9 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		FindCouponByUser(ctx context.Context, in *User, out *common.Response) error
 		FindCouponByNo(ctx context.Context, in *CouponNo, out *common.Response) error
 		UseCoupon(ctx context.Context, in *CouponNo, out *common.Response) error
+		AddTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
+		UpdateTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
+		ListCouponTemplate(ctx context.Context, in *common.Page, out *common.Response) error
 	}
 	type Coupons struct {
 		coupons
@@ -194,4 +233,16 @@ func (h *couponsHandler) FindCouponByNo(ctx context.Context, in *CouponNo, out *
 
 func (h *couponsHandler) UseCoupon(ctx context.Context, in *CouponNo, out *common.Response) error {
 	return h.CouponsHandler.UseCoupon(ctx, in, out)
+}
+
+func (h *couponsHandler) AddTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error {
+	return h.CouponsHandler.AddTemplate(ctx, in, out)
+}
+
+func (h *couponsHandler) UpdateTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error {
+	return h.CouponsHandler.UpdateTemplate(ctx, in, out)
+}
+
+func (h *couponsHandler) ListCouponTemplate(ctx context.Context, in *common.Page, out *common.Response) error {
+	return h.CouponsHandler.ListCouponTemplate(ctx, in, out)
 }
