@@ -86,6 +86,7 @@ message OrderDTO {
   string refundAmount = 36; //退款总额
   uint64 receiptTime = 37;//确认收货时间
   uint64 deliveryId = 38;//配送人id
+  string orderPicName = 39;//服务人员姓名
 }
 
 message OrderList {
