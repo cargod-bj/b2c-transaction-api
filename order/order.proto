@@ -16,7 +16,7 @@ option go_package = "github.com/cargod-bj/b2c-transaction-api/order";
 service Order {
   //新增订单，返回data.nil
   rpc Add(OrderDTO) returns (Response) {}
-  //根据id删除订单，这里是假删除，设置status为1，返回data.nil
+  //根据id删除订单，这里是假删除，设置status为2，返回data.nil
   rpc Delete(DeleteId) returns (Response) {}
   //更新订单信息，返回data.nil
   rpc Update(OrderDTO) returns (Response) {}
@@ -84,6 +84,9 @@ message OrderDTO {
 
   string paymentAmount = 35; //收款总额
   string refundAmount = 36; //退款总额
+  uint64 receiptTime = 37;//确认收货时间
+  uint64 deliveryId = 38;//配送人id
+  string orderPicName = 39;//服务人员姓名
 }
 
 message OrderList {
@@ -99,7 +102,7 @@ message OrderCondition {
   uint64 userId = 3;
   repeated uint64 userIds = 4;
   uint64 orderNo = 5;
-  string carId = 6;
+  uint64 carId = 6;
   uint64 storeId = 7;
   uint32 status = 8;
   string createTime = 9;

@@ -51,7 +51,7 @@ func NewOrderEndpoints() []*api.Endpoint {
 type OrderService interface {
 	//新增订单，返回data.nil
 	Add(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*Response, error)
-	//根据id删除订单，这里是假删除，设置status为1，返回data.nil
+	//根据id删除订单，这里是假删除，设置status为2，返回data.nil
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*Response, error)
 	//更新订单信息，返回data.nil
 	Update(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*Response, error)
@@ -164,7 +164,7 @@ func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, op
 type OrderHandler interface {
 	//新增订单，返回data.nil
 	Add(context.Context, *OrderDTO, *Response) error
-	//根据id删除订单，这里是假删除，设置status为1，返回data.nil
+	//根据id删除订单，这里是假删除，设置status为2，返回data.nil
 	Delete(context.Context, *DeleteId, *Response) error
 	//更新订单信息，返回data.nil
 	Update(context.Context, *OrderDTO, *Response) error
