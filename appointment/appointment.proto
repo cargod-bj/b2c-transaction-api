@@ -51,6 +51,7 @@ message AppointmentCon {
   uint32 pageSize = 2;
   uint64 UserId = 3;
   uint32 Completed = 4;//0表示未完成的，1表示完成的
+  uint64 StoreId = 5;
 }
 message AppointCon {
   uint64 carId = 1;
