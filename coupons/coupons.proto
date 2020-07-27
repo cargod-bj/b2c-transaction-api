@@ -12,7 +12,7 @@ service Coupons {
   rpc Add(CouponDto) returns (common.Response) {}
   rpc Delete(CouponDto) returns (common.Response) {}
   rpc Update(CouponDto) returns (common.Response) {}
-  rpc List(common.Page) returns (common.Response) {}
+  rpc List(CouponCondition) returns (common.Response) {}
   rpc FindCouponByUser(User) returns (common.Response) {}
   rpc FindCouponByNo(CouponNo) returns (common.Response) {}
   rpc UseCoupon(CouponNo) returns (common.Response) {}
@@ -25,6 +25,12 @@ service Coupons {
 
 
 }
+
+message CouponCondition{
+  common.Page page = 1;
+  uint64      UserId = 2;
+}
+
 message User {
   uint64   UserId = 1;
 }

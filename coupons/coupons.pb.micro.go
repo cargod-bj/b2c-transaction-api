@@ -47,7 +47,7 @@ type CouponsService interface {
 	Add(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
 	Delete(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
 	Update(ctx context.Context, in *CouponDto, opts ...client.CallOption) (*common.Response, error)
-	List(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
+	List(ctx context.Context, in *CouponCondition, opts ...client.CallOption) (*common.Response, error)
 	FindCouponByUser(ctx context.Context, in *User, opts ...client.CallOption) (*common.Response, error)
 	FindCouponByNo(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
 	UseCoupon(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
@@ -98,7 +98,7 @@ func (c *couponsService) Update(ctx context.Context, in *CouponDto, opts ...clie
 	return out, nil
 }
 
-func (c *couponsService) List(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
+func (c *couponsService) List(ctx context.Context, in *CouponCondition, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Coupons.List", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -174,7 +174,7 @@ type CouponsHandler interface {
 	Add(context.Context, *CouponDto, *common.Response) error
 	Delete(context.Context, *CouponDto, *common.Response) error
 	Update(context.Context, *CouponDto, *common.Response) error
-	List(context.Context, *common.Page, *common.Response) error
+	List(context.Context, *CouponCondition, *common.Response) error
 	FindCouponByUser(context.Context, *User, *common.Response) error
 	FindCouponByNo(context.Context, *CouponNo, *common.Response) error
 	UseCoupon(context.Context, *CouponNo, *common.Response) error
@@ -188,7 +188,7 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		Add(ctx context.Context, in *CouponDto, out *common.Response) error
 		Delete(ctx context.Context, in *CouponDto, out *common.Response) error
 		Update(ctx context.Context, in *CouponDto, out *common.Response) error
-		List(ctx context.Context, in *common.Page, out *common.Response) error
+		List(ctx context.Context, in *CouponCondition, out *common.Response) error
 		FindCouponByUser(ctx context.Context, in *User, out *common.Response) error
 		FindCouponByNo(ctx context.Context, in *CouponNo, out *common.Response) error
 		UseCoupon(ctx context.Context, in *CouponNo, out *common.Response) error
@@ -219,7 +219,7 @@ func (h *couponsHandler) Update(ctx context.Context, in *CouponDto, out *common.
 	return h.CouponsHandler.Update(ctx, in, out)
 }
 
-func (h *couponsHandler) List(ctx context.Context, in *common.Page, out *common.Response) error {
+func (h *couponsHandler) List(ctx context.Context, in *CouponCondition, out *common.Response) error {
 	return h.CouponsHandler.List(ctx, in, out)
 }
 

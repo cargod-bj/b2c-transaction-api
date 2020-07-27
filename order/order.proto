@@ -3,7 +3,7 @@ syntax = "proto3";
 package order;
 import "google/protobuf/any.proto";
 import "payment/payment.proto";
-import "orderCheckList/checklist.proto";
+import "orderCheckList/checkList.proto";
 import "orderFee/orderFee.proto";
 import "orderFlowLog/orderFlowLog.proto";
 import "orderRefund/orderRefund.proto";
