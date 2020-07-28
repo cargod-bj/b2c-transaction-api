@@ -352,9 +352,23 @@ var couponBizTypeText = map[int]string{
 	CarSomeEmployeeVoucher: "CarSome Employee Voucher",
 }
 
+
+
 func CouponBizTypeText(code int) string {
 	return couponBizTypeText[code]
 }
+
+var couponBizTypeCodeText = map[int]string{
+	C2BTradeIn:             "T",
+	B2CClientReferral:      "C",
+	OnlineShopVoucherShop:  "O",
+	CarSomeEmployeeVoucher: "E",
+}
+
+func CouponBizTypeCodeText(code int) string {
+	return couponBizTypeCodeText[code]
+}
+
 
 func CouponBizTypeList() []int {
 	return getKeys(couponBizTypeText)
