@@ -29,6 +29,7 @@ service Coupons {
 message CouponCondition{
   common.Page page = 1;
   uint64      UserId = 2;
+  string      CouponNo = 3;
 }
 
 message User {
