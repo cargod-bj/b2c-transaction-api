@@ -32,4 +32,6 @@ message CheckListDto {
 message OrderIdDto {
   uint64 orderId = 1;
   uint64 staffId = 2;
+  uint64 receiptTime = 3;
+  uint64 logisticsPic = 4;
 }
