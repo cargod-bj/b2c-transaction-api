@@ -80,6 +80,7 @@ message CouponTemplateDto {
   int64    CreateTime = 16;
   int64    UpdateTime = 17;
   uint32   BizType = 19;
+  uint32   EffectiveDay = 20;
 }
 
 message CouponUserDto {
