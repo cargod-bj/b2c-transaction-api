@@ -172,17 +172,19 @@ func FeeTypeCode(text string) int {
 }
 
 const (
-	Earnest        = 1
-	DownPayment    = 2
-	BalancePayment = 3
-	FullPayment    = 4
+	BookingFee  = 1
+	DownPayment = 2
+	LoanPayment = 3
+	FullPayment = 4
+	TradeIn     = 5
 )
 
 var paymentTypeText = map[int]string{
-	Earnest:        "Earnest",
-	DownPayment:    "Down Payment",
-	BalancePayment: "Balance Payment",
-	FullPayment:    "Full Payment",
+	BookingFee:  "Booking Fee",
+	DownPayment: "Down Payment",
+	LoanPayment: "Loan Payment",
+	FullPayment: "Full Payment",
+	TradeIn:     "Trade-in",
 }
 
 func PaymentTypeText(code int) string {
@@ -194,10 +196,11 @@ func PaymentTypeList() []int {
 }
 
 var paymentTypeCode = map[string]int{
-	"Earnest":         Earnest,
-	"Down Payment":    DownPayment,
-	"Balance Payment": BalancePayment,
-	"Full Payment":    FullPayment,
+	"Booking Fee":  BookingFee,
+	"Down Payment": DownPayment,
+	"Loan Payment": LoanPayment,
+	"Full Payment": FullPayment,
+	"Trade-in":     TradeIn,
 }
 
 func PaymentTypeCode(text string) int {
@@ -352,8 +355,6 @@ var couponBizTypeText = map[int]string{
 	CarSomeEmployeeVoucher: "CarSome Employee Voucher",
 }
 
-
-
 func CouponBizTypeText(code int) string {
 	return couponBizTypeText[code]
 }
@@ -368,7 +369,6 @@ var couponBizTypeCodeText = map[int]string{
 func CouponBizTypeCodeText(code int) string {
 	return couponBizTypeCodeText[code]
 }
-
 
 func CouponBizTypeList() []int {
 	return getKeys(couponBizTypeText)
