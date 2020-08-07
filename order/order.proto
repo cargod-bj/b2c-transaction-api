@@ -87,6 +87,8 @@ message OrderDTO {
   uint64 receiptTime = 37;//确认收货时间
   uint64 deliveryId = 38;//配送人id
   string orderPicName = 39;//服务人员姓名
+  string licensePlate = 40;//车牌号
+
 }
 
 message OrderList {
