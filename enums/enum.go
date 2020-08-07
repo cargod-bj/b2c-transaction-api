@@ -176,7 +176,6 @@ const (
 	DownPayment = 2
 	LoanPayment = 3
 	FullPayment = 4
-	TradeIn     = 5
 )
 
 var paymentTypeText = map[int]string{
@@ -184,7 +183,6 @@ var paymentTypeText = map[int]string{
 	DownPayment: "Down Payment",
 	LoanPayment: "Loan Payment",
 	FullPayment: "Full Payment",
-	TradeIn:     "Trade-in",
 }
 
 func PaymentTypeText(code int) string {
@@ -200,7 +198,6 @@ var paymentTypeCode = map[string]int{
 	"Down Payment": DownPayment,
 	"Loan Payment": LoanPayment,
 	"Full Payment": FullPayment,
-	"Trade-in":     TradeIn,
 }
 
 func PaymentTypeCode(text string) int {
