@@ -88,6 +88,8 @@ message OrderDTO {
   uint64 deliveryId = 38;//配送人id
   string orderPicName = 39;//服务人员姓名
   string licensePlate = 40;//车牌号
+  uint64 operatorId = 41;//操作人员ID
+
 
 }
 
