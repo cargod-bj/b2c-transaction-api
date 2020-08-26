@@ -27,7 +27,7 @@ message CheckListDto {
   uint32 isChecked = 7;
   uint64 receiptTime = 8;
   uint64 logisticsPic = 9;
-  repeated FileDTO fileDto= 10;
+  repeated fileResource.FileDTO fileDto = 10;
 }
 
 message OrderIdDto {
