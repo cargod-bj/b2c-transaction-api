@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package orderRefund;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+import "fileResource/fileResource.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/orderRefund";
 /**
@@ -25,6 +26,7 @@ message OrderRefundDto {
   uint64 staffId = 9;
   uint64 storeId = 10;
   repeated string images = 11;
+  repeated fileResource.FileDTO fileDto = 12;
 }
 message RefundCond{
   uint64 orderId = 1;

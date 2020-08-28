@@ -6,6 +6,7 @@ package payment
 import (
 	fmt "fmt"
 	common "github.com/cargod-bj/b2c-proto-common/common"
+	_ "github.com/cargod-bj/b2c-transaction-api/fileResource"
 	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
