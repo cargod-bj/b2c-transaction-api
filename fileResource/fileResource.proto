@@ -11,6 +11,7 @@ service fileResource {
   rpc Add(FileDTO) returns (Response) {}
   rpc Delete(DeleteId) returns (Response) {}
   rpc Update(FileDTO) returns (Response) {}
+  rpc HistoricalData(DataType) returns (Response) {}
 }
 
 message FileDTO {
@@ -30,5 +31,8 @@ message Response {
 
 message DeleteId{
   uint64 id = 1;
+}
+message DataType {
+  uint64 type = 1;
 }
 

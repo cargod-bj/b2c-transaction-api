@@ -46,6 +46,7 @@ type FileResourceService interface {
 	Add(ctx context.Context, in *FileDTO, opts ...client.CallOption) (*Response, error)
 	Delete(ctx context.Context, in *DeleteId, opts ...client.CallOption) (*Response, error)
 	Update(ctx context.Context, in *FileDTO, opts ...client.CallOption) (*Response, error)
+	HistoricalData(ctx context.Context, in *DataType, opts ...client.CallOption) (*Response, error)
 }
 
 type fileResourceService struct {
@@ -90,12 +91,23 @@ func (c *fileResourceService) Update(ctx context.Context, in *FileDTO, opts ...c
 	return out, nil
 }
 
+func (c *fileResourceService) HistoricalData(ctx context.Context, in *DataType, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "FileResource.HistoricalData", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FileResource service
 
 type FileResourceHandler interface {
 	Add(context.Context, *FileDTO, *Response) error
 	Delete(context.Context, *DeleteId, *Response) error
 	Update(context.Context, *FileDTO, *Response) error
+	HistoricalData(context.Context, *DataType, *Response) error
 }
 
 func RegisterFileResourceHandler(s server.Server, hdlr FileResourceHandler, opts ...server.HandlerOption) error {
@@ -103,6 +115,7 @@ func RegisterFileResourceHandler(s server.Server, hdlr FileResourceHandler, opts
 		Add(ctx context.Context, in *FileDTO, out *Response) error
 		Delete(ctx context.Context, in *DeleteId, out *Response) error
 		Update(ctx context.Context, in *FileDTO, out *Response) error
+		HistoricalData(ctx context.Context, in *DataType, out *Response) error
 	}
 	type FileResource struct {
 		fileResource
@@ -125,4 +138,8 @@ func (h *fileResourceHandler) Delete(ctx context.Context, in *DeleteId, out *Res
 
 func (h *fileResourceHandler) Update(ctx context.Context, in *FileDTO, out *Response) error {
 	return h.FileResourceHandler.Update(ctx, in, out)
+}
+
+func (h *fileResourceHandler) HistoricalData(ctx context.Context, in *DataType, out *Response) error {
+	return h.FileResourceHandler.HistoricalData(ctx, in, out)
 }
