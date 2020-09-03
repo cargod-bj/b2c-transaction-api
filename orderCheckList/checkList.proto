@@ -13,6 +13,7 @@ service CheckList {
   rpc Update(CheckListDto) returns (common.Response) {}
   //批量添加checklists
   rpc AddCheckLists(CheckListDto) returns (common.Response) {}
+  rpc ConfirmCheckList(CheckListDto) returns (common.Response) {}
   rpc List(OrderIdDto) returns (common.Response) {}
   //校验上传照片信息
   rpc DeliveryConfirm(OrderIdDto) returns (common.Response) {}
