@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package fileResource;
+import "google/protobuf/any.proto";
+
+option go_package="github.com/cargod-bj/b2c-transaction-api/fileResource";
+/**
+*车辆引线
+ */
+service fileResource {
+  rpc Add(FileDTO) returns (Response) {}
+  rpc Delete(DeleteId) returns (Response) {}
+  rpc Update(FileDTO) returns (Response) {}
+}
+
+message FileDTO {
+  uint64 id = 1;
+  string name = 2;
+  string suffix = 3;
+  string url = 4;
+  uint64 createTime = 5;
+  uint64 updateTime = 6;
+}
+
+message Response {
+  string msg = 1;
+  google.protobuf.Any data = 3;
+  string code = 2;
+}
+
+message DeleteId{
+  uint64 id = 1;
+}
+

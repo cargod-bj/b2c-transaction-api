@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package orderCheckList;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
-
+import "fileResource/fileResource.proto";
 option go_package = "github.com/cargod-bj/b2c-transaction-api/orderCheckList";
 /**
 *订单各种收据图片
@@ -28,6 +28,7 @@ message CheckListDto {
   uint32 isChecked = 7;
   uint64 receiptTime = 8;
   uint64 logisticsPic = 9;
+  repeated fileResource.FileDTO fileDto = 10;
 }
 
 message OrderIdDto {

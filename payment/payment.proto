@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package payment;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+import "fileResource/fileResource.proto";
 
 option go_package = "github.com/cargod-bj/b2c-transaction-api/payment";
 /**
@@ -33,7 +34,7 @@ message PaymentDto {
   uint32   recordType = 10;
   uint32   paymentType = 11;
   string   remark = 12;
-  repeated string  images = 13;
+  repeated fileResource.FileDTO fileDto = 13;
   string couponNo = 14;
 }
 
