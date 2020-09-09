@@ -65,6 +65,8 @@ type OrderService interface {
 	SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*Response, error)
 	//更新订单状态
 	UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*common.Response, error)
+	//更新订单费用信息
+	UpdateCost(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -159,6 +161,16 @@ func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, op
 	return out, nil
 }
 
+func (c *orderService) UpdateCost(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.UpdateCost", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -178,6 +190,8 @@ type OrderHandler interface {
 	SaveDeliveryInfo(context.Context, *DeliveryInfo, *Response) error
 	//更新订单状态
 	UpdateOrderStatus(context.Context, *UpdateInfo, *common.Response) error
+	//更新订单费用信息
+	UpdateCost(context.Context, *OrderDTO, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -190,6 +204,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		CancelOrder(ctx context.Context, in *OrderCondition, out *Response) error
 		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
 		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error
+		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -232,4 +247,8 @@ func (h *orderHandler) SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, o
 
 func (h *orderHandler) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error {
 	return h.OrderHandler.UpdateOrderStatus(ctx, in, out)
+}
+
+func (h *orderHandler) UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error {
+	return h.OrderHandler.UpdateCost(ctx, in, out)
 }
