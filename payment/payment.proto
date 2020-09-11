@@ -19,7 +19,8 @@ service Payment {
   rpc AddPaymentImages(PaymentDto) returns (common.Response) {}
   //订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
   rpc CheckOrderPaymentStatus(OrderId) returns (common.Response) {}
-
+  //更改payment状态
+  rpc UpdateStatus(PaymentDto) returns (common.Response) {}
 }
 message PaymentDto {
   uint64   id = 1;

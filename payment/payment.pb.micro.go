@@ -54,6 +54,7 @@ type PaymentService interface {
 	AddPaymentImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 	//订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
 	CheckOrderPaymentStatus(ctx context.Context, in *OrderId, opts ...client.CallOption) (*common.Response, error)
+	UpdateStatus(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type paymentService struct {
@@ -138,6 +139,16 @@ func (c *paymentService) CheckOrderPaymentStatus(ctx context.Context, in *OrderI
 	return out, nil
 }
 
+func (c *paymentService) UpdateStatus(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Payment.UpdateStatus", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Payment service
 
 type PaymentHandler interface {
@@ -151,6 +162,7 @@ type PaymentHandler interface {
 	AddPaymentImages(context.Context, *PaymentDto, *common.Response) error
 	//订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
 	CheckOrderPaymentStatus(context.Context, *OrderId, *common.Response) error
+	UpdateStatus(context.Context, *PaymentDto, *common.Response) error
 }
 
 func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server.HandlerOption) error {
@@ -162,6 +174,7 @@ func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server
 		GetPaymentListByCond(ctx context.Context, in *PaymentCond, out *common.Response) error
 		AddPaymentImages(ctx context.Context, in *PaymentDto, out *common.Response) error
 		CheckOrderPaymentStatus(ctx context.Context, in *OrderId, out *common.Response) error
+		UpdateStatus(ctx context.Context, in *PaymentDto, out *common.Response) error
 	}
 	type Payment struct {
 		payment
@@ -200,4 +213,8 @@ func (h *paymentHandler) AddPaymentImages(ctx context.Context, in *PaymentDto, o
 
 func (h *paymentHandler) CheckOrderPaymentStatus(ctx context.Context, in *OrderId, out *common.Response) error {
 	return h.PaymentHandler.CheckOrderPaymentStatus(ctx, in, out)
+}
+
+func (h *paymentHandler) UpdateStatus(ctx context.Context, in *PaymentDto, out *common.Response) error {
+	return h.PaymentHandler.UpdateStatus(ctx, in, out)
 }
