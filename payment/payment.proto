@@ -37,6 +37,7 @@ message PaymentDto {
   string   remark = 12;
   repeated fileResource.FileDTO fileDto = 13;
   string couponNo = 14;
+  string rejectNote = 16;
 }
 
 message PaymentCond{

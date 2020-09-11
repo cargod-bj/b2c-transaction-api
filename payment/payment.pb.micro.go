@@ -54,6 +54,7 @@ type PaymentService interface {
 	AddPaymentImages(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 	//订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
 	CheckOrderPaymentStatus(ctx context.Context, in *OrderId, opts ...client.CallOption) (*common.Response, error)
+	//更改payment状态
 	UpdateStatus(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
 }
 
@@ -162,6 +163,7 @@ type PaymentHandler interface {
 	AddPaymentImages(context.Context, *PaymentDto, *common.Response) error
 	//订单金额校验  校验Order Fee的总金额是否大于等于有效的Payment总金额-有效的Refund总金额：
 	CheckOrderPaymentStatus(context.Context, *OrderId, *common.Response) error
+	//更改payment状态
 	UpdateStatus(context.Context, *PaymentDto, *common.Response) error
 }
 
