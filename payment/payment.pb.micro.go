@@ -56,6 +56,8 @@ type PaymentService interface {
 	CheckOrderPaymentStatus(ctx context.Context, in *OrderId, opts ...client.CallOption) (*common.Response, error)
 	//更改payment状态
 	UpdateStatus(ctx context.Context, in *PaymentDto, opts ...client.CallOption) (*common.Response, error)
+	//获取审批列表
+	GetPaymentsByCond(ctx context.Context, in *ApprovalCond, opts ...client.CallOption) (*common.Response, error)
 }
 
 type paymentService struct {
@@ -150,6 +152,16 @@ func (c *paymentService) UpdateStatus(ctx context.Context, in *PaymentDto, opts 
 	return out, nil
 }
 
+func (c *paymentService) GetPaymentsByCond(ctx context.Context, in *ApprovalCond, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Payment.GetPaymentsByCond", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Payment service
 
 type PaymentHandler interface {
@@ -165,6 +177,8 @@ type PaymentHandler interface {
 	CheckOrderPaymentStatus(context.Context, *OrderId, *common.Response) error
 	//更改payment状态
 	UpdateStatus(context.Context, *PaymentDto, *common.Response) error
+	//获取审批列表
+	GetPaymentsByCond(context.Context, *ApprovalCond, *common.Response) error
 }
 
 func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server.HandlerOption) error {
@@ -177,6 +191,7 @@ func RegisterPaymentHandler(s server.Server, hdlr PaymentHandler, opts ...server
 		AddPaymentImages(ctx context.Context, in *PaymentDto, out *common.Response) error
 		CheckOrderPaymentStatus(ctx context.Context, in *OrderId, out *common.Response) error
 		UpdateStatus(ctx context.Context, in *PaymentDto, out *common.Response) error
+		GetPaymentsByCond(ctx context.Context, in *ApprovalCond, out *common.Response) error
 	}
 	type Payment struct {
 		payment
@@ -219,4 +234,8 @@ func (h *paymentHandler) CheckOrderPaymentStatus(ctx context.Context, in *OrderI
 
 func (h *paymentHandler) UpdateStatus(ctx context.Context, in *PaymentDto, out *common.Response) error {
 	return h.PaymentHandler.UpdateStatus(ctx, in, out)
+}
+
+func (h *paymentHandler) GetPaymentsByCond(ctx context.Context, in *ApprovalCond, out *common.Response) error {
+	return h.PaymentHandler.GetPaymentsByCond(ctx, in, out)
 }

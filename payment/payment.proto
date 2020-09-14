@@ -21,6 +21,8 @@ service Payment {
   rpc CheckOrderPaymentStatus(OrderId) returns (common.Response) {}
   //更改payment状态
   rpc UpdateStatus(PaymentDto) returns (common.Response) {}
+  //获取审批列表
+  rpc GetPaymentsByCond(ApprovalCond) returns (common.Response) {}
 }
 message PaymentDto {
   uint64   id = 1;
@@ -54,4 +56,14 @@ message PaymentList{
 }
 message PaymentCheck{
   string result = 1;
+}
+message ApprovalCond{
+  uint64 fromTime = 1;
+  uint64 toTime = 2;
+  uint64 storeId = 3;
+  uint64 orderId = 4;
+  uint32 status = 5;
+  string licenseNum = 6;
+  uint32  method = 7;
+  uint64 userId = 8;
 }
