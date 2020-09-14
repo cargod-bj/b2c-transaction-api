@@ -58,8 +58,8 @@ message PaymentCheck{
   string result = 1;
 }
 message ApprovalCond{
-  uint64 fromTime = 1;
-  uint64 toTime = 2;
+  string fromTime = 1;
+  string toTime = 2;
   uint64 storeId = 3;
   uint64 orderId = 4;
   uint32 status = 5;
