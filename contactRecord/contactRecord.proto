@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package contactRecord;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+option go_package = "github.com/cargod-bj/b2c-transaction-api/contactRecord";
+/**
+*沟通记录
+ */
+service ContactRecord {
+  //新增沟通记录，返回data.nil
+  rpc Add(ContactRecordDTO) returns (common.Response) {}
+  //获取试驾信息列表，返回列表数据
+  rpc GetList(ContactRecordCondition) returns (common.Response) {}
+
+}
+
+message ContactRecordDTO {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 staffId = 3;
+  uint64 storeId = 4;
+  uint32 method = 5;
+  string content = 6; //备注
+  string contactTime = 7;//沟通时间
+  uint64 createTime = 8;
+  uint64 updateTime = 9;
+}
+message ContactRecordList {
+  repeated ContactRecordDTO contactRecord = 5;
+}
+message ContactRecordCondition {
+  uint32 pageNo = 1;
+  uint32 pageSize = 2;
+  uint64 userId = 3;
+  uint64 staffId = 5;
+  uint64 storeId = 8;
+}
+
