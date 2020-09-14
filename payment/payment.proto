@@ -59,7 +59,7 @@ message PaymentCheck{
 }
 message ApprovalCond{
   uint64 storeId = 1;
-  uint64 orderId = 2;
+  string orderNo = 2;
   uint32 status = 3;
   string licenseNum = 4;
   uint32  method = 5;
