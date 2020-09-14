@@ -63,7 +63,7 @@ message ApprovalCond{
   uint32 status = 3;
   string licenseNum = 4;
   uint32  method = 5;
-  uint64 userId = 6;
+  repeated uint64 userId = 6;
   int32  page = 7;
   int32  limit = 8;
   string fromTime = 9;

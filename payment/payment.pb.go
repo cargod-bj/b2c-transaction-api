@@ -403,17 +403,17 @@ type ApprovalCond struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StoreId    uint64 `protobuf:"varint,1,opt,name=storeId,proto3" json:"storeId,omitempty"`
-	OrderNo    string `protobuf:"bytes,2,opt,name=orderNo,proto3" json:"orderNo,omitempty"`
-	Status     uint32 `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
-	LicenseNum string `protobuf:"bytes,4,opt,name=licenseNum,proto3" json:"licenseNum,omitempty"`
-	Method     uint32 `protobuf:"varint,5,opt,name=method,proto3" json:"method,omitempty"`
-	UserId     uint64 `protobuf:"varint,6,opt,name=userId,proto3" json:"userId,omitempty"`
-	Page       int32  `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
-	Limit      int32  `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"`
-	FromTime   string `protobuf:"bytes,9,opt,name=fromTime,proto3" json:"fromTime,omitempty"`
-	ToTime     string `protobuf:"bytes,10,opt,name=toTime,proto3" json:"toTime,omitempty"`
-	CarId      uint64 `protobuf:"varint,11,opt,name=carId,proto3" json:"carId,omitempty"`
+	StoreId    uint64   `protobuf:"varint,1,opt,name=storeId,proto3" json:"storeId,omitempty"`
+	OrderNo    string   `protobuf:"bytes,2,opt,name=orderNo,proto3" json:"orderNo,omitempty"`
+	Status     uint32   `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
+	LicenseNum string   `protobuf:"bytes,4,opt,name=licenseNum,proto3" json:"licenseNum,omitempty"`
+	Method     uint32   `protobuf:"varint,5,opt,name=method,proto3" json:"method,omitempty"`
+	UserId     []uint64 `protobuf:"varint,6,rep,packed,name=userId,proto3" json:"userId,omitempty"`
+	Page       int32    `protobuf:"varint,7,opt,name=page,proto3" json:"page,omitempty"`
+	Limit      int32    `protobuf:"varint,8,opt,name=limit,proto3" json:"limit,omitempty"`
+	FromTime   string   `protobuf:"bytes,9,opt,name=fromTime,proto3" json:"fromTime,omitempty"`
+	ToTime     string   `protobuf:"bytes,10,opt,name=toTime,proto3" json:"toTime,omitempty"`
+	CarId      uint64   `protobuf:"varint,11,opt,name=carId,proto3" json:"carId,omitempty"`
 }
 
 func (x *ApprovalCond) Reset() {
@@ -483,11 +483,11 @@ func (x *ApprovalCond) GetMethod() uint32 {
 	return 0
 }
 
-func (x *ApprovalCond) GetUserId() uint64 {
+func (x *ApprovalCond) GetUserId() []uint64 {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return nil
 }
 
 func (x *ApprovalCond) GetPage() int32 {
@@ -590,7 +590,7 @@ var file_payment_payment_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x73, 0x65, 0x4e, 0x75, 0x6d, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6c,
 	0x69, 0x63, 0x65, 0x6e, 0x73, 0x65, 0x4e, 0x75, 0x6d, 0x12, 0x16, 0x0a, 0x06, 0x6d, 0x65, 0x74,
 	0x68, 0x6f, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f,
-	0x64, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x64, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x06, 0x20, 0x03, 0x28,
 	0x04, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x67,
 	0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x70, 0x61, 0x67, 0x65, 0x12, 0x14, 0x0a,
 	0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x6c, 0x69,
