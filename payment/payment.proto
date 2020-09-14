@@ -68,4 +68,5 @@ message ApprovalCond{
   int32  limit = 8;
   string fromTime = 9;
   string toTime = 10;
+  uint64 carId = 11;
 }
