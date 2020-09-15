@@ -38,6 +38,6 @@ message ContactRecordCondition {
 }
 
 message LatestContactCond {
-  repeated uint64 userId = 1;
+  repeated uint64 userIds = 1;
   uint64 storeId = 2;
 }
