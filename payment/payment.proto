@@ -67,7 +67,7 @@ message ApprovalCond{
   repeated uint64 userId = 6;
   int32  page = 7;
   int32  limit = 8;
-  string fromTime = 9;
-  string toTime = 10;
+  uint64 fromTime = 9;
+  uint64 toTime = 10;
   uint64 carId = 11;
 }
