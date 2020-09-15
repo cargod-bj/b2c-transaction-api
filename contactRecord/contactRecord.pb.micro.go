@@ -47,6 +47,7 @@ type ContactRecordService interface {
 	Add(ctx context.Context, in *ContactRecordDTO, opts ...client.CallOption) (*common.Response, error)
 	//获取试驾信息列表，返回列表数据
 	GetList(ctx context.Context, in *ContactRecordCondition, opts ...client.CallOption) (*common.Response, error)
+	GetLatestContactList(ctx context.Context, in *LatestContactCond, opts ...client.CallOption) (*common.Response, error)
 }
 
 type contactRecordService struct {
@@ -81,6 +82,16 @@ func (c *contactRecordService) GetList(ctx context.Context, in *ContactRecordCon
 	return out, nil
 }
 
+func (c *contactRecordService) GetLatestContactList(ctx context.Context, in *LatestContactCond, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "ContactRecord.GetLatestContactList", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ContactRecord service
 
 type ContactRecordHandler interface {
@@ -88,12 +99,14 @@ type ContactRecordHandler interface {
 	Add(context.Context, *ContactRecordDTO, *common.Response) error
 	//获取试驾信息列表，返回列表数据
 	GetList(context.Context, *ContactRecordCondition, *common.Response) error
+	GetLatestContactList(context.Context, *LatestContactCond, *common.Response) error
 }
 
 func RegisterContactRecordHandler(s server.Server, hdlr ContactRecordHandler, opts ...server.HandlerOption) error {
 	type contactRecord interface {
 		Add(ctx context.Context, in *ContactRecordDTO, out *common.Response) error
 		GetList(ctx context.Context, in *ContactRecordCondition, out *common.Response) error
+		GetLatestContactList(ctx context.Context, in *LatestContactCond, out *common.Response) error
 	}
 	type ContactRecord struct {
 		contactRecord
@@ -112,4 +125,8 @@ func (h *contactRecordHandler) Add(ctx context.Context, in *ContactRecordDTO, ou
 
 func (h *contactRecordHandler) GetList(ctx context.Context, in *ContactRecordCondition, out *common.Response) error {
 	return h.ContactRecordHandler.GetList(ctx, in, out)
+}
+
+func (h *contactRecordHandler) GetLatestContactList(ctx context.Context, in *LatestContactCond, out *common.Response) error {
+	return h.ContactRecordHandler.GetLatestContactList(ctx, in, out)
 }
