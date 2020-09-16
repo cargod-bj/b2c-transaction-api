@@ -5,6 +5,7 @@ package testDrive
 
 import (
 	fmt "fmt"
+	_ "github.com/cargod-bj/b2c-transaction-api/fileResource"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/golang/protobuf/ptypes/any"
 	math "math"
@@ -51,6 +52,8 @@ type TestDriveService interface {
 	Update(ctx context.Context, in *TestDriveDTO, opts ...client.CallOption) (*Response, error)
 	//获取试驾信息列表，返回列表数据
 	GetList(ctx context.Context, in *TestDriveCondition, opts ...client.CallOption) (*Response, error)
+	//新增合同信息，返回data.nil
+	AddTestDriveImages(ctx context.Context, in *TestDriveDTO, opts ...client.CallOption) (*Response, error)
 }
 
 type testDriveService struct {
@@ -105,6 +108,16 @@ func (c *testDriveService) GetList(ctx context.Context, in *TestDriveCondition, 
 	return out, nil
 }
 
+func (c *testDriveService) AddTestDriveImages(ctx context.Context, in *TestDriveDTO, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "TestDrive.AddTestDriveImages", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for TestDrive service
 
 type TestDriveHandler interface {
@@ -116,6 +129,8 @@ type TestDriveHandler interface {
 	Update(context.Context, *TestDriveDTO, *Response) error
 	//获取试驾信息列表，返回列表数据
 	GetList(context.Context, *TestDriveCondition, *Response) error
+	//新增合同信息，返回data.nil
+	AddTestDriveImages(context.Context, *TestDriveDTO, *Response) error
 }
 
 func RegisterTestDriveHandler(s server.Server, hdlr TestDriveHandler, opts ...server.HandlerOption) error {
@@ -124,6 +139,7 @@ func RegisterTestDriveHandler(s server.Server, hdlr TestDriveHandler, opts ...se
 		Delete(ctx context.Context, in *DeleteId, out *Response) error
 		Update(ctx context.Context, in *TestDriveDTO, out *Response) error
 		GetList(ctx context.Context, in *TestDriveCondition, out *Response) error
+		AddTestDriveImages(ctx context.Context, in *TestDriveDTO, out *Response) error
 	}
 	type TestDrive struct {
 		testDrive
@@ -150,4 +166,8 @@ func (h *testDriveHandler) Update(ctx context.Context, in *TestDriveDTO, out *Re
 
 func (h *testDriveHandler) GetList(ctx context.Context, in *TestDriveCondition, out *Response) error {
 	return h.TestDriveHandler.GetList(ctx, in, out)
+}
+
+func (h *testDriveHandler) AddTestDriveImages(ctx context.Context, in *TestDriveDTO, out *Response) error {
+	return h.TestDriveHandler.AddTestDriveImages(ctx, in, out)
 }
