@@ -30,6 +30,8 @@ service Order {
   rpc SaveDeliveryInfo(DeliveryInfo) returns (Response) {}
   //更新订单状态
   rpc UpdateOrderStatus(UpdateInfo) returns (common.Response) {}
+  //更新订单费用信息
+  rpc UpdateCost(OrderDTO) returns (common.Response) {}
 }
 
 
@@ -90,6 +92,11 @@ message OrderDTO {
   string licensePlate = 40;//车牌号
   uint64 operatorId = 41;//操作人员ID
 
+  string jpjCost = 42;//手续费
+  string roadTaxCost = 43;//路费
+  string fisCost = 44;//抵押手续费
+  string warrantyCost = 45;//保险费用
+  string bankCost = 46;//银行过户手续费
 
 }
 
