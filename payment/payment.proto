@@ -44,6 +44,7 @@ message PaymentDto {
   string orderNo = 18;
   uint64 carId = 19;
   uint64 storeId = 20;
+  uint64 approvedTime = 21;
 }
 
 message PaymentCond{
