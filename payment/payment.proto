@@ -40,7 +40,11 @@ message PaymentDto {
   repeated fileResource.FileDTO fileDto = 13;
   string couponNo = 14;
   string rejectNote = 16;
-  string sendApprovalTime = 17;
+  uint64 sendApprovalTime = 17;
+  string orderNo = 18;
+  uint64 carId = 19;
+  uint64 storeId = 20;
+  uint64 approvedTime = 21;
 }
 
 message PaymentCond{
