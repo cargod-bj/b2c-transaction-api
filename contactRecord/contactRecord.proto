@@ -22,7 +22,7 @@ message ContactRecordDTO {
   uint64 storeId = 4;
   uint32 method = 5;
   string content = 6; //备注
-  string contactTime = 7;//沟通时间
+  uint64 contactTime = 7;//沟通时间
   uint64 createTime = 8;
   uint64 updateTime = 9;
 }
