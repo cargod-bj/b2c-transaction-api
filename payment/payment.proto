@@ -74,4 +74,6 @@ message ApprovalCond{
   uint64 fromTime = 9;
   uint64 toTime = 10;
   uint64 carId = 11;
+  uint64 approvedFromTime = 12;
+  uint64 approvedToTime = 13;
 }
