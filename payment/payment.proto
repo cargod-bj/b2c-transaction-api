@@ -45,6 +45,8 @@ message PaymentDto {
   uint64 carId = 19;
   uint64 storeId = 20;
   uint64 approvedTime = 21;
+  string ownerName = 22;
+  string ownerNum = 23;
 }
 
 message PaymentCond{
