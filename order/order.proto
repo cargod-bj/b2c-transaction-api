@@ -98,6 +98,7 @@ message OrderDTO {
   string warrantyCost = 45;//保险费用
   string bankCost = 46;//银行过户手续费
   uint64 paymentCompleteTime = 47;//点击paymentcomplete时间
+  uint32 cancelReason = 48;//取消订单原因
 }
 
 message OrderList {
