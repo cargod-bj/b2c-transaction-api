@@ -123,6 +123,7 @@ message OrderCondition {
   string remarks = 12;
   uint64 paymentCompleteTime = 13;//paymentcomplete时间
   uint64 receiptTime = 14;//接收时间
+  uint32 cancelReason = 15;//取消订单原因
 }
 
 message Response {
