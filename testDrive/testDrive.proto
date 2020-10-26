@@ -30,10 +30,11 @@ message TestDriveDTO {
   uint64 carId = 6;
   uint64 storeId = 7;
   uint32 status = 8;
-  string appointment = 9; //预约时间
+  uint64 appointment = 9; //预约时间
   uint64 createTime = 10;
   uint64 updateTime = 11;
   repeated fileResource.FileDTO fileDto = 12;
+  repeated uint64 carIds = 13;
 }
 
 message TestDriveList {

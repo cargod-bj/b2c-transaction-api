@@ -45,6 +45,8 @@ message PaymentDto {
   uint64 carId = 19;
   uint64 storeId = 20;
   uint64 approvedTime = 21;
+  string ownerName = 22;
+  string ownerNum = 23;
 }
 
 message PaymentCond{
@@ -76,5 +78,7 @@ message ApprovalCond{
   uint64 carId = 11;
   uint64 approvedFromTime = 12;
   uint64 approvedToTime = 13;
-  repeated uint64 storeIds = 14;
+  string ownerName = 14;
+  string ownerNum = 15;
+  repeated uint64 storeIds = 16;
 }

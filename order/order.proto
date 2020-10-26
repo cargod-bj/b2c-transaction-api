@@ -97,7 +97,7 @@ message OrderDTO {
   string fisCost = 44;//抵押手续费
   string warrantyCost = 45;//保险费用
   string bankCost = 46;//银行过户手续费
-
+  uint64 paymentCompleteTime = 47;//点击paymentcomplete时间
 }
 
 message OrderList {
@@ -120,7 +120,9 @@ message OrderCondition {
   uint64 staffId = 10;//订单PIC
   uint64 orderId = 11;//后面查询用
   string remarks = 12;
-  repeated uint64 storeIds = 13;
+  uint64 paymentCompleteTime = 13;//paymentcomplete时间
+  uint64 receiptTime = 14;//接收时间
+  repeated uint64 storeIds = 15;
 }
 
 message Response {
