@@ -21,7 +21,7 @@ service Coupons {
 
   rpc UpdateTemplate(CouponTemplateDto) returns (common.Response) {}
 
-  rpc ListCouponTemplate(common.Page) returns (common.Response) {}
+  rpc ListCouponTemplate(CouponTemplateCondition) returns (common.Response) {}
 
 
 }
@@ -31,6 +31,12 @@ message CouponCondition{
   uint64      UserId = 2;
   string      CouponNo = 3;
 }
+
+message CouponTemplateCondition{
+  common.Page page = 1;
+  bool        NoTradeIn = 2;
+}
+
 
 message User {
   uint64   UserId = 1;
