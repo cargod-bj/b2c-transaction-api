@@ -53,7 +53,7 @@ type CouponsService interface {
 	UseCoupon(ctx context.Context, in *CouponNo, opts ...client.CallOption) (*common.Response, error)
 	AddTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
 	UpdateTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
-	ListCouponTemplate(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error)
+	ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type couponsService struct {
@@ -158,7 +158,7 @@ func (c *couponsService) UpdateTemplate(ctx context.Context, in *CouponTemplateD
 	return out, nil
 }
 
-func (c *couponsService) ListCouponTemplate(ctx context.Context, in *common.Page, opts ...client.CallOption) (*common.Response, error) {
+func (c *couponsService) ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Coupons.ListCouponTemplate", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -180,7 +180,7 @@ type CouponsHandler interface {
 	UseCoupon(context.Context, *CouponNo, *common.Response) error
 	AddTemplate(context.Context, *CouponTemplateDto, *common.Response) error
 	UpdateTemplate(context.Context, *CouponTemplateDto, *common.Response) error
-	ListCouponTemplate(context.Context, *common.Page, *common.Response) error
+	ListCouponTemplate(context.Context, *CouponTemplateCondition, *common.Response) error
 }
 
 func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server.HandlerOption) error {
@@ -194,7 +194,7 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		UseCoupon(ctx context.Context, in *CouponNo, out *common.Response) error
 		AddTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
 		UpdateTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
-		ListCouponTemplate(ctx context.Context, in *common.Page, out *common.Response) error
+		ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, out *common.Response) error
 	}
 	type Coupons struct {
 		coupons
@@ -243,6 +243,6 @@ func (h *couponsHandler) UpdateTemplate(ctx context.Context, in *CouponTemplateD
 	return h.CouponsHandler.UpdateTemplate(ctx, in, out)
 }
 
-func (h *couponsHandler) ListCouponTemplate(ctx context.Context, in *common.Page, out *common.Response) error {
+func (h *couponsHandler) ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, out *common.Response) error {
 	return h.CouponsHandler.ListCouponTemplate(ctx, in, out)
 }
