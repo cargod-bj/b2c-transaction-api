@@ -32,6 +32,8 @@ service Order {
   rpc UpdateOrderStatus(UpdateInfo) returns (common.Response) {}
   //更新订单费用信息
   rpc UpdateCost(OrderDTO) returns (common.Response) {}
+  // change car
+  rpc ChangeCar(OrderCondition) returns (common.Response) {}
 }
 
 
