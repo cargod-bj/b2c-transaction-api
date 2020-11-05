@@ -68,7 +68,7 @@ type OrderService interface {
 	//更新订单费用信息
 	UpdateCost(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 	// change car
-	ChangeCar(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -173,7 +173,7 @@ func (c *orderService) UpdateCost(ctx context.Context, in *OrderDTO, opts ...cli
 	return out, nil
 }
 
-func (c *orderService) ChangeCar(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+func (c *orderService) ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Order.ChangeCar", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -205,7 +205,7 @@ type OrderHandler interface {
 	//更新订单费用信息
 	UpdateCost(context.Context, *OrderDTO, *common.Response) error
 	// change car
-	ChangeCar(context.Context, *OrderCondition, *common.Response) error
+	ChangeCar(context.Context, *OrderDTO, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -219,7 +219,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
 		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error
 		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
-		ChangeCar(ctx context.Context, in *OrderCondition, out *common.Response) error
+		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -268,6 +268,6 @@ func (h *orderHandler) UpdateCost(ctx context.Context, in *OrderDTO, out *common
 	return h.OrderHandler.UpdateCost(ctx, in, out)
 }
 
-func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderCondition, out *common.Response) error {
+func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error {
 	return h.OrderHandler.ChangeCar(ctx, in, out)
 }
