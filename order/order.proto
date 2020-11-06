@@ -34,6 +34,8 @@ service Order {
   rpc UpdateCost(OrderDTO) returns (common.Response) {}
   // change car
   rpc ChangeCar(OrderDTO) returns (common.Response) {}
+  //查询车辆是否已经创建订单
+  rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
 }
 
 
@@ -169,4 +171,7 @@ message UpdateInfo{
   uint64 staffId = 2;
   uint32 status = 3;
   string remarks = 4;
+}
+message CarIds{
+  repeated uint64 ids = 1;
 }
