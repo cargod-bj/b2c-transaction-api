@@ -103,7 +103,7 @@ message OrderDTO {
   string bankCost = 46;//银行过户手续费
   uint64 paymentCompleteTime = 47;//点击paymentcomplete时间
   uint64 campaignId = 48; //活动ID
-  uint32 cancelReason = 48;//取消订单原因
+  uint32 cancelReason = 49;//取消订单原因
 }
 
 message OrderList {
