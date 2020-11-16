@@ -18,6 +18,8 @@ service Appointment {
   rpc Get(AppointCon) returns (Response) {}
   //客户管理页面查询
   rpc GetListForManage(ManageCond) returns (Response) {}
+  //查询满足一天的预约参数为时间间隔，单位为分钟
+  rpc GetListForSMS(SmsCond) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -89,4 +91,7 @@ message AssignDto{
 message ManageCond{
   repeated uint64 userIds = 1;
   uint64 StoreId = 2;
+}
+message SmsCond{
+  uint64 sendInterval = 1;
 }
