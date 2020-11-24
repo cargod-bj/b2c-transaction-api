@@ -67,6 +67,10 @@ type OrderService interface {
 	UpdateOrderStatus(ctx context.Context, in *UpdateInfo, opts ...client.CallOption) (*common.Response, error)
 	//更新订单费用信息
 	UpdateCost(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
+	// change car
+	ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
+	//查询车辆是否已经创建订单
+	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -171,6 +175,26 @@ func (c *orderService) UpdateCost(ctx context.Context, in *OrderDTO, opts ...cli
 	return out, nil
 }
 
+func (c *orderService) ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.ChangeCar", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CheckCarInvalidInOrder", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -192,6 +216,10 @@ type OrderHandler interface {
 	UpdateOrderStatus(context.Context, *UpdateInfo, *common.Response) error
 	//更新订单费用信息
 	UpdateCost(context.Context, *OrderDTO, *common.Response) error
+	// change car
+	ChangeCar(context.Context, *OrderDTO, *common.Response) error
+	//查询车辆是否已经创建订单
+	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -205,6 +233,8 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		SaveDeliveryInfo(ctx context.Context, in *DeliveryInfo, out *Response) error
 		UpdateOrderStatus(ctx context.Context, in *UpdateInfo, out *common.Response) error
 		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
+		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
+		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -251,4 +281,12 @@ func (h *orderHandler) UpdateOrderStatus(ctx context.Context, in *UpdateInfo, ou
 
 func (h *orderHandler) UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error {
 	return h.OrderHandler.UpdateCost(ctx, in, out)
+}
+
+func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error {
+	return h.OrderHandler.ChangeCar(ctx, in, out)
+}
+
+func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error {
+	return h.OrderHandler.CheckCarInvalidInOrder(ctx, in, out)
 }

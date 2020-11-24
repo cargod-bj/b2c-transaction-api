@@ -32,6 +32,10 @@ service Order {
   rpc UpdateOrderStatus(UpdateInfo) returns (common.Response) {}
   //更新订单费用信息
   rpc UpdateCost(OrderDTO) returns (common.Response) {}
+  // change car
+  rpc ChangeCar(OrderDTO) returns (common.Response) {}
+  //查询车辆是否已经创建订单
+  rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
 }
 
 
@@ -99,6 +103,7 @@ message OrderDTO {
   string bankCost = 46;//银行过户手续费
   uint64 paymentCompleteTime = 47;//点击paymentcomplete时间
   uint64 campaignId = 48; //活动ID
+  uint32 cancelReason = 49;//取消订单原因
 }
 
 message OrderList {
@@ -123,7 +128,8 @@ message OrderCondition {
   string remarks = 12;
   uint64 paymentCompleteTime = 13;//paymentcomplete时间
   uint64 receiptTime = 14;//接收时间
-  repeated uint64 storeIds = 15;
+  uint32 cancelReason = 15;//取消订单原因
+  repeated uint64 storeIds = 16;
 }
 
 message Response {
@@ -167,4 +173,7 @@ message UpdateInfo{
   uint64 staffId = 2;
   uint32 status = 3;
   string remarks = 4;
+}
+message CarIds{
+  repeated uint64 ids = 1;
 }
