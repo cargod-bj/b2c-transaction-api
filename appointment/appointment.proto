@@ -36,6 +36,9 @@ message AppointmentDTO {
   uint64 updateTime = 13;
 
   uint32 appointment_status = 14;//预约状态1canceled,2completed
+  string storeIds = 15;//多门店
+  repeated uint64 staffIds = 16;//多服务人员
+  repeated uint32 appointment_statuss = 17;//多个状态
 }
 
 message AppointmentList {
