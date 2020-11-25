@@ -71,6 +71,8 @@ message AppointmentCondition {
   string Appointment = 11; //预约时间
   repeated uint32 Status = 12;
   repeated uint64 StoreIds = 13;
+  uint64 fromTime = 14;
+  uint64 toTime = 15;
 }
 
 message Response {
