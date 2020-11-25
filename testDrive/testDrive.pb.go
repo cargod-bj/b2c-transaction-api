@@ -246,14 +246,21 @@ type TestDriveCondition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PageNo      uint32   `protobuf:"varint,1,opt,name=pageNo,proto3" json:"pageNo,omitempty"`
-	PageSize    uint32   `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
-	UserId      uint64   `protobuf:"varint,3,opt,name=userId,proto3" json:"userId,omitempty"`
-	StaffId     uint64   `protobuf:"varint,5,opt,name=staffId,proto3" json:"staffId,omitempty"`
-	CarId       uint64   `protobuf:"varint,7,opt,name=carId,proto3" json:"carId,omitempty"`
-	StoreId     uint64   `protobuf:"varint,8,opt,name=storeId,proto3" json:"storeId,omitempty"`
-	Appointment uint64   `protobuf:"varint,9,opt,name=appointment,proto3" json:"appointment,omitempty"` //预约时间
-	StoreIds    []uint64 `protobuf:"varint,10,rep,packed,name=storeIds,proto3" json:"storeIds,omitempty"`
+	PageNo      uint32 `protobuf:"varint,1,opt,name=pageNo,proto3" json:"pageNo,omitempty"`
+	PageSize    uint32 `protobuf:"varint,2,opt,name=pageSize,proto3" json:"pageSize,omitempty"`
+	UserId      uint64 `protobuf:"varint,3,opt,name=userId,proto3" json:"userId,omitempty"`
+	StaffId     uint64 `protobuf:"varint,5,opt,name=staffId,proto3" json:"staffId,omitempty"`
+	CarId       uint64 `protobuf:"varint,7,opt,name=carId,proto3" json:"carId,omitempty"`
+	StoreId     uint64 `protobuf:"varint,8,opt,name=storeId,proto3" json:"storeId,omitempty"`
+	Appointment uint64 `protobuf:"varint,9,opt,name=appointment,proto3" json:"appointment,omitempty"`
+	// 多门店的门店id
+	StoreIds []uint64 `protobuf:"varint,10,rep,packed,name=storeIds,proto3" json:"storeIds,omitempty"`
+	// 查询的多pics
+	Pics []uint64 `protobuf:"varint,11,rep,packed,name=pics,proto3" json:"pics,omitempty"`
+	// 开始时间
+	DateBegin uint64 `protobuf:"varint,12,opt,name=dateBegin,proto3" json:"dateBegin,omitempty"`
+	// 结束时间
+	DateEnd uint64 `protobuf:"varint,13,opt,name=dateEnd,proto3" json:"dateEnd,omitempty"`
 }
 
 func (x *TestDriveCondition) Reset() {
@@ -342,6 +349,27 @@ func (x *TestDriveCondition) GetStoreIds() []uint64 {
 		return x.StoreIds
 	}
 	return nil
+}
+
+func (x *TestDriveCondition) GetPics() []uint64 {
+	if x != nil {
+		return x.Pics
+	}
+	return nil
+}
+
+func (x *TestDriveCondition) GetDateBegin() uint64 {
+	if x != nil {
+		return x.DateBegin
+	}
+	return 0
+}
+
+func (x *TestDriveCondition) GetDateEnd() uint64 {
+	if x != nil {
+		return x.DateEnd
+	}
+	return 0
 }
 
 type Response struct {
