@@ -35,6 +35,7 @@ message ContactRecordCondition {
   uint64 userId = 3;
   uint64 staffId = 5;
   uint64 storeId = 8;
+  repeated uint64 storeIds = 9;
 }
 
 message LatestContactCond {
