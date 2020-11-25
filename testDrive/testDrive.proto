@@ -50,8 +50,15 @@ message TestDriveCondition {
   uint64 staffId = 5;
   uint64 carId = 7;
   uint64 storeId = 8;
-  uint64 appointment = 9; //预约时间
+  uint64 appointment = 9;
+  // 多门店的门店id
   repeated uint64 storeIds = 10;
+  // 查询的多pics
+  repeated uint64 pics = 11;
+  // 开始时间
+  uint64 dateBegin = 12;
+  // 结束时间
+  uint64 dateEnd = 13;
 }
 
 message Response {
