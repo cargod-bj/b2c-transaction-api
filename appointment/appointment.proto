@@ -18,6 +18,8 @@ service Appointment {
   rpc Get(AppointCon) returns (Response) {}
   //客户管理页面查询
   rpc GetListForManage(ManageCond) returns (Response) {}
+  //appointment_list界面接口
+  rpc GetAppointmentList(AppointmentCondition) returns (Response) {}
 }
 
 message AppointmentDTO {
