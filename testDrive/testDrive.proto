@@ -60,7 +60,7 @@ message TestDriveCondition {
   // 结束时间
   uint64 dateEnd = 13;
   // 使用appointment排序：1升序，2降序，0不使用
-  bool sortByAppointment = 14;
+  uint32 sortByAppointment = 14;
 }
 
 message Response {
