@@ -59,8 +59,8 @@ message TestDriveCondition {
   uint64 dateBegin = 12;
   // 结束时间
   uint64 dateEnd = 13;
-  // 是否使用appointment升序
-  bool isAppointmentAsc = 14;
+  // 使用appointment排序：1升序，2降序，0不使用
+  bool sortByAppointment = 14;
 }
 
 message Response {
