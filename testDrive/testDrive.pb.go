@@ -261,7 +261,7 @@ type TestDriveCondition struct {
 	DateBegin uint64 `protobuf:"varint,12,opt,name=dateBegin,proto3" json:"dateBegin,omitempty"`
 	// 结束时间
 	DateEnd uint64 `protobuf:"varint,13,opt,name=dateEnd,proto3" json:"dateEnd,omitempty"`
-	// 使用appointment排序：1升序，2降序，0不使用
+	// 使用appointment排序：1升序，2降序，默认使用降序
 	SortByAppointment uint32 `protobuf:"varint,14,opt,name=sortByAppointment,proto3" json:"sortByAppointment,omitempty"`
 }
 
