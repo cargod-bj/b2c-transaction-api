@@ -56,6 +56,7 @@ type AppointmentService interface {
 	GetListForManage(ctx context.Context, in *ManageCond, opts ...client.CallOption) (*Response, error)
 	//appointment_list界面接口
 	GetAppointmentList(ctx context.Context, in *AppointmentCondition, opts ...client.CallOption) (*Response, error)
+	GetListForSMS(ctx context.Context, in *SmsCond, opts ...client.CallOption) (*Response, error)
 }
 
 type appointmentService struct {
@@ -160,6 +161,16 @@ func (c *appointmentService) GetAppointmentList(ctx context.Context, in *Appoint
 	return out, nil
 }
 
+func (c *appointmentService) GetListForSMS(ctx context.Context, in *SmsCond, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Appointment.GetListForSMS", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Appointment service
 
 type AppointmentHandler interface {
@@ -176,6 +187,7 @@ type AppointmentHandler interface {
 	GetListForManage(context.Context, *ManageCond, *Response) error
 	//appointment_list界面接口
 	GetAppointmentList(context.Context, *AppointmentCondition, *Response) error
+	GetListForSMS(context.Context, *SmsCond, *Response) error
 }
 
 func RegisterAppointmentHandler(s server.Server, hdlr AppointmentHandler, opts ...server.HandlerOption) error {
@@ -189,6 +201,7 @@ func RegisterAppointmentHandler(s server.Server, hdlr AppointmentHandler, opts .
 		Get(ctx context.Context, in *AppointCon, out *Response) error
 		GetListForManage(ctx context.Context, in *ManageCond, out *Response) error
 		GetAppointmentList(ctx context.Context, in *AppointmentCondition, out *Response) error
+		GetListForSMS(ctx context.Context, in *SmsCond, out *Response) error
 	}
 	type Appointment struct {
 		appointment
@@ -235,4 +248,8 @@ func (h *appointmentHandler) GetListForManage(ctx context.Context, in *ManageCon
 
 func (h *appointmentHandler) GetAppointmentList(ctx context.Context, in *AppointmentCondition, out *Response) error {
 	return h.AppointmentHandler.GetAppointmentList(ctx, in, out)
+}
+
+func (h *appointmentHandler) GetListForSMS(ctx context.Context, in *SmsCond, out *Response) error {
+	return h.AppointmentHandler.GetListForSMS(ctx, in, out)
 }

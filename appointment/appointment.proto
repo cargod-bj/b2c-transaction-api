@@ -20,6 +20,7 @@ service Appointment {
   rpc GetListForManage(ManageCond) returns (Response) {}
   //appointment_list界面接口
   rpc GetAppointmentList(AppointmentCondition) returns (Response) {}
+  rpc GetListForSMS(SmsCond) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -98,4 +99,7 @@ message AssignDto{
 message ManageCond{
   repeated uint64 userIds = 1;
   uint64 StoreId = 2;
+}
+message SmsCond{
+  uint32 sendInterval = 1;
 }
