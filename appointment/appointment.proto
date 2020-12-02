@@ -68,6 +68,7 @@ message AppointCon {
   uint64 storeId = 3;
   uint32 status = 4;
   uint64 id = 5;
+  string appointment = 6;
 }
 message AppointSize {
   uint32 size = 1;
