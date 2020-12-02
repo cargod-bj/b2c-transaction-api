@@ -21,6 +21,8 @@ service Appointment {
   //appointment_list界面接口
   rpc GetAppointmentList(AppointmentCondition) returns (Response) {}
   rpc GetListForSMS(SmsCond) returns (Response) {}
+  //获取是否发过短信了
+  rpc GetAppointmentSize(AppointCon) returns (Response) {}
 }
 
 message AppointmentDTO {
@@ -63,6 +65,11 @@ message AppointmentCon {
 message AppointCon {
   uint64 carId = 1;
   uint64 userId = 2;
+  uint64 storeId = 3;
+  uint64 id = 4;
+}
+message AppointSize {
+  uint32 size = 1;
 }
 message AppointmentCondition {
   uint32 pageNo = 1;
