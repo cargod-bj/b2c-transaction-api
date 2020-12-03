@@ -54,8 +54,6 @@ type TestDriveService interface {
 	GetList(ctx context.Context, in *TestDriveCondition, opts ...client.CallOption) (*Response, error)
 	//新增合同信息，返回data.nil
 	AddTestDriveImages(ctx context.Context, in *TestDriveDTO, opts ...client.CallOption) (*Response, error)
-	//校验用户发送短信次数
-	GetTestDriveSmsSize(ctx context.Context, in *TestDriveCondition, opts ...client.CallOption) (*Response, error)
 }
 
 type testDriveService struct {
@@ -120,16 +118,6 @@ func (c *testDriveService) AddTestDriveImages(ctx context.Context, in *TestDrive
 	return out, nil
 }
 
-func (c *testDriveService) GetTestDriveSmsSize(ctx context.Context, in *TestDriveCondition, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "TestDrive.GetTestDriveSmsSize", in)
-	out := new(Response)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // Server API for TestDrive service
 
 type TestDriveHandler interface {
@@ -143,8 +131,6 @@ type TestDriveHandler interface {
 	GetList(context.Context, *TestDriveCondition, *Response) error
 	//新增合同信息，返回data.nil
 	AddTestDriveImages(context.Context, *TestDriveDTO, *Response) error
-	//校验用户发送短信次数
-	GetTestDriveSmsSize(context.Context, *TestDriveCondition, *Response) error
 }
 
 func RegisterTestDriveHandler(s server.Server, hdlr TestDriveHandler, opts ...server.HandlerOption) error {
@@ -154,7 +140,6 @@ func RegisterTestDriveHandler(s server.Server, hdlr TestDriveHandler, opts ...se
 		Update(ctx context.Context, in *TestDriveDTO, out *Response) error
 		GetList(ctx context.Context, in *TestDriveCondition, out *Response) error
 		AddTestDriveImages(ctx context.Context, in *TestDriveDTO, out *Response) error
-		GetTestDriveSmsSize(ctx context.Context, in *TestDriveCondition, out *Response) error
 	}
 	type TestDrive struct {
 		testDrive
@@ -185,8 +170,4 @@ func (h *testDriveHandler) GetList(ctx context.Context, in *TestDriveCondition, 
 
 func (h *testDriveHandler) AddTestDriveImages(ctx context.Context, in *TestDriveDTO, out *Response) error {
 	return h.TestDriveHandler.AddTestDriveImages(ctx, in, out)
-}
-
-func (h *testDriveHandler) GetTestDriveSmsSize(ctx context.Context, in *TestDriveCondition, out *Response) error {
-	return h.TestDriveHandler.GetTestDriveSmsSize(ctx, in, out)
 }

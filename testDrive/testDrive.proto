@@ -19,8 +19,6 @@ service TestDrive {
   rpc GetList(TestDriveCondition) returns (Response) {}
   //新增合同信息，返回data.nil
   rpc AddTestDriveImages(TestDriveDTO) returns (Response) {}
-  //校验用户发送短信次数
-  rpc GetTestDriveSmsSize(TestDriveCondition) returns (Response) {}
 }
 
 message TestDriveDTO {
@@ -68,9 +66,6 @@ message Response {
   string msg = 1;
   google.protobuf.Any data = 3;
   string code = 2;
-}
-message TestDriveSmsSize {
-  uint32 size = 1;
 }
 message AddTestDriveData{
   uint64 id = 1;
