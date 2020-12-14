@@ -62,6 +62,9 @@ message TestDriveCondition {
   uint64 dateEnd = 13;
   // 使用appointment排序：1升序，2降序，默认使用降序
   uint32 sortByAppointment = 14;
+  //试驾类型
+  uint64 testDriveType = 15;
+
 }
 message Response {
   string msg = 1;
