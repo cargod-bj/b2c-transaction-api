@@ -35,6 +35,7 @@ message TestDriveDTO {
   uint64 updateTime = 11;
   repeated fileResource.FileDTO fileDto = 12;
   repeated uint64 carIds = 13;
+  uint64 testDriveType = 14;
 }
 
 message TestDriveList {
