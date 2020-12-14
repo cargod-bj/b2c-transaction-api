@@ -82,4 +82,6 @@ message ApprovalCond{
   string ownerName = 14;
   string ownerNum = 15;
   repeated uint64 storeIds = 16;
+  uint64 actualReceivedFromTime = 17;
+  uint64 actualReceivedToTime = 18;
 }
