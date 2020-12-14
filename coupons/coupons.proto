@@ -65,6 +65,7 @@ message CouponDto {
   uint64   CouponTemplateId = 18;
   uint32   BizType = 19;
   int64    GenerateNum = 20;
+  string   CouponCost = 21;
 }
 message PagedList{
   uint32 pageNo = 1;
@@ -87,6 +88,7 @@ message CouponTemplateDto {
   int64    UpdateTime = 17;
   uint32   BizType = 19;
   uint32   EffectiveDay = 20;
+  string   CouponCost = 21;
 }
 
 message CouponUserDto {
