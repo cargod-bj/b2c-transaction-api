@@ -32,28 +32,29 @@ type PaymentDto struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               uint64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId           uint64                  `protobuf:"varint,2,opt,name=userId,proto3" json:"userId,omitempty"`
-	OrderId          uint64                  `protobuf:"varint,3,opt,name=orderId,proto3" json:"orderId,omitempty"`
-	StaffId          uint64                  `protobuf:"varint,4,opt,name=staffId,proto3" json:"staffId,omitempty"`
-	Method           uint32                  `protobuf:"varint,5,opt,name=method,proto3" json:"method,omitempty"`
-	Amount           string                  `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	Status           uint32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
-	CreateTime       int64                   `protobuf:"varint,8,opt,name=createTime,proto3" json:"createTime,omitempty"`
-	UpdateTime       int64                   `protobuf:"varint,9,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
-	RecordType       uint32                  `protobuf:"varint,10,opt,name=recordType,proto3" json:"recordType,omitempty"`
-	PaymentType      uint32                  `protobuf:"varint,11,opt,name=paymentType,proto3" json:"paymentType,omitempty"`
-	Remark           string                  `protobuf:"bytes,12,opt,name=remark,proto3" json:"remark,omitempty"`
-	FileDto          []*fileResource.FileDTO `protobuf:"bytes,13,rep,name=fileDto,proto3" json:"fileDto,omitempty"`
-	CouponNo         string                  `protobuf:"bytes,14,opt,name=couponNo,proto3" json:"couponNo,omitempty"`
-	RejectNote       string                  `protobuf:"bytes,16,opt,name=rejectNote,proto3" json:"rejectNote,omitempty"`
-	SendApprovalTime uint64                  `protobuf:"varint,17,opt,name=sendApprovalTime,proto3" json:"sendApprovalTime,omitempty"`
-	OrderNo          string                  `protobuf:"bytes,18,opt,name=orderNo,proto3" json:"orderNo,omitempty"`
-	CarId            uint64                  `protobuf:"varint,19,opt,name=carId,proto3" json:"carId,omitempty"`
-	StoreId          uint64                  `protobuf:"varint,20,opt,name=storeId,proto3" json:"storeId,omitempty"`
-	ApprovedTime     uint64                  `protobuf:"varint,21,opt,name=approvedTime,proto3" json:"approvedTime,omitempty"`
-	OwnerName        string                  `protobuf:"bytes,22,opt,name=ownerName,proto3" json:"ownerName,omitempty"`
-	OwnerNum         string                  `protobuf:"bytes,23,opt,name=ownerNum,proto3" json:"ownerNum,omitempty"`
+	Id                 uint64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId             uint64                  `protobuf:"varint,2,opt,name=userId,proto3" json:"userId,omitempty"`
+	OrderId            uint64                  `protobuf:"varint,3,opt,name=orderId,proto3" json:"orderId,omitempty"`
+	StaffId            uint64                  `protobuf:"varint,4,opt,name=staffId,proto3" json:"staffId,omitempty"`
+	Method             uint32                  `protobuf:"varint,5,opt,name=method,proto3" json:"method,omitempty"`
+	Amount             string                  `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	Status             uint32                  `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	CreateTime         int64                   `protobuf:"varint,8,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	UpdateTime         int64                   `protobuf:"varint,9,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
+	RecordType         uint32                  `protobuf:"varint,10,opt,name=recordType,proto3" json:"recordType,omitempty"`
+	PaymentType        uint32                  `protobuf:"varint,11,opt,name=paymentType,proto3" json:"paymentType,omitempty"`
+	Remark             string                  `protobuf:"bytes,12,opt,name=remark,proto3" json:"remark,omitempty"`
+	FileDto            []*fileResource.FileDTO `protobuf:"bytes,13,rep,name=fileDto,proto3" json:"fileDto,omitempty"`
+	CouponNo           string                  `protobuf:"bytes,14,opt,name=couponNo,proto3" json:"couponNo,omitempty"`
+	RejectNote         string                  `protobuf:"bytes,16,opt,name=rejectNote,proto3" json:"rejectNote,omitempty"`
+	SendApprovalTime   uint64                  `protobuf:"varint,17,opt,name=sendApprovalTime,proto3" json:"sendApprovalTime,omitempty"`
+	OrderNo            string                  `protobuf:"bytes,18,opt,name=orderNo,proto3" json:"orderNo,omitempty"`
+	CarId              uint64                  `protobuf:"varint,19,opt,name=carId,proto3" json:"carId,omitempty"`
+	StoreId            uint64                  `protobuf:"varint,20,opt,name=storeId,proto3" json:"storeId,omitempty"`
+	ApprovedTime       uint64                  `protobuf:"varint,21,opt,name=approvedTime,proto3" json:"approvedTime,omitempty"`
+	OwnerName          string                  `protobuf:"bytes,22,opt,name=ownerName,proto3" json:"ownerName,omitempty"`
+	OwnerNum           string                  `protobuf:"bytes,23,opt,name=ownerNum,proto3" json:"ownerNum,omitempty"`
+	ActualReceivedTime uint64                  `protobuf:"varint,24,opt,name=actualReceivedTime,proto3" json:"actualReceivedTime,omitempty"`
 }
 
 func (x *PaymentDto) Reset() {
@@ -240,6 +241,13 @@ func (x *PaymentDto) GetOwnerNum() string {
 		return x.OwnerNum
 	}
 	return ""
+}
+
+func (x *PaymentDto) GetActualReceivedTime() uint64 {
+	if x != nil {
+		return x.ActualReceivedTime
+	}
+	return 0
 }
 
 type PaymentCond struct {
@@ -631,7 +639,7 @@ var file_payment_payment_proto_rawDesc = []byte{
 	0x2d, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x63,
 	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x66, 0x69, 0x6c,
 	0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x2f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65,
-	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x8b, 0x05, 0x0a,
+	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xbb, 0x05, 0x0a,
 	0x0a, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x44, 0x74, 0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x75,
 	0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x75, 0x73, 0x65,
@@ -672,7 +680,10 @@ var file_payment_payment_proto_rawDesc = []byte{
 	0x12, 0x1c, 0x0a, 0x09, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x16, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x09, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a,
 	0x0a, 0x08, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x18, 0x17, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x22, 0x5f, 0x0a, 0x0b, 0x50, 0x61,
+	0x52, 0x08, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x4e, 0x75, 0x6d, 0x12, 0x2e, 0x0a, 0x12, 0x61, 0x63,
+	0x74, 0x75, 0x61, 0x6c, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x54, 0x69, 0x6d, 0x65,
+	0x18, 0x18, 0x20, 0x01, 0x28, 0x04, 0x52, 0x12, 0x61, 0x63, 0x74, 0x75, 0x61, 0x6c, 0x52, 0x65,
+	0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x5f, 0x0a, 0x0b, 0x50, 0x61,
 	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x43, 0x6f, 0x6e, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x6f, 0x72, 0x64,
 	0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65,
 	0x72, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x54, 0x79, 0x70,

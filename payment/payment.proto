@@ -47,6 +47,7 @@ message PaymentDto {
   uint64 approvedTime = 21;
   string ownerName = 22;
   string ownerNum = 23;
+  uint64 actualReceivedTime = 24;
 }
 
 message PaymentCond{
