@@ -105,6 +105,9 @@ message OrderDTO {
   uint64 campaignId = 48; //活动ID
   uint32 cancelReason = 49;//取消订单原因
   string originalCarPrice = 50;//原始车价
+  uint32 bookingStatus = 60;
+  uint32 channel = 61;
+  uint32 assignType = 62;
 }
 
 message OrderList {
