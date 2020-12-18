@@ -36,8 +36,9 @@ service Order {
   rpc ChangeCar(OrderDTO) returns (common.Response) {}
   //查询车辆是否已经创建订单
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
+  //查询线上预定订单并且pic为空的订单
+  rpc GetNoAssignCustomerByOrder(OrderCondition) returns (common.Response) {}
 }
-
 
 message DeliveryInfo {
   uint64 id = 1;
