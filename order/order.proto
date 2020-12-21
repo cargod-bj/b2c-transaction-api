@@ -113,6 +113,7 @@ message OrderDTO {
   uint32 channel = 61;
   uint32 assignType = 62;
   repeated Payment payments = 63;
+  string bookingFee  = 64;
 
 
 
