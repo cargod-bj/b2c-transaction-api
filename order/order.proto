@@ -38,6 +38,9 @@ service Order {
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
   //查询线上预定订单并且pic为空的订单
   rpc GetNoAssignCustomerByOrder(OrderCondition) returns (common.Response) {}
+
+  //查询订单列表，返回订单列表数据
+  rpc GetListWithPay(OrderCondition) returns (common.Response) {}
   //给没有分配PIC订单，分配PIC
   rpc AssignOrderPIC(OrderCondition) returns (common.Response) {}
 }
@@ -111,6 +114,22 @@ message OrderDTO {
   uint32 bookingStatus = 60;
   uint32 channel = 61;
   uint32 assignType = 62;
+  repeated Payment payments = 63;
+  string bookingFee  = 64;
+
+
+
+}
+
+message Payment {
+  uint64 id = 1;
+  uint32 recordType = 2;
+  uint32 method = 3;
+  uint64 paymentType = 4;
+  uint32 pay_status = 5;
+  string amount = 6;
+  uint32 status = 7;
+  uint64 payment_no = 8;
 }
 
 message OrderList {
@@ -146,7 +165,8 @@ message Response {
 }
 
 message AddOrderData{
-  uint64 id = 1;
+  uint64 id  = 1;
+  string url = 2;
 }
 message DeleteId{
   uint64 id = 1;
