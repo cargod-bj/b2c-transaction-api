@@ -71,6 +71,8 @@ type OrderService interface {
 	ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
+	//查询订单列表，返回订单列表数据
+	GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -195,6 +197,16 @@ func (c *orderService) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, o
 	return out, nil
 }
 
+func (c *orderService) GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetListWithPay", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -220,6 +232,8 @@ type OrderHandler interface {
 	ChangeCar(context.Context, *OrderDTO, *common.Response) error
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
+	//查询订单列表，返回订单列表数据
+	GetListWithPay(context.Context, *OrderCondition, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -235,6 +249,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
 		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
+		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -289,4 +304,8 @@ func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderDTO, out *common.
 
 func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error {
 	return h.OrderHandler.CheckCarInvalidInOrder(ctx, in, out)
+}
+
+func (h *orderHandler) GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.GetListWithPay(ctx, in, out)
 }
