@@ -73,6 +73,8 @@ type OrderService interface {
 	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
 	//查询线上预定订单并且pic为空的订单
 	GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -207,6 +209,16 @@ func (c *orderService) GetNoAssignCustomerByOrder(ctx context.Context, in *Order
 	return out, nil
 }
 
+func (c *orderService) AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.AssignOrderPIC", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -234,6 +246,8 @@ type OrderHandler interface {
 	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
 	//查询线上预定订单并且pic为空的订单
 	GetNoAssignCustomerByOrder(context.Context, *OrderCondition, *common.Response) error
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -250,6 +264,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
 		GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
+		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -308,4 +323,8 @@ func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, o
 
 func (h *orderHandler) GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error {
 	return h.OrderHandler.GetNoAssignCustomerByOrder(ctx, in, out)
+}
+
+func (h *orderHandler) AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.AssignOrderPIC(ctx, in, out)
 }

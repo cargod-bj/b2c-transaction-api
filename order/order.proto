@@ -38,6 +38,8 @@ service Order {
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
   //查询线上预定订单并且pic为空的订单
   rpc GetNoAssignCustomerByOrder(OrderCondition) returns (common.Response) {}
+  //给没有分配PIC订单，分配PIC
+  rpc AssignOrderPIC(OrderCondition) returns (common.Response) {}
 }
 
 message DeliveryInfo {
