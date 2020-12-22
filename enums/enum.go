@@ -423,3 +423,26 @@ var CouponUsedStatusCode = map[string]int{
 	"UnUsed": UnUsed,
 	"Used":   Used,
 }
+
+const (
+	HomeTestDrive   = 1
+	RetailTestDrive = 2
+)
+
+var testDriveTypeText = map[int]string{
+	HomeTestDrive:   "Home Test Drive",
+	RetailTestDrive: "Retail Test Drive",
+}
+
+func TestDriveTypeText(code int) string {
+	return testDriveTypeText[code]
+}
+
+func TestDriveTypeList() []int {
+	return getKeys(couponUsedStatusText)
+}
+
+var TestDriveTypeCode = map[string]int{
+	"Home Test Drive":   HomeTestDrive,
+	"Retail Test Drive": RetailTestDrive,
+}
