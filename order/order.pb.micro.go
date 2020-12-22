@@ -75,6 +75,8 @@ type OrderService interface {
 	GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	//查询订单列表，返回订单列表数据
 	GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -219,6 +221,16 @@ func (c *orderService) GetListWithPay(ctx context.Context, in *OrderCondition, o
 	return out, nil
 }
 
+func (c *orderService) AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.AssignOrderPIC", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -248,6 +260,8 @@ type OrderHandler interface {
 	GetNoAssignCustomerByOrder(context.Context, *OrderCondition, *common.Response) error
 	//查询订单列表，返回订单列表数据
 	GetListWithPay(context.Context, *OrderCondition, *common.Response) error
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -265,6 +279,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
 		GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
 		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
+		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -327,4 +342,8 @@ func (h *orderHandler) GetNoAssignCustomerByOrder(ctx context.Context, in *Order
 
 func (h *orderHandler) GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error {
 	return h.OrderHandler.GetListWithPay(ctx, in, out)
+}
+
+func (h *orderHandler) AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.AssignOrderPIC(ctx, in, out)
 }

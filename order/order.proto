@@ -41,6 +41,8 @@ service Order {
 
   //查询订单列表，返回订单列表数据
   rpc GetListWithPay(OrderCondition) returns (common.Response) {}
+  //给没有分配PIC订单，分配PIC
+  rpc AssignOrderPIC(OrderCondition) returns (common.Response) {}
 }
 
 message DeliveryInfo {
