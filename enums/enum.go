@@ -210,6 +210,9 @@ const (
 	BankTransfer   = 3
 	Loan           = 4
 	DiscountCoupon = 5
+	TradeIn        = 6
+	CardPayment    = 7
+	Online         = 8
 )
 
 var paymentMethodText = map[int]string{
@@ -218,6 +221,9 @@ var paymentMethodText = map[int]string{
 	BankTransfer:   "Bank Transfer",
 	Loan:           "Loan",
 	DiscountCoupon: "Discount Coupon",
+	TradeIn:        "TradeIn",
+	CardPayment:    "CardPayment",
+	Online:         "Online",
 }
 
 func PaymentMethodText(code int) string {
@@ -234,6 +240,9 @@ var paymentMethodCode = map[string]int{
 	"Bank Transfer":   BankTransfer,
 	"Loan":            Loan,
 	"Discount Coupon": DiscountCoupon,
+	"TradeIn":        TradeIn,
+	"CardPayment":     CardPayment,
+	"Online":          Online,
 }
 
 func PaymentMethodCode(text string) int {
