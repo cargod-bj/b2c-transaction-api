@@ -50,7 +50,7 @@ message PaymentDto {
 
   uint32 payStatus = 30;
   uint64 paymentNo = 31;
-
+  uint32 channel = 32;
 }
 
 message PaymentCond{
