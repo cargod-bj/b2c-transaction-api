@@ -107,7 +107,7 @@ message OrderDTO {
   string originalCarPrice = 50;//原始车价
   string insuranceCost = 51;//保险服务费
   string loanProfit = 52;//贷款费用
-  uint64 changeCarFrom = 51;//换车
+  uint64 changeCarFrom = 53;//换车
 }
 
 message OrderList {
