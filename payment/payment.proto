@@ -50,7 +50,7 @@ message PaymentDto {
 
   uint32 payStatus = 30;
   uint64 paymentNo = 31;
-
+  uint32 channel = 32;
 }
 
 message PaymentCond{
@@ -85,4 +85,5 @@ message ApprovalCond{
   string ownerName = 14;
   string ownerNum = 15;
   repeated uint64 storeIds = 16;
+  uint32 channel = 17;//渠道
 }

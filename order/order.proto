@@ -156,6 +156,7 @@ message OrderCondition {
   uint64 receiptTime = 14;//接收时间
   uint32 cancelReason = 15;//取消订单原因
   repeated uint64 storeIds = 16;
+  uint32 channel = 17;//渠道
 }
 
 message Response {
