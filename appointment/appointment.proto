@@ -99,6 +99,7 @@ message AddAppointmentData{
 message DeleteId{
   uint64 id = 1;
   uint64 userId = 2;
+  uint64 StoreId = 3;
 }
 
 message AssignDto{
