@@ -240,7 +240,7 @@ var paymentMethodCode = map[string]int{
 	"Bank Transfer":   BankTransfer,
 	"Loan":            Loan,
 	"Discount Coupon": DiscountCoupon,
-	"TradeIn":        TradeIn,
+	"TradeIn":         TradeIn,
 	"CardPayment":     CardPayment,
 	"Online":          Online,
 }
