@@ -47,10 +47,11 @@ message PaymentDto {
   uint64 approvedTime = 21;
   string ownerName = 22;
   string ownerNum = 23;
-
+  uint64 actualReceivedTime = 24;
   uint32 payStatus = 30;
   uint64 paymentNo = 31;
   uint32 channel = 32;
+
 }
 
 message PaymentCond{
@@ -85,5 +86,7 @@ message ApprovalCond{
   string ownerName = 14;
   string ownerNum = 15;
   repeated uint64 storeIds = 16;
-  uint32 channel = 17;//渠道
+  uint64 actualReceivedFromTime = 17;
+  uint64 actualReceivedToTime = 18;
+  uint32 channel = 19;//渠道
 }

@@ -104,6 +104,7 @@ message DeleteId{
 message AssignDto{
   repeated uint64 ids = 1;
   uint64 StaffId = 2;
+  uint64 StoreId = 3;
 }
 message ManageCond{
   repeated uint64 userIds = 1;

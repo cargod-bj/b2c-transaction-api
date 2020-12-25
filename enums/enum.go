@@ -352,6 +352,7 @@ const (
 	B2CClientReferral      = 2
 	OnlineShopVoucherShop  = 3
 	CarSomeEmployeeVoucher = 4
+	BusinessCampaign       = 5
 )
 
 var couponBizTypeText = map[int]string{
@@ -359,6 +360,7 @@ var couponBizTypeText = map[int]string{
 	B2CClientReferral:      "B2C Client Referral",
 	OnlineShopVoucherShop:  "Online Shop Voucher_Shopee&Lazada",
 	CarSomeEmployeeVoucher: "CarSome Employee Voucher",
+	BusinessCampaign:       "Business Campaign",
 }
 
 func CouponBizTypeText(code int) string {
@@ -370,6 +372,7 @@ var couponBizTypeCodeText = map[int]string{
 	B2CClientReferral:      "C",
 	OnlineShopVoucherShop:  "O",
 	CarSomeEmployeeVoucher: "E",
+	BusinessCampaign:       "B",
 }
 
 func CouponBizTypeCodeText(code int) string {
@@ -385,6 +388,7 @@ var CouponBizTypeCode = map[string]int{
 	"B2C Client Referral":               B2CClientReferral,
 	"Online Shop Voucher_Shopee&Lazada": OnlineShopVoucherShop,
 	"CarSome Employee Voucher":          CarSomeEmployeeVoucher,
+	"Business Campaign":                 BusinessCampaign,
 }
 
 const (
@@ -431,4 +435,27 @@ func CouponUsedStatusList() []int {
 var CouponUsedStatusCode = map[string]int{
 	"UnUsed": UnUsed,
 	"Used":   Used,
+}
+
+const (
+	HomeTestDrive   = 1
+	RetailTestDrive = 2
+)
+
+var testDriveTypeText = map[int]string{
+	HomeTestDrive:   "Home Test Drive",
+	RetailTestDrive: "Retail Test Drive",
+}
+
+func TestDriveTypeText(code int) string {
+	return testDriveTypeText[code]
+}
+
+func TestDriveTypeList() []int {
+	return getKeys(couponUsedStatusText)
+}
+
+var TestDriveTypeCode = map[string]int{
+	"Home Test Drive":   HomeTestDrive,
+	"Retail Test Drive": RetailTestDrive,
 }
