@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.23.0-devel
 // 	protoc        v3.7.1
-// source: payCallCack/pay_callback.proto
+// source: payCallback/pay_callback.proto
 
 package payCallback
 
@@ -38,7 +38,7 @@ type NoticeDTO struct {
 func (x *NoticeDTO) Reset() {
 	*x = NoticeDTO{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_payCallCack_pay_callback_proto_msgTypes[0]
+		mi := &file_payCallback_pay_callback_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -51,7 +51,7 @@ func (x *NoticeDTO) String() string {
 func (*NoticeDTO) ProtoMessage() {}
 
 func (x *NoticeDTO) ProtoReflect() protoreflect.Message {
-	mi := &file_payCallCack_pay_callback_proto_msgTypes[0]
+	mi := &file_payCallback_pay_callback_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +64,7 @@ func (x *NoticeDTO) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NoticeDTO.ProtoReflect.Descriptor instead.
 func (*NoticeDTO) Descriptor() ([]byte, []int) {
-	return file_payCallCack_pay_callback_proto_rawDescGZIP(), []int{0}
+	return file_payCallback_pay_callback_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *NoticeDTO) GetPayId() uint64 {
@@ -81,10 +81,10 @@ func (x *NoticeDTO) GetStatus() uint32 {
 	return 0
 }
 
-var File_payCallCack_pay_callback_proto protoreflect.FileDescriptor
+var File_payCallback_pay_callback_proto protoreflect.FileDescriptor
 
-var file_payCallCack_pay_callback_proto_rawDesc = []byte{
-	0x0a, 0x1e, 0x70, 0x61, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x43, 0x61, 0x63, 0x6b, 0x2f, 0x70, 0x61,
+var file_payCallback_pay_callback_proto_rawDesc = []byte{
+	0x0a, 0x1e, 0x70, 0x61, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x2f, 0x70, 0x61,
 	0x79, 0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x0b, 0x70, 0x61, 0x79, 0x43, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x1a, 0x39, 0x67,
 	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x61, 0x72, 0x67, 0x6f, 0x64,
@@ -106,23 +106,23 @@ var file_payCallCack_pay_callback_proto_rawDesc = []byte{
 }
 
 var (
-	file_payCallCack_pay_callback_proto_rawDescOnce sync.Once
-	file_payCallCack_pay_callback_proto_rawDescData = file_payCallCack_pay_callback_proto_rawDesc
+	file_payCallback_pay_callback_proto_rawDescOnce sync.Once
+	file_payCallback_pay_callback_proto_rawDescData = file_payCallback_pay_callback_proto_rawDesc
 )
 
-func file_payCallCack_pay_callback_proto_rawDescGZIP() []byte {
-	file_payCallCack_pay_callback_proto_rawDescOnce.Do(func() {
-		file_payCallCack_pay_callback_proto_rawDescData = protoimpl.X.CompressGZIP(file_payCallCack_pay_callback_proto_rawDescData)
+func file_payCallback_pay_callback_proto_rawDescGZIP() []byte {
+	file_payCallback_pay_callback_proto_rawDescOnce.Do(func() {
+		file_payCallback_pay_callback_proto_rawDescData = protoimpl.X.CompressGZIP(file_payCallback_pay_callback_proto_rawDescData)
 	})
-	return file_payCallCack_pay_callback_proto_rawDescData
+	return file_payCallback_pay_callback_proto_rawDescData
 }
 
-var file_payCallCack_pay_callback_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_payCallCack_pay_callback_proto_goTypes = []interface{}{
+var file_payCallback_pay_callback_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_payCallback_pay_callback_proto_goTypes = []interface{}{
 	(*NoticeDTO)(nil),       // 0: payCallback.NoticeDTO
 	(*common.Response)(nil), // 1: common.Response
 }
-var file_payCallCack_pay_callback_proto_depIdxs = []int32{
+var file_payCallback_pay_callback_proto_depIdxs = []int32{
 	0, // 0: payCallback.PayCallback.Notice:input_type -> payCallback.NoticeDTO
 	1, // 1: payCallback.PayCallback.Notice:output_type -> common.Response
 	1, // [1:2] is the sub-list for method output_type
@@ -132,13 +132,13 @@ var file_payCallCack_pay_callback_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_payCallCack_pay_callback_proto_init() }
-func file_payCallCack_pay_callback_proto_init() {
-	if File_payCallCack_pay_callback_proto != nil {
+func init() { file_payCallback_pay_callback_proto_init() }
+func file_payCallback_pay_callback_proto_init() {
+	if File_payCallback_pay_callback_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_payCallCack_pay_callback_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_payCallback_pay_callback_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NoticeDTO); i {
 			case 0:
 				return &v.state
@@ -155,18 +155,18 @@ func file_payCallCack_pay_callback_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_payCallCack_pay_callback_proto_rawDesc,
+			RawDescriptor: file_payCallback_pay_callback_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_payCallCack_pay_callback_proto_goTypes,
-		DependencyIndexes: file_payCallCack_pay_callback_proto_depIdxs,
-		MessageInfos:      file_payCallCack_pay_callback_proto_msgTypes,
+		GoTypes:           file_payCallback_pay_callback_proto_goTypes,
+		DependencyIndexes: file_payCallback_pay_callback_proto_depIdxs,
+		MessageInfos:      file_payCallback_pay_callback_proto_msgTypes,
 	}.Build()
-	File_payCallCack_pay_callback_proto = out.File
-	file_payCallCack_pay_callback_proto_rawDesc = nil
-	file_payCallCack_pay_callback_proto_goTypes = nil
-	file_payCallCack_pay_callback_proto_depIdxs = nil
+	File_payCallback_pay_callback_proto = out.File
+	file_payCallback_pay_callback_proto_rawDesc = nil
+	file_payCallback_pay_callback_proto_goTypes = nil
+	file_payCallback_pay_callback_proto_depIdxs = nil
 }
