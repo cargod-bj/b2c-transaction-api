@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package payCallback;
+package payNotice;
 import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
 
-option go_package = "github.com/cargod-bj/b2c-transaction-api/payCallback";
+option go_package = "github.com/cargod-bj/b2c-transaction-api/payNotice";
 /**
 *订单付款和退款记录
  */
-service PayCallback {
+service PayNotice {
   rpc Notice(NoticeDTO) returns (common.Response) {}
 }
 message NoticeDTO {
