@@ -15,5 +15,5 @@ message NoticeDTO {
   uint32   status = 2;
   uint64   paymentId = 3;
   bool     lockCar = 4;
-  bool     orderId = 5;
+  uint64   orderId = 5;
 }
