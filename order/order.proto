@@ -122,10 +122,16 @@ message OrderDTO {
   uint32 channel = 61;
   uint32 assignType = 62;
   repeated Payment payments = 63;
-  string bookingFee  = 64;
+  string bookingFee = 64;
 
 
+}
 
+message OrderPayInfo{
+  uint64 orderId = 1;
+  uint64 orderNo = 2;
+  string payUrl = 3;
+  uint32 status = 4;
 }
 
 message Payment {
@@ -137,6 +143,7 @@ message Payment {
   string amount = 6;
   uint32 status = 7;
   uint64 payment_no = 8;
+  string payUrl = 9 ;
 }
 
 message OrderList {
@@ -173,7 +180,7 @@ message Response {
 }
 
 message AddOrderData{
-  uint64 id  = 1;
+  uint64 id = 1;
   string url = 2;
 }
 message DeleteId{
