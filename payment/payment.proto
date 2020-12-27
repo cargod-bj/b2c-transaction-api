@@ -23,6 +23,9 @@ service Payment {
   rpc UpdateStatus(PaymentDto) returns (common.Response) {}
   //获取审批列表
   rpc GetPaymentsByCond(ApprovalCond) returns (common.Response) {}
+
+  //获取支付信息
+  rpc GetPaymentByPaymentNo(PaymentNo) returns (common.Response) {}
 }
 message PaymentDto {
   uint64   id = 1;
@@ -89,4 +92,8 @@ message ApprovalCond{
   uint64 actualReceivedFromTime = 17;
   uint64 actualReceivedToTime = 18;
   uint32 channel = 19;//渠道
+}
+
+message PaymentNo{
+  uint64 paymentNo = 1;
 }
