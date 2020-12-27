@@ -77,6 +77,8 @@ type OrderService interface {
 	GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	//给没有分配PIC订单，分配PIC
 	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	GetPayInfo(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -231,6 +233,26 @@ func (c *orderService) AssignOrderPIC(ctx context.Context, in *OrderCondition, o
 	return out, nil
 }
 
+func (c *orderService) CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CancelOnlineOrder", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) GetPayInfo(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetPayInfo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -262,6 +284,8 @@ type OrderHandler interface {
 	GetListWithPay(context.Context, *OrderCondition, *common.Response) error
 	//给没有分配PIC订单，分配PIC
 	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
+	CancelOnlineOrder(context.Context, *OrderCondition, *common.Response) error
+	GetPayInfo(context.Context, *OrderCondition, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -280,6 +304,8 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
 		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
 		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
+		CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -346,4 +372,12 @@ func (h *orderHandler) GetListWithPay(ctx context.Context, in *OrderCondition, o
 
 func (h *orderHandler) AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error {
 	return h.OrderHandler.AssignOrderPIC(ctx, in, out)
+}
+
+func (h *orderHandler) CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.CancelOnlineOrder(ctx, in, out)
+}
+
+func (h *orderHandler) GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.GetPayInfo(ctx, in, out)
 }

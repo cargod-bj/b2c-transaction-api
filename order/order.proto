@@ -43,6 +43,10 @@ service Order {
   rpc GetListWithPay(OrderCondition) returns (common.Response) {}
   //给没有分配PIC订单，分配PIC
   rpc AssignOrderPIC(OrderCondition) returns (common.Response) {}
+
+  rpc CancelOnlineOrder(OrderCondition) returns (common.Response) {}
+
+  rpc GetPayInfo(OrderCondition) returns (common.Response) {}
 }
 
 message DeliveryInfo {
