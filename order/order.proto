@@ -36,6 +36,8 @@ service Order {
   rpc ChangeCar(OrderDTO) returns (common.Response) {}
   //查询车辆是否已经创建订单
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
+  //查询要发短信的订单
+  rpc QueryOrderForSendSms(DeliveryInfo) returns (common.Response) {}
 }
 
 
