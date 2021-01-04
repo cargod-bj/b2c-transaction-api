@@ -66,6 +66,7 @@ message CouponDto {
   uint32   BizType = 19;
   int64    GenerateNum = 20;
   string   CouponCost = 21;
+  repeated uint64 UserIds=22;
 }
 message PagedList{
   uint32 pageNo = 1;
