@@ -146,6 +146,8 @@ message Payment {
   uint32 status = 7;
   uint64 payment_no = 8;
   string payUrl = 9 ;
+  uint64 createTime = 10 ;
+  uint64 updateTime = 11 ;
 }
 
 message OrderList {
