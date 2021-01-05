@@ -47,6 +47,8 @@ service Order {
   rpc CancelOnlineOrder(OrderCondition) returns (common.Response) {}
 
   rpc GetPayInfo(OrderCondition) returns (common.Response) {}
+
+  rpc CheckCarInvalid(CarCheckDTO) returns (common.Response) {}
 }
 
 message DeliveryInfo {
@@ -218,4 +220,8 @@ message UpdateInfo{
 }
 message CarIds{
   repeated uint64 ids = 1;
+}
+message CarCheckDTO{
+  uint64 carId = 1;
+  uint64 userId = 2;
 }

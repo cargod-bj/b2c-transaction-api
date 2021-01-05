@@ -79,6 +79,7 @@ type OrderService interface {
 	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	GetPayInfo(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -253,6 +254,16 @@ func (c *orderService) GetPayInfo(ctx context.Context, in *OrderCondition, opts 
 	return out, nil
 }
 
+func (c *orderService) CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CheckCarInvalid", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -286,6 +297,7 @@ type OrderHandler interface {
 	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
 	CancelOnlineOrder(context.Context, *OrderCondition, *common.Response) error
 	GetPayInfo(context.Context, *OrderCondition, *common.Response) error
+	CheckCarInvalid(context.Context, *CarCheckDTO, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -306,6 +318,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
 		CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
 		GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error
+		CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -380,4 +393,8 @@ func (h *orderHandler) CancelOnlineOrder(ctx context.Context, in *OrderCondition
 
 func (h *orderHandler) GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error {
 	return h.OrderHandler.GetPayInfo(ctx, in, out)
+}
+
+func (h *orderHandler) CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error {
+	return h.OrderHandler.CheckCarInvalid(ctx, in, out)
 }
