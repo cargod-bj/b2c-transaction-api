@@ -134,6 +134,12 @@ message OrderPayInfo{
   uint64 orderNo = 2;
   string payUrl = 3;
   uint32 status = 4;
+  string amount = 5;
+  uint64 createTime = 6;
+  uint64 expireTime = 7;
+  uint64 carId = 8;
+  string carNo = 9;
+  string payMethod = 10;
 }
 
 message Payment {
