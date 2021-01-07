@@ -192,6 +192,7 @@ message Response {
 message AddOrderData{
   uint64 id = 1;
   string url = 2;
+  uint64 orderNo = 3;
 }
 message DeleteId{
   uint64 id = 1;
