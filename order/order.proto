@@ -154,6 +154,7 @@ message Payment {
   string payUrl = 9 ;
   uint64 createTime = 10 ;
   uint64 updateTime = 11 ;
+  bool paySuccess = 12 ;
 }
 
 message OrderList {
