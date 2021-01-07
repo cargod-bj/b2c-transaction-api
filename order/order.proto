@@ -147,10 +147,10 @@ message Payment {
   uint32 recordType = 2;
   uint32 method = 3;
   uint64 paymentType = 4;
-  uint32 pay_status = 5;
+  uint32 payStatus = 5;
   string amount = 6;
   uint32 status = 7;
-  uint64 payment_no = 8;
+  uint64 paymentNo = 8;
   string payUrl = 9 ;
   uint64 createTime = 10 ;
   uint64 updateTime = 11 ;
