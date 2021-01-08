@@ -36,6 +36,9 @@ service Order {
   rpc ChangeCar(OrderDTO) returns (common.Response) {}
   //查询车辆是否已经创建订单
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
+  //查询要发短信的订单
+  rpc QueryOrderForSendSms(DeliveryInfo) returns (common.Response) {}
+
   //查询线上预定订单并且pic为空的订单
   rpc GetNoAssignCustomerByOrder(OrderCondition) returns (common.Response) {}
 
@@ -50,7 +53,6 @@ service Order {
 
   rpc CheckCarInvalid(CarCheckDTO) returns (common.Response) {}
 }
-
 message DeliveryInfo {
   uint64 id = 1;
   string ownerName = 2;

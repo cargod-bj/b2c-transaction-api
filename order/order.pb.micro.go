@@ -71,6 +71,8 @@ type OrderService interface {
 	ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
+	//查询要发短信的订单
+	QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*common.Response, error)
 	//查询线上预定订单并且pic为空的订单
 	GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	//查询订单列表，返回订单列表数据
@@ -204,6 +206,16 @@ func (c *orderService) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, o
 	return out, nil
 }
 
+func (c *orderService) QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.QueryOrderForSendSms", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Order.GetNoAssignCustomerByOrder", in)
 	out := new(common.Response)
@@ -289,6 +301,8 @@ type OrderHandler interface {
 	ChangeCar(context.Context, *OrderDTO, *common.Response) error
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
+	//查询要发短信的订单
+	QueryOrderForSendSms(context.Context, *DeliveryInfo, *common.Response) error
 	//查询线上预定订单并且pic为空的订单
 	GetNoAssignCustomerByOrder(context.Context, *OrderCondition, *common.Response) error
 	//查询订单列表，返回订单列表数据
@@ -313,6 +327,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
 		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
+		QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error
 		GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
 		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
 		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
@@ -373,6 +388,10 @@ func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderDTO, out *common.
 
 func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error {
 	return h.OrderHandler.CheckCarInvalidInOrder(ctx, in, out)
+}
+
+func (h *orderHandler) QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error {
+	return h.OrderHandler.QueryOrderForSendSms(ctx, in, out)
 }
 
 func (h *orderHandler) GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error {
