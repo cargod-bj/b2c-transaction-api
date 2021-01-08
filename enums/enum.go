@@ -79,6 +79,7 @@ const (
 	OrderClosed    = 4
 	MoneyBack      = 5
 	OrderCancelled = 6
+	OrderCreated   = 99
 )
 
 var orderStatusText = map[int]string{
@@ -88,6 +89,7 @@ var orderStatusText = map[int]string{
 	OrderClosed:    "Order Closed",
 	MoneyBack:      "Money Back",
 	OrderCancelled: "Order Cancelled",
+	OrderCreated:   "Order Created",
 }
 
 func OrderStatusText(code int) string {
@@ -105,6 +107,7 @@ var orderStatusCode = map[string]int{
 	"Order Closed":    OrderClosed,
 	"Money Back":      MoneyBack,
 	"Order Cancelled": OrderCancelled,
+	"Order Created":   OrderCreated,
 }
 
 func OrderStatusCode(text string) int {

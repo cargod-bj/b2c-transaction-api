@@ -182,7 +182,7 @@ message OrderCondition {
   uint32 cancelReason = 15;//取消订单原因
   repeated uint64 storeIds = 16;
   uint32 channel = 17;//渠道
-  repeated  uint32 multiStatus = 18; //状态数组
+  repeated  uint64 multiStatus = 18; //状态数组
 }
 
 message Response {
