@@ -12,7 +12,7 @@ import (
 	_ "github.com/cargod-bj/b2c-transaction-api/orderRefund"
 	_ "github.com/cargod-bj/b2c-transaction-api/payment"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/anypb"
+	_ "github.com/golang/protobuf/ptypes/any"
 	math "math"
 )
 
