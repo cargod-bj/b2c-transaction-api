@@ -459,3 +459,50 @@ var TestDriveTypeCode = map[string]int{
 	"Home Test Drive":   HomeTestDrive,
 	"Retail Test Drive": RetailTestDrive,
 }
+
+const (
+	ChangeCar                             = 1
+	RejectedByBank                        = 2
+	UnableToProvideDocumentsRequestByBank = 3
+	HigherInterestRate                    = 4
+	NotEnoughDownPayment                  = 5
+	ChangeMind                            = 6
+	OtherReasons                          = 7
+	OnlinePaymentTimeout                  = 8
+	CustomerCancel                        = 9
+	BookingFailedCancel                   = 10
+)
+
+var cancelReasonText = map[int]string{
+	ChangeCar:                             "Change car",
+	RejectedByBank:                        "Rejected by bank",
+	UnableToProvideDocumentsRequestByBank: "Unable to provide documents request by bank",
+	HigherInterestRate:                    "Higher interest rate",
+	NotEnoughDownPayment:                  "Not enough Down Payment",
+	ChangeMind:                            "Change mind",
+	OtherReasons:                          "Other reasons",
+	OnlinePaymentTimeout:                  "Online Payment Timeout",
+	CustomerCancel:                        "Customer Cancel",
+	BookingFailedCancel:                   "Booking Failed Cancel",
+}
+
+func CancelReasonText(code int) string {
+	return cancelReasonText[code]
+}
+
+func CancelReasonList() []int {
+	return getKeys(cancelReasonText)
+}
+
+var CancelReasonCode = map[string]int{
+	"Change car":       ChangeCar,
+	"Rejected by bank": RejectedByBank,
+	"Unable to provide documents request by bank": UnableToProvideDocumentsRequestByBank,
+	"Higher interest rate":                        HigherInterestRate,
+	"Not enough Down Payment":                     NotEnoughDownPayment,
+	"Change mind":                                 ChangeMind,
+	"Other reasons":                               OtherReasons,
+	"Online Payment Timeout":                      OnlinePaymentTimeout,
+	"Customer Cancel":                             CustomerCancel,
+	"Booking Failed Cancel":                       BookingFailedCancel,
+}
