@@ -80,7 +80,7 @@ type OrderService interface {
 	//给没有分配PIC订单，分配PIC
 	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 	CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
-	GetPayInfo(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	GetPayInfo(ctx context.Context, in *QueryPayDTO, opts ...client.CallOption) (*common.Response, error)
 	CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error)
 }
 
@@ -256,7 +256,7 @@ func (c *orderService) CancelOnlineOrder(ctx context.Context, in *OrderCondition
 	return out, nil
 }
 
-func (c *orderService) GetPayInfo(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+func (c *orderService) GetPayInfo(ctx context.Context, in *QueryPayDTO, opts ...client.CallOption) (*common.Response, error) {
 	req := c.c.NewRequest(c.name, "Order.GetPayInfo", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -310,7 +310,7 @@ type OrderHandler interface {
 	//给没有分配PIC订单，分配PIC
 	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
 	CancelOnlineOrder(context.Context, *OrderCondition, *common.Response) error
-	GetPayInfo(context.Context, *OrderCondition, *common.Response) error
+	GetPayInfo(context.Context, *QueryPayDTO, *common.Response) error
 	CheckCarInvalid(context.Context, *CarCheckDTO, *common.Response) error
 }
 
@@ -332,7 +332,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
 		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
 		CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
-		GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetPayInfo(ctx context.Context, in *QueryPayDTO, out *common.Response) error
 		CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error
 	}
 	type Order struct {
@@ -410,7 +410,7 @@ func (h *orderHandler) CancelOnlineOrder(ctx context.Context, in *OrderCondition
 	return h.OrderHandler.CancelOnlineOrder(ctx, in, out)
 }
 
-func (h *orderHandler) GetPayInfo(ctx context.Context, in *OrderCondition, out *common.Response) error {
+func (h *orderHandler) GetPayInfo(ctx context.Context, in *QueryPayDTO, out *common.Response) error {
 	return h.OrderHandler.GetPayInfo(ctx, in, out)
 }
 

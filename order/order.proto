@@ -49,9 +49,14 @@ service Order {
 
   rpc CancelOnlineOrder(OrderCondition) returns (common.Response) {}
 
-  rpc GetPayInfo(OrderCondition) returns (common.Response) {}
+  rpc GetPayInfo(QueryPayDTO) returns (common.Response) {}
 
   rpc CheckCarInvalid(CarCheckDTO) returns (common.Response) {}
+}
+
+message QueryPayDTO{
+  uint64 orderNo = 1;
+  bool refresh = 2;
 }
 message DeliveryInfo {
   uint64 id = 1;
