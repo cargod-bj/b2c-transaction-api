@@ -52,6 +52,8 @@ service Order {
   rpc GetPayInfo(QueryPayDTO) returns (common.Response) {}
 
   rpc CheckCarInvalid(CarCheckDTO) returns (common.Response) {}
+  //根据carid查询订单
+  rpc Get(OrderCondition) returns (common.Response) {}
 }
 
 message QueryPayDTO{
