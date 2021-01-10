@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package payNotice;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+
+option go_package = "github.com/cargod-bj/b2c-transaction-api/payNotice";
+/**
+*订单付款和退款记录
+ */
+service PayNotice {
+  rpc Notice(NoticeDTO) returns (common.Response) {}
+}
+message NoticeDTO {
+  uint64   paymentNo = 1;
+  uint32   status = 2;
+  uint64   paymentId = 3;
+  bool     lockCar = 4;
+  uint64   orderId = 5;
+}
