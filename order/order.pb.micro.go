@@ -73,6 +73,8 @@ type OrderService interface {
 	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
 	//查询要发短信的订单
 	QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*common.Response, error)
+	//根据条件查询订单信息
+	Get(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -207,6 +209,16 @@ func (c *orderService) QueryOrderForSendSms(ctx context.Context, in *DeliveryInf
 	return out, nil
 }
 
+func (c *orderService) Get(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.Get", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -234,6 +246,8 @@ type OrderHandler interface {
 	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
 	//查询要发短信的订单
 	QueryOrderForSendSms(context.Context, *DeliveryInfo, *common.Response) error
+	//根据条件查询订单信息
+	Get(context.Context, *OrderCondition, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -250,6 +264,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
 		QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error
+		Get(ctx context.Context, in *OrderCondition, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -308,4 +323,8 @@ func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, o
 
 func (h *orderHandler) QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error {
 	return h.OrderHandler.QueryOrderForSendSms(ctx, in, out)
+}
+
+func (h *orderHandler) Get(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.Get(ctx, in, out)
 }

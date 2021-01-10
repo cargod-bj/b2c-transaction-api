@@ -38,6 +38,8 @@ service Order {
   rpc CheckCarInvalidInOrder(CarIds) returns (common.Response) {}
   //查询要发短信的订单
   rpc QueryOrderForSendSms(DeliveryInfo) returns (common.Response) {}
+  //根据条件查询订单信息
+  rpc Get(OrderCondition) returns (common.Response) {}
 }
 
 
