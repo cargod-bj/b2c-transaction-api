@@ -120,5 +120,5 @@ message CouponUserDto {
 message IssueCouponDto{
   uint64   couponTemplateId = 1;//模板ID
   uint64   userId = 2;//用户ID
-  string   generateNum = 3;//生成数目
+  uint64   generateNum = 3;//生成数目
 }
