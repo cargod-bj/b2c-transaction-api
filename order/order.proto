@@ -149,6 +149,8 @@ message OrderPayInfo{
   uint64 carId = 8;
   string carNo = 9;
   string payMethod = 10;
+  uint64 now = 11;
+  uint64 PayTime = 12;
 }
 
 message Payment {
@@ -164,6 +166,7 @@ message Payment {
   uint64 createTime = 10 ;
   uint64 updateTime = 11 ;
   uint32 paySuccess = 12 ;
+  uint64 PayTime = 14;
 }
 
 message OrderList {
