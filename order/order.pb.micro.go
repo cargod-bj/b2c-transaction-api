@@ -84,6 +84,7 @@ type OrderService interface {
 	CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error)
 	//根据carid查询订单
 	Get(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	GetByOrderNo(ctx context.Context, in *common.IdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -288,6 +289,16 @@ func (c *orderService) Get(ctx context.Context, in *OrderCondition, opts ...clie
 	return out, nil
 }
 
+func (c *orderService) GetByOrderNo(ctx context.Context, in *common.IdDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetByOrderNo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -326,6 +337,7 @@ type OrderHandler interface {
 	CheckCarInvalid(context.Context, *CarCheckDTO, *common.Response) error
 	//根据carid查询订单
 	Get(context.Context, *OrderCondition, *common.Response) error
+	GetByOrderNo(context.Context, *common.IdDto, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -349,6 +361,7 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		GetPayInfo(ctx context.Context, in *QueryPayDTO, out *common.Response) error
 		CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error
 		Get(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetByOrderNo(ctx context.Context, in *common.IdDto, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -435,4 +448,8 @@ func (h *orderHandler) CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out
 
 func (h *orderHandler) Get(ctx context.Context, in *OrderCondition, out *common.Response) error {
 	return h.OrderHandler.Get(ctx, in, out)
+}
+
+func (h *orderHandler) GetByOrderNo(ctx context.Context, in *common.IdDto, out *common.Response) error {
+	return h.OrderHandler.GetByOrderNo(ctx, in, out)
 }
