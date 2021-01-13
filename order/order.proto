@@ -154,6 +154,7 @@ message OrderPayInfo{
   uint64 now = 11;
   uint64 PayTime = 12;
   uint32 OrderStatus = 13;
+  uint64 paymentNo = 14;
 }
 
 message Payment {
