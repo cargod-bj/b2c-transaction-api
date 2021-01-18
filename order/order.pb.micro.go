@@ -71,6 +71,20 @@ type OrderService interface {
 	ChangeCar(ctx context.Context, in *OrderDTO, opts ...client.CallOption) (*common.Response, error)
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(ctx context.Context, in *CarIds, opts ...client.CallOption) (*common.Response, error)
+	//查询要发短信的订单
+	QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*common.Response, error)
+	//查询线上预定订单并且pic为空的订单
+	GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	//查询订单列表，返回订单列表数据
+	GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	GetPayInfo(ctx context.Context, in *QueryPayDTO, opts ...client.CallOption) (*common.Response, error)
+	CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error)
+	//根据carid查询订单
+	Get(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error)
+	GetByOrderNo(ctx context.Context, in *common.IdDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type orderService struct {
@@ -195,6 +209,96 @@ func (c *orderService) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, o
 	return out, nil
 }
 
+func (c *orderService) QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.QueryOrderForSendSms", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetNoAssignCustomerByOrder", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) GetListWithPay(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetListWithPay", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) AssignOrderPIC(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.AssignOrderPIC", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) CancelOnlineOrder(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CancelOnlineOrder", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) GetPayInfo(ctx context.Context, in *QueryPayDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetPayInfo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) CheckCarInvalid(ctx context.Context, in *CarCheckDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.CheckCarInvalid", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) Get(ctx context.Context, in *OrderCondition, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.Get", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) GetByOrderNo(ctx context.Context, in *common.IdDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Order.GetByOrderNo", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Order service
 
 type OrderHandler interface {
@@ -220,6 +324,20 @@ type OrderHandler interface {
 	ChangeCar(context.Context, *OrderDTO, *common.Response) error
 	//查询车辆是否已经创建订单
 	CheckCarInvalidInOrder(context.Context, *CarIds, *common.Response) error
+	//查询要发短信的订单
+	QueryOrderForSendSms(context.Context, *DeliveryInfo, *common.Response) error
+	//查询线上预定订单并且pic为空的订单
+	GetNoAssignCustomerByOrder(context.Context, *OrderCondition, *common.Response) error
+	//查询订单列表，返回订单列表数据
+	GetListWithPay(context.Context, *OrderCondition, *common.Response) error
+	//给没有分配PIC订单，分配PIC
+	AssignOrderPIC(context.Context, *OrderCondition, *common.Response) error
+	CancelOnlineOrder(context.Context, *OrderCondition, *common.Response) error
+	GetPayInfo(context.Context, *QueryPayDTO, *common.Response) error
+	CheckCarInvalid(context.Context, *CarCheckDTO, *common.Response) error
+	//根据carid查询订单
+	Get(context.Context, *OrderCondition, *common.Response) error
+	GetByOrderNo(context.Context, *common.IdDto, *common.Response) error
 }
 
 func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.HandlerOption) error {
@@ -235,6 +353,15 @@ func RegisterOrderHandler(s server.Server, hdlr OrderHandler, opts ...server.Han
 		UpdateCost(ctx context.Context, in *OrderDTO, out *common.Response) error
 		ChangeCar(ctx context.Context, in *OrderDTO, out *common.Response) error
 		CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error
+		QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error
+		GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error
+		AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error
+		CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetPayInfo(ctx context.Context, in *QueryPayDTO, out *common.Response) error
+		CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error
+		Get(ctx context.Context, in *OrderCondition, out *common.Response) error
+		GetByOrderNo(ctx context.Context, in *common.IdDto, out *common.Response) error
 	}
 	type Order struct {
 		order
@@ -289,4 +416,40 @@ func (h *orderHandler) ChangeCar(ctx context.Context, in *OrderDTO, out *common.
 
 func (h *orderHandler) CheckCarInvalidInOrder(ctx context.Context, in *CarIds, out *common.Response) error {
 	return h.OrderHandler.CheckCarInvalidInOrder(ctx, in, out)
+}
+
+func (h *orderHandler) QueryOrderForSendSms(ctx context.Context, in *DeliveryInfo, out *common.Response) error {
+	return h.OrderHandler.QueryOrderForSendSms(ctx, in, out)
+}
+
+func (h *orderHandler) GetNoAssignCustomerByOrder(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.GetNoAssignCustomerByOrder(ctx, in, out)
+}
+
+func (h *orderHandler) GetListWithPay(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.GetListWithPay(ctx, in, out)
+}
+
+func (h *orderHandler) AssignOrderPIC(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.AssignOrderPIC(ctx, in, out)
+}
+
+func (h *orderHandler) CancelOnlineOrder(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.CancelOnlineOrder(ctx, in, out)
+}
+
+func (h *orderHandler) GetPayInfo(ctx context.Context, in *QueryPayDTO, out *common.Response) error {
+	return h.OrderHandler.GetPayInfo(ctx, in, out)
+}
+
+func (h *orderHandler) CheckCarInvalid(ctx context.Context, in *CarCheckDTO, out *common.Response) error {
+	return h.OrderHandler.CheckCarInvalid(ctx, in, out)
+}
+
+func (h *orderHandler) Get(ctx context.Context, in *OrderCondition, out *common.Response) error {
+	return h.OrderHandler.Get(ctx, in, out)
+}
+
+func (h *orderHandler) GetByOrderNo(ctx context.Context, in *common.IdDto, out *common.Response) error {
+	return h.OrderHandler.GetByOrderNo(ctx, in, out)
 }

@@ -79,6 +79,7 @@ const (
 	OrderClosed    = 4
 	MoneyBack      = 5
 	OrderCancelled = 6
+	OrderCreated   = 99
 )
 
 var orderStatusText = map[int]string{
@@ -88,6 +89,7 @@ var orderStatusText = map[int]string{
 	OrderClosed:    "Order Closed",
 	MoneyBack:      "Money Back",
 	OrderCancelled: "Order Cancelled",
+	OrderCreated:   "Order Created",
 }
 
 func OrderStatusText(code int) string {
@@ -105,6 +107,7 @@ var orderStatusCode = map[string]int{
 	"Order Closed":    OrderClosed,
 	"Money Back":      MoneyBack,
 	"Order Cancelled": OrderCancelled,
+	"Order Created":   OrderCreated,
 }
 
 func OrderStatusCode(text string) int {
@@ -210,6 +213,9 @@ const (
 	BankTransfer   = 3
 	Loan           = 4
 	DiscountCoupon = 5
+	TradeIn        = 6
+	CardPayment    = 7
+	Online         = 8
 )
 
 var paymentMethodText = map[int]string{
@@ -218,6 +224,9 @@ var paymentMethodText = map[int]string{
 	BankTransfer:   "Bank Transfer",
 	Loan:           "Loan",
 	DiscountCoupon: "Discount Coupon",
+	TradeIn:        "TradeIn",
+	CardPayment:    "CardPayment",
+	Online:         "Online",
 }
 
 func PaymentMethodText(code int) string {
@@ -234,6 +243,9 @@ var paymentMethodCode = map[string]int{
 	"Bank Transfer":   BankTransfer,
 	"Loan":            Loan,
 	"Discount Coupon": DiscountCoupon,
+	"TradeIn":         TradeIn,
+	"CardPayment":     CardPayment,
+	"Online":          Online,
 }
 
 func PaymentMethodCode(text string) int {
@@ -449,4 +461,51 @@ func TestDriveTypeList() []int {
 var TestDriveTypeCode = map[string]int{
 	"Home Test Drive":   HomeTestDrive,
 	"Retail Test Drive": RetailTestDrive,
+}
+
+const (
+	ChangeCar                             = 1
+	RejectedByBank                        = 2
+	UnableToProvideDocumentsRequestByBank = 3
+	HigherInterestRate                    = 4
+	NotEnoughDownPayment                  = 5
+	ChangeMind                            = 6
+	OtherReasons                          = 7
+	OnlinePaymentTimeout                  = 8
+	CustomerCancel                        = 9
+	BookingFailedCancel                   = 10
+)
+
+var cancelReasonText = map[int]string{
+	ChangeCar:                             "Change car",
+	RejectedByBank:                        "Rejected by bank",
+	UnableToProvideDocumentsRequestByBank: "Unable to provide documents request by bank",
+	HigherInterestRate:                    "Higher interest rate",
+	NotEnoughDownPayment:                  "Not enough Down Payment",
+	ChangeMind:                            "Change mind",
+	OtherReasons:                          "Other reasons",
+	OnlinePaymentTimeout:                  "Online Payment Timeout",
+	CustomerCancel:                        "Customer Cancel",
+	BookingFailedCancel:                   "Booking Failed Cancel",
+}
+
+func CancelReasonText(code int) string {
+	return cancelReasonText[code]
+}
+
+func CancelReasonList() []int {
+	return getKeys(cancelReasonText)
+}
+
+var CancelReasonCode = map[string]int{
+	"Change car":       ChangeCar,
+	"Rejected by bank": RejectedByBank,
+	"Unable to provide documents request by bank": UnableToProvideDocumentsRequestByBank,
+	"Higher interest rate":                        HigherInterestRate,
+	"Not enough Down Payment":                     NotEnoughDownPayment,
+	"Change mind":                                 ChangeMind,
+	"Other reasons":                               OtherReasons,
+	"Online Payment Timeout":                      OnlinePaymentTimeout,
+	"Customer Cancel":                             CustomerCancel,
+	"Booking Failed Cancel":                       BookingFailedCancel,
 }
