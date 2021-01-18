@@ -190,8 +190,14 @@ message OrderCondition {
   uint64 receiptTime = 14;//接收时间
   uint32 cancelReason = 15;//取消订单原因
   repeated uint64 storeIds = 16;
-  uint32 channel = 17;//渠道
-  repeated  uint64 multiStatus = 18; //状态数组
+  uint64 createTimeBegin = 17;
+  uint64 createTimeEnd = 18;
+  uint64 paymentCompleteTimeBegin = 19;
+  uint64 paymentCompleteTimeEnd = 20;
+  uint64 receiptTimeBegin = 21;
+  uint64 receiptTimeEnd = 22;
+  uint32 channel = 23;//渠道
+  repeated  uint64 multiStatus = 24; //状态数组
 }
 
 message Response {
