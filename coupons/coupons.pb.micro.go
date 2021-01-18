@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	common "github.com/cargod-bj/b2c-proto-common/common"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/golang/protobuf/ptypes/any"
+	_ "google.golang.org/protobuf/types/known/anypb"
 	math "math"
 )
 
@@ -54,6 +54,8 @@ type CouponsService interface {
 	AddTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
 	UpdateTemplate(ctx context.Context, in *CouponTemplateDto, opts ...client.CallOption) (*common.Response, error)
 	ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, opts ...client.CallOption) (*common.Response, error)
+	//根据模板发放优惠券接口（目前提供给website）
+	IssueCoupon(ctx context.Context, in *IssueCouponDto, opts ...client.CallOption) (*common.Response, error)
 }
 
 type couponsService struct {
@@ -168,6 +170,16 @@ func (c *couponsService) ListCouponTemplate(ctx context.Context, in *CouponTempl
 	return out, nil
 }
 
+func (c *couponsService) IssueCoupon(ctx context.Context, in *IssueCouponDto, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Coupons.IssueCoupon", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Coupons service
 
 type CouponsHandler interface {
@@ -181,6 +193,8 @@ type CouponsHandler interface {
 	AddTemplate(context.Context, *CouponTemplateDto, *common.Response) error
 	UpdateTemplate(context.Context, *CouponTemplateDto, *common.Response) error
 	ListCouponTemplate(context.Context, *CouponTemplateCondition, *common.Response) error
+	//根据模板发放优惠券接口（目前提供给website）
+	IssueCoupon(context.Context, *IssueCouponDto, *common.Response) error
 }
 
 func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server.HandlerOption) error {
@@ -195,6 +209,7 @@ func RegisterCouponsHandler(s server.Server, hdlr CouponsHandler, opts ...server
 		AddTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
 		UpdateTemplate(ctx context.Context, in *CouponTemplateDto, out *common.Response) error
 		ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, out *common.Response) error
+		IssueCoupon(ctx context.Context, in *IssueCouponDto, out *common.Response) error
 	}
 	type Coupons struct {
 		coupons
@@ -245,4 +260,8 @@ func (h *couponsHandler) UpdateTemplate(ctx context.Context, in *CouponTemplateD
 
 func (h *couponsHandler) ListCouponTemplate(ctx context.Context, in *CouponTemplateCondition, out *common.Response) error {
 	return h.CouponsHandler.ListCouponTemplate(ctx, in, out)
+}
+
+func (h *couponsHandler) IssueCoupon(ctx context.Context, in *IssueCouponDto, out *common.Response) error {
+	return h.CouponsHandler.IssueCoupon(ctx, in, out)
 }

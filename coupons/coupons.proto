@@ -23,7 +23,8 @@ service Coupons {
 
   rpc ListCouponTemplate(CouponTemplateCondition) returns (common.Response) {}
 
-
+  //根据模板发放优惠券接口（目前提供给website）
+  rpc IssueCoupon(IssueCouponDto) returns (common.Response) {}
 }
 
 message CouponCondition{
@@ -115,3 +116,9 @@ message CouponUserDto {
   uint64   SourceOrderId = 21;
 }
 
+//发放优惠券接口，后续根据具体需求增加字段
+message IssueCouponDto{
+  uint64   couponTemplateId = 1;//模板ID
+  uint64   userId = 2;//用户ID
+  uint64   generateNum = 3;//生成数目
+}
