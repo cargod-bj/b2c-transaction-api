@@ -54,6 +54,8 @@ service Order {
   rpc CheckCarInvalid(CarCheckDTO) returns (common.Response) {}
   //根据carid查询订单
   rpc Get(OrderCondition) returns (common.Response) {}
+
+  rpc GetByOrderNo(common.IdDto)  returns (common.Response) {}
 }
 
 message QueryPayDTO{
@@ -149,6 +151,10 @@ message OrderPayInfo{
   uint64 carId = 8;
   string carNo = 9;
   string payMethod = 10;
+  uint64 now = 11;
+  uint64 PayTime = 12;
+  uint32 OrderStatus = 13;
+  uint64 paymentNo = 14;
 }
 
 message Payment {
@@ -164,6 +170,7 @@ message Payment {
   uint64 createTime = 10 ;
   uint64 updateTime = 11 ;
   uint32 paySuccess = 12 ;
+  uint64 PayTime = 14;
 }
 
 message OrderList {
