@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	_ "github.com/cargod-bj/b2c-transaction-api/fileResource"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/golang/protobuf/ptypes/any"
+	_ "google.golang.org/protobuf/types/known/anypb"
 	math "math"
 )
 

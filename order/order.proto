@@ -136,6 +136,7 @@ message OrderDTO {
   uint32 assignType = 62;
   repeated Payment payments = 63;
   string bookingFee = 64;
+  string nickName = 65;//昵称
 
 
 }
