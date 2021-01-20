@@ -137,6 +137,7 @@ message OrderDTO {
   repeated Payment payments = 63;
   string bookingFee = 64;
   string nickName = 65;//昵称
+  string customerId = 66;//customerId
 
 
 }
