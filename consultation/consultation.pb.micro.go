@@ -47,6 +47,10 @@ type ConsultationService interface {
 	AddConsultation(ctx context.Context, in *ConsultationRecordDTO, opts ...client.CallOption) (*common.Response, error)
 	//获取有效 call me back
 	GetEffectiveConsultation(ctx context.Context, in *EffectiveConsultationCond, opts ...client.CallOption) (*common.Response, error)
+	// 获取需要发送Google的数据
+	GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, opts ...client.CallOption) (*common.Response, error)
+	// 更新Consultation
+	UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, opts ...client.CallOption) (*common.Response, error)
 }
 
 type consultationService struct {
@@ -81,6 +85,26 @@ func (c *consultationService) GetEffectiveConsultation(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *consultationService) GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Consultation.GetNeedSent2GoogleConsultation", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *consultationService) UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Consultation.updateConsultation", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Consultation service
 
 type ConsultationHandler interface {
@@ -88,12 +112,18 @@ type ConsultationHandler interface {
 	AddConsultation(context.Context, *ConsultationRecordDTO, *common.Response) error
 	//获取有效 call me back
 	GetEffectiveConsultation(context.Context, *EffectiveConsultationCond, *common.Response) error
+	// 获取需要发送Google的数据
+	GetNeedSent2GoogleConsultation(context.Context, *NsgConsultationCond, *common.Response) error
+	// 更新Consultation
+	UpdateConsultation(context.Context, *ConsultationRecordDTO, *common.Response) error
 }
 
 func RegisterConsultationHandler(s server.Server, hdlr ConsultationHandler, opts ...server.HandlerOption) error {
 	type consultation interface {
 		AddConsultation(ctx context.Context, in *ConsultationRecordDTO, out *common.Response) error
 		GetEffectiveConsultation(ctx context.Context, in *EffectiveConsultationCond, out *common.Response) error
+		GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, out *common.Response) error
+		UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, out *common.Response) error
 	}
 	type Consultation struct {
 		consultation
@@ -112,4 +142,12 @@ func (h *consultationHandler) AddConsultation(ctx context.Context, in *Consultat
 
 func (h *consultationHandler) GetEffectiveConsultation(ctx context.Context, in *EffectiveConsultationCond, out *common.Response) error {
 	return h.ConsultationHandler.GetEffectiveConsultation(ctx, in, out)
+}
+
+func (h *consultationHandler) GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, out *common.Response) error {
+	return h.ConsultationHandler.GetNeedSent2GoogleConsultation(ctx, in, out)
+}
+
+func (h *consultationHandler) UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, out *common.Response) error {
+	return h.ConsultationHandler.UpdateConsultation(ctx, in, out)
 }

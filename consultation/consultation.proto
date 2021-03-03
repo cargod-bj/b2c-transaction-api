@@ -11,6 +11,10 @@ service Consultation {
   rpc AddConsultation(ConsultationRecordDTO) returns (common.Response) {}
   //获取有效 call me back
   rpc GetEffectiveConsultation(EffectiveConsultationCond) returns (common.Response) {}
+  // 获取需要发送Google的数据
+  rpc GetNeedSent2GoogleConsultation(NsgConsultationCond) returns (common.Response) {}
+  // 更新Consultation
+  rpc updateConsultation(ConsultationRecordDTO) returns (common.Response) {}
 
 }
 
@@ -32,4 +36,8 @@ message ConsultationRecordList {
 message EffectiveConsultationCond {
   uint64 userId = 1;
   uint64 carId = 2;
+}
+
+message NsgConsultationCond {
+  uint64 status = 1;
 }
