@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package consultation;
+import "github.com/cargod-bj/b2c-proto-common/common/common.proto";
+option go_package = "github.com/cargod-bj/b2c-transaction-api/consultation";
+/**
+*沟通记录
+ */
+service Consultation {
+  //新增沟通记录，返回data.nil
+  rpc AddConsultation(ConsultationRecordDTO) returns (common.Response) {}
+  //获取有效 call me back
+  rpc GetEffectiveConsultation(EffectiveConsultationCond) returns (common.Response) {}
+
+}
+
+message ConsultationRecordDTO {
+  uint64 id = 1;
+  uint64 userId = 2;
+  uint64 carId = 3;
+  uint64 storeId = 4;
+  uint32 ConsultationNo = 5;
+  uint32 ConsultationStatus = 6;
+  string remark = 7; //备注
+  uint64 createTime = 8;
+  uint64 updateTime = 9;
+}
+message ConsultationRecordList {
+  repeated ConsultationRecordDTO consultationRecord = 1;
+}
+
+message EffectiveConsultationCond {
+  uint64 userId = 1;
+  uint64 carId = 2;
+}
