@@ -24,7 +24,7 @@ message ConsultationRecordDTO {
   uint64 carId = 3;
   uint64 storeId = 4;
   uint64 staffId = 5;
-  uint32 ConsultationNo = 6;
+  string ConsultationNo = 6;
   uint32 ConsultationStatus = 7;
   string remark = 8; //备注
   string status = 9;
