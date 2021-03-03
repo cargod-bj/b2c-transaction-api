@@ -96,7 +96,7 @@ func (c *consultationService) GetNeedSent2GoogleConsultation(ctx context.Context
 }
 
 func (c *consultationService) UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, opts ...client.CallOption) (*common.Response, error) {
-	req := c.c.NewRequest(c.name, "Consultation.updateConsultation", in)
+	req := c.c.NewRequest(c.name, "Consultation.UpdateConsultation", in)
 	out := new(common.Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {

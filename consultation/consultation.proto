@@ -14,7 +14,7 @@ service Consultation {
   // 获取需要发送Google的数据
   rpc GetNeedSent2GoogleConsultation(NsgConsultationCond) returns (common.Response) {}
   // 更新Consultation
-  rpc updateConsultation(ConsultationRecordDTO) returns (common.Response) {}
+  rpc UpdateConsultation(ConsultationRecordDTO) returns (common.Response) {}
 
 }
 
