@@ -23,11 +23,13 @@ message ConsultationRecordDTO {
   uint64 userId = 2;
   uint64 carId = 3;
   uint64 storeId = 4;
-  uint32 ConsultationNo = 5;
-  uint32 ConsultationStatus = 6;
-  string remark = 7; //备注
-  uint64 createTime = 8;
-  uint64 updateTime = 9;
+  uint64 staffId = 5;
+  uint32 ConsultationNo = 6;
+  uint32 ConsultationStatus = 7;
+  string remark = 8; //备注
+  string status = 9;
+  uint64 createTime = 10;
+  uint64 updateTime = 11;
 }
 message ConsultationRecordList {
   repeated ConsultationRecordDTO consultationRecord = 1;
@@ -36,6 +38,7 @@ message ConsultationRecordList {
 message EffectiveConsultationCond {
   uint64 userId = 1;
   uint64 carId = 2;
+  uint64 staffId = 3;
 }
 
 message NsgConsultationCond {
