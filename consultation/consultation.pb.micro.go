@@ -51,6 +51,8 @@ type ConsultationService interface {
 	GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, opts ...client.CallOption) (*common.Response, error)
 	// 更新Consultation
 	UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, opts ...client.CallOption) (*common.Response, error)
+	// 批量更新Consultation状态
+	BatchUpdateConsultation(ctx context.Context, in *BatchUpdateRequest, opts ...client.CallOption) (*common.Response, error)
 }
 
 type consultationService struct {
@@ -105,6 +107,16 @@ func (c *consultationService) UpdateConsultation(ctx context.Context, in *Consul
 	return out, nil
 }
 
+func (c *consultationService) BatchUpdateConsultation(ctx context.Context, in *BatchUpdateRequest, opts ...client.CallOption) (*common.Response, error) {
+	req := c.c.NewRequest(c.name, "Consultation.BatchUpdateConsultation", in)
+	out := new(common.Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Consultation service
 
 type ConsultationHandler interface {
@@ -116,6 +128,8 @@ type ConsultationHandler interface {
 	GetNeedSent2GoogleConsultation(context.Context, *NsgConsultationCond, *common.Response) error
 	// 更新Consultation
 	UpdateConsultation(context.Context, *ConsultationRecordDTO, *common.Response) error
+	// 批量更新Consultation状态
+	BatchUpdateConsultation(context.Context, *BatchUpdateRequest, *common.Response) error
 }
 
 func RegisterConsultationHandler(s server.Server, hdlr ConsultationHandler, opts ...server.HandlerOption) error {
@@ -124,6 +138,7 @@ func RegisterConsultationHandler(s server.Server, hdlr ConsultationHandler, opts
 		GetEffectiveConsultation(ctx context.Context, in *EffectiveConsultationCond, out *common.Response) error
 		GetNeedSent2GoogleConsultation(ctx context.Context, in *NsgConsultationCond, out *common.Response) error
 		UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, out *common.Response) error
+		BatchUpdateConsultation(ctx context.Context, in *BatchUpdateRequest, out *common.Response) error
 	}
 	type Consultation struct {
 		consultation
@@ -150,4 +165,8 @@ func (h *consultationHandler) GetNeedSent2GoogleConsultation(ctx context.Context
 
 func (h *consultationHandler) UpdateConsultation(ctx context.Context, in *ConsultationRecordDTO, out *common.Response) error {
 	return h.ConsultationHandler.UpdateConsultation(ctx, in, out)
+}
+
+func (h *consultationHandler) BatchUpdateConsultation(ctx context.Context, in *BatchUpdateRequest, out *common.Response) error {
+	return h.ConsultationHandler.BatchUpdateConsultation(ctx, in, out)
 }

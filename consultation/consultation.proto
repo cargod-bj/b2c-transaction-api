@@ -15,7 +15,8 @@ service Consultation {
   rpc GetNeedSent2GoogleConsultation(NsgConsultationCond) returns (common.Response) {}
   // 更新Consultation
   rpc UpdateConsultation(ConsultationRecordDTO) returns (common.Response) {}
-
+  // 批量更新Consultation状态
+  rpc BatchUpdateConsultation(BatchUpdateRequest) returns (common.Response) {}
 }
 
 message ConsultationRecordDTO {
@@ -43,4 +44,12 @@ message EffectiveConsultationCond {
 
 message NsgConsultationCond {
   uint64 status = 1;
+}
+
+message BatchUpdateRequest {
+  uint64 id = 1;
+  repeated uint64 ids = 2;
+  uint32 ConsultationStatus = 3;
+  string remark = 4; //备注
+  string status = 5;
 }
