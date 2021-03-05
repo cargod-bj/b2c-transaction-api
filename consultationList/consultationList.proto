@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package consultationList;
+import "google/protobuf/any.proto";
+
+option go_package="github.com/cargod-bj/b2c-transaction-api/consultationList";
+
+service consultationList {
+    rpc Add(consultationListDTO) returns (Response) {}
+    rpc Delete(DeleteId) returns (Response) {}
+    rpc Update(consultationListDTO) returns (Response) {}
+    //rpc GetList(AppointmentCondition) returns (Response) {}
+}
+
+message consultationListDTO {
+    uint64 id = 1;
+    uint64 userId = 2;
+    uint64 leadId = 3;
+    uint64 staffId = 4;
+    string realName = 5;
+    string pic = 6;
+    uint64 createTime = 7;
+    uint64 updateTime = 8;
+    uint64 finishedTime = 9;
+    string consultationCar = 10;
+    string licensePlate = 11;
+    string  carStatus = 12;
+
+    enum ConsultationStatus {
+        inProcess   = 0;
+        closed      = 1;
+    }
+    ConsultationStatus consultationStatus = 13;
+
+    //ContactRecord
+}
+
+message Response {
+    string msg = 1;
+    google.protobuf.Any data = 3;
+    string code = 2;
+}
+
+message DeleteId{
+    uint64 id = 1;
+}
+
+message DataType {
+    uint64 type = 1;
+}
