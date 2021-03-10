@@ -56,6 +56,8 @@ service Order {
   rpc Get(OrderCondition) returns (common.Response) {}
 
   rpc GetByOrderNo(common.IdDto)  returns (common.Response) {}
+
+  rpc GetByCarIdAndStatus(CarIdAndStatus) returns (common.Response) {}
 }
 
 message QueryPayDTO{
@@ -264,4 +266,8 @@ message CarIds{
 message CarCheckDTO{
   uint64 carId = 1;
   uint64 userId = 2;
+}
+message CarIdAndStatus{
+  uint64 carId = 1;
+  repeated uint32 status = 2;
 }
