@@ -141,6 +141,11 @@ message OrderDTO {
   string nickName = 65;//昵称
   string customerId = 66;//customerId
 
+  //TH
+  string transferFee = 68;//过户费
+  string transferRunnerFee = 69;//过户手续费
+  string inspectionRunnerFee = 70;//检测手续费
+  string insuranceReferralFee = 71;//保险中介费用
 
 }
 
